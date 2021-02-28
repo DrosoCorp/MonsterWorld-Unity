@@ -14,16 +14,16 @@ namespace MonsterWorld.Unity
     [Serializable]
     public class Monster : ScriptableObject
     {
-
         [SerializeField] private Species _species = null;
-
-        [SerializeField] private int level = 1;
-        [SerializeField] private int totalExp = 0;
-        [SerializeField] private int currentExp = 0;
-
-        [SerializeField] private int currentHealth = 0;
-
+        [SerializeField] private int _level = 1;
+        [SerializeField] private int _totalExp = 0;
+        [SerializeField] private int _currentExp = 0;
+        [SerializeField] private int _currentHealth = 0;
 
         public Species Species => _species;
+        public int Level => _level;
+        public int TotalExp => _totalExp;
+        public int CurrentExp => _currentExp;
+        public int CurrentHealth => _currentHealth;
     }
 }

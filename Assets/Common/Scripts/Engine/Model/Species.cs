@@ -18,9 +18,11 @@ namespace MonsterWorld.Unity
         [SerializeField] private int _id = 0;
         [SerializeField] private float _height = 1.0f;
         [SerializeField] private float _weight = 1.0f;
+        [SerializeField] private Statistics _baseStats = default;
 
         public int Id => _id;
         public float Height => _height;
         public float Weight => _weight;
+        public Statistics BaseStats => _baseStats;
     }
 }
