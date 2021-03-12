@@ -13,15 +13,15 @@ namespace MonsterWorld.Unity.Network.Server
 {
     public class ServerNetworkManager
     {
-        protected static ServerNetworkManager manager;
         // Handles network messages on client and server
-        protected delegate void NetworkMessageDelegate(IPacket packet, int connectionID);
-
+        protected delegate void NetworkMessageDelegate(ArraySegment<byte> bytes, int connectionID);
+        protected static ServerNetworkManager manager;
+        static Telepathy.Server server;
         /// <summary>
         /// The registered network message handlers.
         /// </summary>
-        static readonly Dictionary<byte, (NetworkMessageDelegate, IPacket)> handlers = new Dictionary<byte, (NetworkMessageDelegate, IPacket)>();
-        static Telepathy.Server server;
+        static readonly Dictionary<byte, NetworkMessageDelegate> handlers = new Dictionary<byte, NetworkMessageDelegate>();
+        static readonly Dictionary<byte, byte[]> writebuffers = new Dictionary<byte, byte[]>();
 
         public static void Init()
         {
@@ -30,6 +30,39 @@ namespace MonsterWorld.Unity.Network.Server
             server.OnData = (connectionId, message) => HandlePacket(message, connectionId);
             server.OnDisconnected = (connectionId) => HandleDisconnection(connectionId);
             server.Start(1337);
+        }
+
+        //Send packet
+        static protected ArraySegment<byte> GetBytesFromPacket(IPacket packet)
+        {
+            var writeBuffer = writebuffers[packet.OpCode()];
+            MemoryStream stream = new MemoryStream(writeBuffer, true);
+            BinaryWriter writer = new BinaryWriter(stream);
+            writer.Write(packet.OpCode());
+            packet.Serialize(writer);
+            var segment = new ArraySegment<byte>(writeBuffer, 0, (int)stream.Length);
+            return segment;
+        }
+
+        /// <summary>
+        /// This function register an handler for a packet
+        /// </summary>
+        public static void RegisterHandler<T>(Action<T, int> handler) where T : struct, IPacket
+        {
+            NetworkMessageDelegate del = (bytes, connectionID) =>
+            {
+                T packet = default;
+                packet.Deserialize(new BinaryReader(new MemoryStream(bytes.Array, bytes.Offset + 1, bytes.Count - 1, false)));
+                handler(packet, connectionID);
+            };
+            T p = default;
+            handlers.Add(p.OpCode(), del);
+            writebuffers.Add(p.OpCode(), new byte[512]);
+        }
+
+        protected static void HandlePacket(ArraySegment<byte> bytes, int connectionID)
+        {
+            handlers[bytes.Array[bytes.Offset]](bytes, connectionID);
         }
 
         static public void UpdateServer()
@@ -45,46 +78,6 @@ namespace MonsterWorld.Unity.Network.Server
         private static void HandleDisconnection(int connectionId)
         {
 
-        }
-
-        /// <summary>
-        /// This function register an handler for a packet
-        /// </summary>
-        private static void _RegisterHandler<T>(Action<T, int> handler, IPacket packet) where T : struct, IPacket
-        {
-            NetworkMessageDelegate del = (a, connectionID) =>
-            {
-                handler((T)a, connectionID);
-            };
-            handlers[packet.OpCode()] = (del, packet);
-        }
-
-        public static void RegisterHandler<T>(Action<T, int> handler) where T : struct, IPacket
-        {
-            IPacket p = new T() { };
-            _RegisterHandler(handler, p);
-        }
-
-        private static void HandlePacket(ArraySegment<byte> bytes, int connectionID)
-        {
-            var handler = handlers[bytes.Array[0]];
-            byte[] data = new byte[bytes.Array.Length - 1];
-            System.Buffer.BlockCopy(bytes.Array, 1, data, 0, data.Length);
-            handler.Item2.Deserialize(new BinaryReader(new MemoryStream(data)));
-            handler.Item1(handlers[bytes.Array[0]].Item2, connectionID);
-        }
-
-        //Send packet
-        static private ArraySegment<byte> GetBytesFromPacket(IPacket packet)
-        {
-            MemoryStream stream = new MemoryStream();
-            BinaryWriter writer = new BinaryWriter(stream);
-            packet.Serialize(writer);
-            byte[] data = stream.ToArray();
-            byte[] array = new byte[data.Length + 1];
-            array[0] = packet.OpCode();
-            System.Buffer.BlockCopy(data, 0, array, 1, data.Length);
-            return new ArraySegment<byte>(array);
         }
 
         static public void SendPacket(IPacket packet, int[] connectionList)

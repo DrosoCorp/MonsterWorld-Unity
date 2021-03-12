@@ -11,18 +11,17 @@ using System.IO;
 
 namespace MonsterWorld.Unity.Network.Client
 {
-    public class ClientNetworkManager
+    public class ClientNetworkManager 
     {
-        protected static ClientNetworkManager manager;
         // Handles network messages on client and server
-        protected delegate void NetworkMessageDelegate(IPacket packet);
-
+        protected delegate void NetworkMessageDelegate(ArraySegment<byte> bytes);
+        private static Telepathy.Client client;
+        private static Action load;
         /// <summary>
         /// The registered network message handlers.
         /// </summary>
-        static readonly Dictionary<byte, (NetworkMessageDelegate, IPacket)> handlers = new Dictionary<byte, (NetworkMessageDelegate, IPacket)>();
-        static Telepathy.Client client;
-        static Action load;
+        static readonly Dictionary<byte, NetworkMessageDelegate> handlers = new Dictionary<byte, NetworkMessageDelegate>();
+        static readonly Dictionary<byte, byte[]> writebuffers = new Dictionary<byte, byte[]>();
 
         public static void Init()
         {
@@ -30,6 +29,39 @@ namespace MonsterWorld.Unity.Network.Client
             client.OnConnected = () => HandleConnection();
             client.OnData = (message) => HandlePacket(message);
             client.OnDisconnected = () => HandleDisconnection();
+        }
+
+        //Send packet
+        static protected ArraySegment<byte> GetBytesFromPacket(IPacket packet)
+        {
+            var writeBuffer = writebuffers[packet.OpCode()];
+            MemoryStream stream = new MemoryStream(writeBuffer, true);
+            BinaryWriter writer = new BinaryWriter(stream);
+            writer.Write(packet.OpCode());
+            packet.Serialize(writer);
+            var segment = new ArraySegment<byte>(writeBuffer, 0, (int)stream.Length);
+            return segment;
+        }
+
+        /// <summary>
+        /// This function register an handler for a packet
+        /// </summary>
+        public static void RegisterHandler<T>(Action<T> handler) where T : struct, IPacket
+        {
+            NetworkMessageDelegate del = (bytes) =>
+            {
+                T packet = default;
+                packet.Deserialize(new BinaryReader(new MemoryStream(bytes.Array, bytes.Offset + 1, bytes.Count - 1, false)));
+                handler(packet);
+            };
+            T p = default;
+            handlers.Add(p.OpCode(), del);
+            writebuffers.Add(p.OpCode(), new byte[512]);
+        }
+
+        protected static void HandlePacket(ArraySegment<byte> bytes)
+        {
+            handlers[bytes.Array[bytes.Offset]](bytes);
         }
 
         public static void UpdateClient()
@@ -53,54 +85,10 @@ namespace MonsterWorld.Unity.Network.Client
 
         }
 
-        // static methods, due to the singleton pattern we have to put those in all NetworkManager class
-        public static ClientNetworkManager GetManager()
-        {
-            if (manager == null)
-            {
-                manager = new ClientNetworkManager();
-            }
-            return manager;
-        }
-
-        /// <summary>
-        /// This function register an handler for a packet
-        /// </summary>
-        public static void _RegisterHandler<T>(Action<T> handler, IPacket packet) where T : struct, IPacket
-        {
-            NetworkMessageDelegate del = (a) =>
-            {
-                handler((T)a);
-            };
-            handlers[packet.OpCode()] = (del, packet);
-        }
-
-        public static void RegisterHandler<T>(Action<T> handler) where T : struct, IPacket
-        {
-            IPacket p = new T() { };
-            _RegisterHandler(handler, p);
-        }
-
-        public static void HandlePacket(ArraySegment<byte> bytes)
-        {
-            var handler = handlers[bytes.Array[0]];
-            byte[] data = new byte[bytes.Array.Length - 1];
-            System.Buffer.BlockCopy(bytes.Array, 1, data, 0, data.Length);
-            handler.Item2.Deserialize(new BinaryReader(new MemoryStream(data)));
-            handler.Item1(handlers[bytes.Array[0]].Item2);
-        }
-
         //Send packet
         public static void SendPacket(IPacket packet)
         {
-            MemoryStream stream = new MemoryStream();
-            BinaryWriter writer = new BinaryWriter(stream);
-            packet.Serialize(writer);
-            byte[] data = stream.ToArray();
-            byte[] array = new byte[data.Length + 1];
-            array[0] = packet.OpCode();
-            System.Buffer.BlockCopy(data, 0, array, 1, data.Length);
-            ArraySegment<byte> bytes = new ArraySegment<byte>(array);
+            ArraySegment<byte> bytes = GetBytesFromPacket(packet);
             client.Send(bytes);
         }
     }
