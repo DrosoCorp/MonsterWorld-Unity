@@ -24,6 +24,9 @@
 /[Aa]ssets/_*
 /[Aa]ssets/_*.meta
 
+# Ignore the auto-generated AOT compatibility dll.
+/[Aa]ssets/External/Sirenix/Assemblies/AOT/*
+
 # Ignore Probuilder settings
 /ProjectSettings/Packages/com.unity.probuilder/Settings.json
 
