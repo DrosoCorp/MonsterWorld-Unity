@@ -1,68 +1,63 @@
 ﻿//-----------------------------------------------------------------
 // File:         GameMode.cs
-// Description:  Define a game mode, contains all systems needed
+// Description:  Define a GameMode
 // Module:       Core
 // Author:       Noé Masse
 // Date:         17/03/2021
 //-----------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace MonsterWorld.Core
+namespace MonsterWorld.Unity
 {
-    public class GameMode : IDisposable
+    [DisallowMultipleComponent]
+    public class GameMode : MonoBehaviour
     {
-        private Dictionary<Type, GameSystem> _systems;
-        private SystemLoader _systemLoader;
-        private bool _isReady;
+        [SerializeField] private string _name = "GameMode";
+        [SerializeField] private bool _loadOnStart = true;
+        public UnityEvent GameModeLoadComplete = null;
 
-        public GameMode()
-        {
-            _systems = new Dictionary<Type, GameSystem>();
-            _systemLoader = new SystemLoader(_systems);
-            _isReady = false;
-        }
+        private SceneLoader _sceneLoader = null;
+        private bool _isLoaded = false;
 
-        public void AddSystem<T>() where T : GameSystem, new()
+        public string GameModeName => _name;
+        public bool IsLoaded => _isLoaded;
+
+        private void Start()
         {
-            var type = typeof(T);
-            if (_systems.ContainsKey(type))
+            _sceneLoader = new SceneLoader();
+            if (_loadOnStart)
             {
-                Debug.LogWarning("[SystemContainer] " + type.Name + " is already registered.");
-            }
-            else
-            {
-                _systems.Add(type, new T());
+                Load();
             }
         }
 
-        public void Load(Action loadCallback)
+        public void Load()
         {
-            _systemLoader.Completed += () =>
+            if (!_isLoaded)
             {
-                _isReady = true;
-                loadCallback.Invoke();
-            };
-            _systemLoader.LoadSystems();
-        }
-
-        public void Update()
-        {
-            if (!_isReady) return;
-
-            foreach (var sys in _systems)
-            {
-                sys.Value.Update();
+                StartCoroutine(InitializeSystemsCoroutine());
             }
         }
 
-        public void Dispose()
+        private IEnumerator InitializeSystemsCoroutine()
         {
-            foreach (var sys in _systems)
+            var systems = GetComponents<GameSystem>();
+            foreach (var system in systems)
             {
-                sys.Value.Dispose();
+                system.BindSceneLoader(_sceneLoader);
+                system.Initialize();
+                while (!system.IsReady)
+                {
+                    yield return null;
+                }
+            }
+
+            _isLoaded = true;
+            if (GameModeLoadComplete != null)
+            {
+                GameModeLoadComplete.Invoke();
             }
         }
     }
