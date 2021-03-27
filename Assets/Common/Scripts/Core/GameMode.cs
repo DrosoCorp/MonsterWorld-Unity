@@ -43,7 +43,7 @@ namespace MonsterWorld.Unity
 
         private IEnumerator InitializeSystemsCoroutine()
         {
-            var systems = GetComponents<GameSystem>();
+            var systems = GetComponentsInChildren<GameSystem>();
             foreach (var system in systems)
             {
                 system.BindSceneLoader(_sceneLoader);
