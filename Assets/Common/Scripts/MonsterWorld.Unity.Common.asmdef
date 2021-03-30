@@ -8,8 +8,16 @@
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "AWSSDK.CognitoIdentity.dll",
+        "AWSSDK.CognitoSync.dll",
+        "AWSSDK.Core.dll",
+        "AWSSDK.CognitoIdentityProvider.dll",
+        "AWSSDK.ConfigService.dll",
+        "AWSSDK.SecurityToken.dll",
+        "BouncyCastle.dll"
+    ],
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],

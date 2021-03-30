@@ -25,7 +25,7 @@ namespace MonsterWorld.Unity.Network.Client
 
         public static void Init()
         {
-            client = new Telepathy.Client(512);
+            client = new Telepathy.Client(4096);
             client.OnConnected = () => HandleConnection();
             client.OnData = (message) => HandlePacket(message);
             client.OnDisconnected = () => HandleDisconnection();
@@ -46,8 +46,12 @@ namespace MonsterWorld.Unity.Network.Client
         /// <summary>
         /// This function register an handler for a packet
         /// </summary>
-        public static void RegisterHandler<T>(Action<T> handler) where T : struct, IPacket
+        public static void RegisterHandler<T>(Action<T> handler = null) where T : struct, IPacket
         {
+            if (handler == null)
+            {
+                handler = (a) => { };
+            }
             NetworkMessageDelegate del = (bytes) =>
             {
                 T packet = default;
@@ -56,7 +60,7 @@ namespace MonsterWorld.Unity.Network.Client
             };
             T p = default;
             handlers.Add(p.OpCode(), del);
-            writebuffers.Add(p.OpCode(), new byte[512]);
+            writebuffers.Add(p.OpCode(), new byte[4096]);
         }
 
         protected static void HandlePacket(ArraySegment<byte> bytes)
