@@ -19,8 +19,16 @@ namespace MonsterWorld.Unity.Tilemap3D
     {
         private static readonly string[] _toolbarContent = new string[] { "Tiles", "Paint" };
 
-        private static Tilemap3DEditor _currentEditor = null;
-        public static Tilemap3DEditor Current => _currentEditor;
+        [MenuItem("GameObject/MonsterWorld/Tilemap 3D", false, 10)]
+        private static void CreateTilemap(MenuCommand menuCommand)
+        {
+            GameObject go = new GameObject("Tilemap 3D");
+            go.AddComponent<Tilemap3D>();
+            go.AddComponent<Tilemap3DRenderer>();
+            GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+            Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+            Selection.activeObject = go;
+        }
 
         public struct TileInfo
         {
@@ -71,7 +79,6 @@ namespace MonsterWorld.Unity.Tilemap3D
             _tools.Add(new Tilemap3DEditorSelectionTool(this));
             _tools.Add(new Tilemap3DEditorPaintTool(this));
 
-            _currentEditor = this;
             _Tilemap3D = target as Tilemap3D;
             _commandBuffer = new CommandBuffer()
             {
@@ -82,7 +89,6 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         private void OnDisable()
         {
-            _currentEditor = null;
             RenderPipelineManager.endCameraRendering -= OnEndCameraRendering;
             _commandBuffer.Release();
             Tools.hidden = false;

@@ -37,10 +37,9 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         public override void OnSceneGUI()
         {
-            var editor = Tilemap3DEditor.Current;
-            var tilemap = editor.Tilemap;
-            int tileIndex = editor.TileIndex;
-            int height = editor.Height;
+            var tilemap = Editor.Tilemap;
+            int tileIndex = Editor.TileIndex;
+            int height = Editor.Height;
 
             if (tilemap == null || tileIndex < 0) return;
 

@@ -24,11 +24,14 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         public bool HasTile(Vector3Int position)
         {
+            if (_tiles == null) _tiles = new Dictionary<Vector3Int, int>();
             return _tiles.ContainsKey(position);
         }
 
         public bool AddTile(int index, Vector3Int position, int rotation)
         {
+            if (_tiles == null) _tiles = new Dictionary<Vector3Int, int>();
+
             if (index < 0 || index >= _prefabList.Count)
             {
                 return false;
@@ -37,11 +40,6 @@ namespace MonsterWorld.Unity.Tilemap3D
             if (_tiles.ContainsKey(position))
             {
                 return false;
-            }
-
-            if (_tiles == null)
-            {
-                _tiles = new Dictionary<Vector3Int, int>();
             }
 
             _tileRenderDataList[index].positions.Add(position);
@@ -57,6 +55,8 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         public bool RemoveTile(Vector3Int position)
         {
+            if (_tiles == null) _tiles = new Dictionary<Vector3Int, int>();
+
             if (_tiles.TryGetValue(position, out int index))
             {
                 int positionIndex = _tileRenderDataList[index].positions.IndexOf(position);
@@ -70,6 +70,8 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         public bool TryAddTilePrefab(GameObject prefab)
         {
+            if (_tiles == null) _tiles = new Dictionary<Vector3Int, int>();
+
             var meshFilter = prefab.GetComponent<MeshFilter>();
             var meshRenderer = prefab.GetComponent<MeshRenderer>();
 
