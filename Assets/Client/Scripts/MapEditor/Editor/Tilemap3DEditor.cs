@@ -5,6 +5,7 @@
 // Author:       Noé Masse
 // Date:         28/03/2021
 //-----------------------------------------------------------------
+using System.Collections.Generic;
 using System.Linq;
 
 using UnityEditor;
@@ -18,25 +19,59 @@ namespace MonsterWorld.Unity.Tilemap3D
     {
         private static readonly string[] _toolbarContent = new string[] { "Tiles", "Paint" };
 
-        private struct TilePreviewInfo
+        private static Tilemap3DEditor _currentEditor = null;
+        public static Tilemap3DEditor Current => _currentEditor;
+
+        public struct TileInfo
         {
             public Mesh mesh;
             public Material material;
-            public Vector3Int localPosition;
+            public GameObject prefab;
+            public int rotation;
         }
 
         private Tilemap3D _Tilemap3D;
-        private int _tabIndex;
-
         private int _tileIndex = 0;
-        private TilePreviewInfo _tilePreview;
+        private int _height = 0;
+        private bool _isEraserEnabled = false;
 
+        public Tilemap3D Tilemap => _Tilemap3D;
+        public int TileIndex => _tileIndex;
+        public int Height => _height;
+        public bool IsEraserEnabled => _isEraserEnabled;
+
+        public TileInfo selectedTileInfo;
+
+        private List<Tilemap3DEditorTool> _tools;
+        private int _currentToolIndex = 0;
+
+        private Tilemap3DEditorTool CurrentTool => _tools[_currentToolIndex];
+
+        private GUIContent _increaseHeightIcon;
+        private GUIContent _decreaseHeightIcon;
+        private GUIContent _eraserIcon;
+        private GUIContent _rotateIcon;
+        private GUIContent _addIcon;
+
+        private Vector2 _scrollPosition;
         private int _prefabPickerControlId = -1;
-
         private CommandBuffer _commandBuffer;
+
 
         private void OnEnable()
         {
+            _increaseHeightIcon = EditorGUIUtility.IconContent("TerrainInspector.TerrainToolRaise");
+            _decreaseHeightIcon = EditorGUIUtility.IconContent("TerrainInspector.TerrainToolLowerAlt");
+            _eraserIcon = EditorGUIUtility.IconContent("Grid.EraserTool");
+            _rotateIcon = EditorGUIUtility.IconContent("RotateTool");
+
+            _addIcon = EditorGUIUtility.IconContent("CreateAddNew");
+
+            _tools = new List<Tilemap3DEditorTool>();
+            _tools.Add(new Tilemap3DEditorSelectionTool(this));
+            _tools.Add(new Tilemap3DEditorPaintTool(this));
+
+            _currentEditor = this;
             _Tilemap3D = target as Tilemap3D;
             _commandBuffer = new CommandBuffer()
             {
@@ -47,56 +82,103 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         private void OnDisable()
         {
+            _currentEditor = null;
             RenderPipelineManager.endCameraRendering -= OnEndCameraRendering;
             _commandBuffer.Release();
             Tools.hidden = false;
+        }
+
+        private void OnDestroy()
+        {
+        }
+
+        public void RotateTile()
+        {
+            selectedTileInfo.rotation = (selectedTileInfo.rotation + 1) % 4;
+        }
+
+        public void IncreaseHeight()
+        {
+            _height++;
+        }
+
+        public void DecreaseHeight()
+        {
+            _height--;
+        }
+
+        public void ToggleEraser()
+        {
+            _isEraserEnabled = !_isEraserEnabled;
+            Repaint();
         }
 
         private void OnEndCameraRendering(ScriptableRenderContext context, Camera camera)
         {
             if (camera.cameraType == CameraType.SceneView)
             {
-                if (_tilePreview.mesh != null && _tilePreview.material != null)
+                if (selectedTileInfo.prefab != null && selectedTileInfo.mesh != null && selectedTileInfo.material != null)
                 {
                     // Draw Preview
                     _commandBuffer.Clear();
-                    _commandBuffer.SetGlobalMatrix(Tilemap3DRenderer._TilemapMatrix, _Tilemap3D.transform.localToWorldMatrix);
-                    _commandBuffer.DrawMesh(_tilePreview.mesh, GetTilePreviewMatrix(), _tilePreview.material, 0, 0);
+                    _commandBuffer.SetGlobalMatrix(Tilemap3DRenderFeature._TilemapMatrix, _Tilemap3D.transform.localToWorldMatrix);
+                    CurrentTool.DrawPreview(_commandBuffer);
                     context.ExecuteCommandBuffer(_commandBuffer);
                     context.Submit();
                 }
-
             }
         }
 
         public override void OnInspectorGUI()
         {
-            EditorGUI.BeginChangeCheck();
-            _tabIndex = GUILayout.Toolbar(_tabIndex, _toolbarContent);
-            if (EditorGUI.EndChangeCheck())
-            {
-                Tools.hidden = _tabIndex == 1;
-                SceneView.RepaintAll();
-            }
+            DrawToolbar();
+            DrawTilePalette();
+        }
 
-            if (_tabIndex == 0)
-            {
-                DrawAddPrefabButton();
-            }
+        private void DrawToolbar()
+        {
+            GUILayout.BeginHorizontal(GUILayout.Height(24f));
+            EditorGUILayout.Space();
+            _currentToolIndex = GUILayout.Toolbar(_currentToolIndex, _tools.Select((tool) => tool.toolbarIcon).ToArray(), GUILayout.Height(24f));
+            Tools.hidden = _currentToolIndex > 0;
 
+            EditorGUILayout.Space();
+            _isEraserEnabled = GUILayout.Toggle(_isEraserEnabled, _eraserIcon, "Button", GUILayout.Height(24f));
+
+            EditorGUILayout.Space();
+            if (GUILayout.Button(_rotateIcon, GUILayout.Height(24f))) RotateTile();
+            if (GUILayout.Button(_increaseHeightIcon, GUILayout.Height(24f))) IncreaseHeight();
+            if (GUILayout.Button(_decreaseHeightIcon, GUILayout.Height(24f))) DecreaseHeight();
+            EditorGUILayout.Space();
+
+            GUILayout.EndHorizontal();
+        }
+
+        private void DrawTilePalette()
+        {
+            GUILayout.Space(10f);
+            EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
+            GUILayout.Label("Tile Palette", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+            DrawAddPrefabButton();
+            EditorGUILayout.EndHorizontal();
+
+            _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, false, true, GUILayout.Height(300f));
             EditorGUI.BeginChangeCheck();
             _tileIndex = GUILayout.SelectionGrid(_tileIndex, _Tilemap3D.PrefabList.Select((p) => AssetPreview.GetAssetPreview(p)).ToArray(), 4);
             if (EditorGUI.EndChangeCheck())
             {
                 var data = _Tilemap3D.TileRenderDataList[_tileIndex];
-                _tilePreview.mesh = data.mesh;
-                _tilePreview.material = data.material;
+                selectedTileInfo.mesh = data.mesh;
+                selectedTileInfo.material = data.material;
+                selectedTileInfo.prefab = _Tilemap3D.PrefabList[_tileIndex];
             }
+            GUILayout.EndScrollView();
         }
 
         private void DrawAddPrefabButton()
         {
-            if (GUILayout.Button("Add Prefab") && _prefabPickerControlId == -1)
+            if (GUILayout.Button(_addIcon, EditorStyles.toolbarButton, GUILayout.Width(40f)) && _prefabPickerControlId == -1)
             {
                 _prefabPickerControlId = GUIUtility.GetControlID(FocusType.Passive);
                 EditorGUIUtility.ShowObjectPicker<GameObject>(null, false, "pfb_tile", _prefabPickerControlId);
@@ -119,61 +201,42 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         private void OnSceneGUI()
         {
-            if (_tabIndex == 1)
+            CurrentTool.OnSceneGUI();
+
+            var controlID = GUIUtility.GetControlID(FocusType.Passive);
+            switch (Event.current.type)
             {
-                var controlID = GUIUtility.GetControlID(FocusType.Passive);
-                switch (Event.current.type)
-                {
-                    case EventType.Layout:
-                        HandleUtility.AddDefaultControl(controlID);
-                        break;
-                    case EventType.MouseDown:
-                        if (Event.current.button == 0)
-                        {
-                            if (_Tilemap3D.AddTile(_tileIndex, _tilePreview.localPosition) == false)
-                            {
-                                if (_Tilemap3D.RemoveTile(_tilePreview.localPosition))
-                                {
-                                    EditorUtility.SetDirty(_Tilemap3D);
-                                }
-                            }
-                            else
-                            {
-                                EditorUtility.SetDirty(_Tilemap3D);
-                            }
-                            Event.current.Use();
-                        }
-                        break;
-                }
-
-                // Raycast
-                var handleMatrix = Handles.matrix;
-                Handles.matrix = _Tilemap3D.transform.localToWorldMatrix;
-                Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-
-                Plane plane = new Plane(_Tilemap3D.transform.up, _Tilemap3D.transform.position + new Vector3(0.0f, 0.1f, 0.0f));
-                if (plane.Raycast(ray, out float distance))
-                {
-                    var position = ray.origin + ray.direction * distance;
-                    var localPosition = _Tilemap3D.transform.worldToLocalMatrix.MultiplyPoint3x4(position);
-                    Vector3Int localPositionInt = new Vector3Int();
-
-                    localPositionInt.x = Mathf.FloorToInt(localPosition.x);
-                    localPositionInt.y = Mathf.FloorToInt(localPosition.y);
-                    localPositionInt.z = Mathf.FloorToInt(localPosition.z);
-
-                    Handles.DrawWireCube(localPositionInt + new Vector3(0.5f, 0.0f, 0.5f), new Vector3(1.0f, 0.0f, 1.0f));
-                    _tilePreview.localPosition = localPositionInt;
-                    SceneView.currentDrawingSceneView.Repaint();
-
-                }
-                Handles.matrix = handleMatrix;
+                case EventType.Layout:
+                    HandleUtility.AddDefaultControl(controlID);
+                    break;
+                case EventType.KeyDown:
+                    if (ProcessKeyInput(Event.current.keyCode))
+                    {
+                        Event.current.Use();
+                    }
+                    break;
             }
         }
 
-        private Matrix4x4 GetTilePreviewMatrix()
+        private bool ProcessKeyInput(KeyCode keyCode)
         {
-            return Matrix4x4.Translate(_tilePreview.localPosition) * _Tilemap3D.PrefabList[_tileIndex].transform.localToWorldMatrix;
+            switch (keyCode)
+            {
+                case KeyCode.KeypadPlus:
+                    IncreaseHeight();
+                    return true;
+                case KeyCode.KeypadMinus:
+                    DecreaseHeight();
+                    return true;
+                case KeyCode.R:
+                    RotateTile();
+                    return true;
+                case KeyCode.E:
+                    ToggleEraser();
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

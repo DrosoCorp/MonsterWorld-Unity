@@ -5,9 +5,9 @@
 // Author:       Noé Masse
 // Date:         28/03/2021
 //-----------------------------------------------------------------
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-
 
 namespace MonsterWorld.Unity.Tilemap3D
 {
@@ -15,42 +15,23 @@ namespace MonsterWorld.Unity.Tilemap3D
     [RequireComponent(typeof(Tilemap3D))]
     public class Tilemap3DRenderer : MonoBehaviour
     {
-        public static readonly int _TilemapMatrix = Shader.PropertyToID("_TilemapMatrix");
-        private Tilemap3D _Tilemap3D;
-        private CommandBuffer _commandBuffer;
+        private Tilemap3D _Tilemap3D = null;
+
+        public List<Tile3DRenderData> TileRenderList => _Tilemap3D == null ? null : _Tilemap3D.TileRenderDataList;
+
+        private void Start()
+        {
+            _Tilemap3D = GetComponent<Tilemap3D>();
+        }
 
         private void OnEnable()
         {
-            _commandBuffer = new CommandBuffer()
-            {
-                name = "Tilemap 3D Renderer"
-            };
-            _Tilemap3D = GetComponent<Tilemap3D>();
-            RenderPipelineManager.endCameraRendering += OnEndCameraRendering;
+            Tilemap3DRenderFeature.Tilemap3DRenderers.Add(this);
         }
 
         private void OnDisable()
         {
-            RenderPipelineManager.endCameraRendering -= OnEndCameraRendering;
-            _commandBuffer.Release();
-        }
-
-        private void OnEndCameraRendering(ScriptableRenderContext context, Camera camera)
-        {
-            if (camera.cameraType == CameraType.Preview) return;
-
-            _commandBuffer.Clear();
-            _commandBuffer.SetGlobalMatrix(_TilemapMatrix, transform.localToWorldMatrix);
-            var renderList = _Tilemap3D.TileRenderDataList;
-            foreach (var renderData in renderList)
-            {
-                _commandBuffer.DrawMeshInstanced(renderData.mesh, 0, renderData.material, 0, renderData.matrices.ToArray());
-            }
-            Graphics.ExecuteCommandBuffer(_commandBuffer);
-        }
-
-        private void Update()
-        {
+            Tilemap3DRenderFeature.Tilemap3DRenderers.Remove(this);
         }
     }
 }

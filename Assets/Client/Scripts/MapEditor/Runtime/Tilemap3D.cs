@@ -22,7 +22,12 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         private Dictionary<Vector3Int, int> _tiles;
 
-        public bool AddTile(int index, Vector3Int position)
+        public bool HasTile(Vector3Int position)
+        {
+            return _tiles.ContainsKey(position);
+        }
+
+        public bool AddTile(int index, Vector3Int position, int rotation)
         {
             if (index < 0 || index >= _prefabList.Count)
             {
@@ -40,7 +45,11 @@ namespace MonsterWorld.Unity.Tilemap3D
             }
 
             _tileRenderDataList[index].positions.Add(position);
-            _tileRenderDataList[index].matrices.Add(Matrix4x4.Translate(position) * _prefabList[index].transform.localToWorldMatrix);
+
+            var t = position + new Vector3(0.5f, 0.5f, 0.5f);
+            var r = Quaternion.AngleAxis(90f * rotation, Vector3.up);
+
+            _tileRenderDataList[index].matrices.Add(Matrix4x4.TRS(t, r, Vector3.one) * _prefabList[index].transform.localToWorldMatrix);
             _tiles.Add(position, index);
 
             return true;

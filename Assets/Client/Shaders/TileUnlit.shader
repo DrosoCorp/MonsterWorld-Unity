@@ -5,43 +5,22 @@
         _BaseMap("Base Map", 2D) = "white"
     }
 
-        SubShader
+    SubShader
     {
-        // SubShader Tags define when and under which conditions a SubShader block or
-        // a pass is executed.
-        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline" }
-
-        Pass
+        Pass // 0 - Unlit
         {
+            Name "Unlit"
+            Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline" }
+
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
             #pragma multi_compile_instancing
+            #pragma multi_compile __ TILE_PREVIEW
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
-            float4x4 _TilemapMatrix;
-
-            struct Attributes
-            {
-                float4 positionOS   : POSITION;
-                float2 uv           : TEXCOORD0;
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-            };
-
-            struct Varyings
-            {
-                float4 positionHCS  : SV_POSITION;
-                float2 uv           : TEXCOORD0;
-            };
-
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
-
-            CBUFFER_START(UnityPerMaterial)
-                float4 _BaseMap_ST;
-            CBUFFER_END
+            #include "Assets/Client/Shaders/Lib/TileUnlitInput.hlsl"
 
             Varyings vert(Attributes IN)
             {
@@ -49,11 +28,15 @@
 
                 Varyings OUT;
 
-                // Get the TileMapSpace position
-                float4 positionTMS = mul(GetObjectToWorldMatrix(), float4(IN.positionOS.xyz, 1.0));
-                float4 positionWS = mul(_TilemapMatrix, positionTMS);
+                #if defined(TILE_PREVIEW)
+                    OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                #else
+                    // Get the TileMapSpace position
+                    float4 positionTMS = mul(GetObjectToWorldMatrix(), float4(IN.positionOS.xyz, 1.0));
+                    float4 positionWS = mul(_TilemapMatrix, positionTMS);
+                    OUT.positionHCS = mul(GetWorldToHClipMatrix(), positionWS);
+                #endif
 
-                OUT.positionHCS = mul(GetWorldToHClipMatrix(), positionWS);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
 
                 return OUT;
@@ -66,5 +49,96 @@
             }
             ENDHLSL
         }
+
+        Pass // 1 - Depth Only
+        {
+            Tags{"LightMode" = "DepthOnly"}
+
+            ZWrite On
+            ColorMask 0
+
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+
+            #pragma multi_compile_instancing
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Assets/Client/Shaders/Lib/TileUnlitInput.hlsl"
+
+            Varyings vert(Attributes IN)
+            {
+                UNITY_SETUP_INSTANCE_ID(IN);
+
+                Varyings OUT;
+
+                #if defined(TILE_PREVIEW)
+                    OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                #else
+                    // Get the TileMapSpace position
+                    float4 positionTMS = mul(GetObjectToWorldMatrix(), float4(IN.positionOS.xyz, 1.0));
+                    float4 positionWS = mul(_TilemapMatrix, positionTMS);
+                    OUT.positionHCS = mul(GetWorldToHClipMatrix(), positionWS);
+                #endif
+
+                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+
+                return OUT;
+            }
+
+            half4 frag(Varyings IN) : SV_Target
+            {
+                return 0;
+            }
+            ENDHLSL
+        }
+
+        Pass // 2 - Preview
+        {
+            Name "Preview"
+            Tags { "RenderType" = "Transparent" "RenderPipeline" = "UniversalRenderPipeline" }
+            
+            ZWrite Off
+            Blend SrcAlpha OneMinusSrcAlpha
+
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+
+            #pragma multi_compile_instancing
+            #pragma multi_compile __ TILE_PREVIEW
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Assets/Client/Shaders/Lib/TileUnlitInput.hlsl"
+
+            Varyings vert(Attributes IN)
+            {
+                UNITY_SETUP_INSTANCE_ID(IN);
+
+                Varyings OUT;
+
+                #if defined(TILE_PREVIEW)
+                    OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                #else
+                // Get the TileMapSpace position
+                float4 positionTMS = mul(GetObjectToWorldMatrix(), float4(IN.positionOS.xyz, 1.0));
+                float4 positionWS = mul(_TilemapMatrix, positionTMS);
+                OUT.positionHCS = mul(GetWorldToHClipMatrix(), positionWS);
+                #endif
+
+                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+
+                return OUT;
+            }
+
+            half4 frag(Varyings IN) : SV_Target
+            {
+                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
+                color.a = 0.75;
+                return color;
+            }
+            ENDHLSL
+        }
     }
+
 }
