@@ -31,7 +31,7 @@ namespace MonsterWorld.Unity.Tilemap3D
             if (Editor.IsEraserEnabled) return;
 
             var selectedTileInfo = Editor.selectedTileInfo;
-            cmd.DrawMesh(selectedTileInfo.mesh, GetTilePreviewMatrix(), selectedTileInfo.material, 0, 2);
+            cmd.DrawMesh(selectedTileInfo.tile.Mesh, GetTilePreviewMatrix(), selectedTileInfo.tile.Material, 0, 2);
         }
 
         public override void OnSceneGUI()
@@ -72,7 +72,7 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         private Matrix4x4 GetTilePreviewMatrix()
         {           
-            return TilePose.Matrix * Editor.selectedTileInfo.prefab.transform.localToWorldMatrix;
+            return TilePose.Matrix * Editor.selectedTileInfo.tile.Prefab.transform.localToWorldMatrix;
         }
 
         private void DrawGrid(Vector3Int position)

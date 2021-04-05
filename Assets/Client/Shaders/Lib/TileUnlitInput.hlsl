@@ -21,6 +21,8 @@ float4x4 _TilemapMatrix;
 
 CBUFFER_START(UnityPerMaterial)
 float4 _BaseMap_ST;
+half4 _BaseColor;
+half _Cutoff;
 CBUFFER_END
 
 #endif

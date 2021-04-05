@@ -33,10 +33,10 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         public struct TileInfo
         {
-            public Mesh mesh;
-            public Material material;
-            public GameObject prefab;
+            public Tile3D tile;
             public int rotation;
+
+            public int FinalRotation => tile.CanBeRotated ? rotation : 0;
         }
 
         private Tilemap3D _Tilemap3D;
@@ -60,11 +60,11 @@ namespace MonsterWorld.Unity.Tilemap3D
         private GUIContent _decreaseHeightIcon;
         private GUIContent _eraserIcon;
         private GUIContent _rotateIcon;
-        private GUIContent _addIcon;
+        //private GUIContent _addIcon;
 
         private Vector2 _scrollPosition;
         private string _searchText;
-        private int _prefabPickerControlId = -1;
+        //private int _prefabPickerControlId = -1;
         private CommandBuffer _commandBuffer;
 
         private void OnEnable()
@@ -79,7 +79,7 @@ namespace MonsterWorld.Unity.Tilemap3D
             _eraserIcon.tooltip = "Toggle Eraser (E)";
             _rotateIcon.tooltip = "Rotate Tile (R)";
 
-            _addIcon = EditorGUIUtility.IconContent("CreateAddNew");
+            //_addIcon = EditorGUIUtility.IconContent("CreateAddNew");
 
             _tools = new List<Tilemap3DEditorTool>();
             _tools.Add(new Tilemap3DEditorSelectionTool(this));
@@ -94,6 +94,8 @@ namespace MonsterWorld.Unity.Tilemap3D
                 name = "Tilemap 3D Editor Preview"
             };
             RenderPipelineManager.endCameraRendering += OnEndCameraRendering;
+
+            selectedTileInfo.tile = _Tilemap3D.tileset[0];
         }
 
         private void OnDisable()
@@ -101,10 +103,6 @@ namespace MonsterWorld.Unity.Tilemap3D
             RenderPipelineManager.endCameraRendering -= OnEndCameraRendering;
             _commandBuffer.Release();
             Tools.hidden = false;
-        }
-
-        private void OnDestroy()
-        {
         }
 
         public override bool RequiresConstantRepaint()
@@ -137,7 +135,7 @@ namespace MonsterWorld.Unity.Tilemap3D
         {
             if (camera.cameraType == CameraType.SceneView)
             {
-                if (selectedTileInfo.prefab != null && selectedTileInfo.mesh != null && selectedTileInfo.material != null)
+                if (selectedTileInfo.tile != null && selectedTileInfo.tile.IsValid())
                 {
                     // Draw Preview
                     _commandBuffer.Clear();
@@ -152,8 +150,21 @@ namespace MonsterWorld.Unity.Tilemap3D
         public override void OnInspectorGUI()
         {
             HandleInputs();
-            DrawToolbar();
-            DrawTilePalette();
+            EditorGUI.BeginChangeCheck();
+            _Tilemap3D.tileset = (Tileset3D) EditorGUILayout.ObjectField("Tileset", _Tilemap3D.tileset, typeof(Tileset3D), false);
+            if (EditorGUI.EndChangeCheck())
+            {
+                EditorUtility.SetDirty(_Tilemap3D);
+            }
+            if (_Tilemap3D.tileset != null)
+            {
+                DrawToolbar();
+                DrawTilePalette();
+            }
+            else
+            {
+
+            }
         }
 
         private void HandleInputs()
@@ -199,44 +210,42 @@ namespace MonsterWorld.Unity.Tilemap3D
             GUILayout.Label("Tile Palette", EditorStyles.boldLabel);
             EditorGUILayout.Space();
             _searchText = GUILayout.TextField(_searchText, EditorStyles.toolbarSearchField, GUILayout.Width(80f));
-            DrawAddPrefabButton();
+            //DrawAddPrefabButton();
             EditorGUILayout.EndHorizontal();
 
             _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, false, true, GUILayout.Height(300f));
             EditorGUI.BeginChangeCheck();
-            _tileIndex = GUILayout.SelectionGrid(_tileIndex, _Tilemap3D.PrefabList.Select((p) => AssetPreview.GetAssetPreview(p)).ToArray(), 4);
+            var gridElements = _Tilemap3D.tileset.Select((p) => AssetPreview.GetAssetPreview(p.Prefab)).ToArray();
+            _tileIndex = GUILayout.SelectionGrid(_tileIndex, gridElements, 4);
             if (EditorGUI.EndChangeCheck())
             {
-                var data = _Tilemap3D.TileRenderDataList[_tileIndex];
-                selectedTileInfo.mesh = data.mesh;
-                selectedTileInfo.material = data.material;
-                selectedTileInfo.prefab = _Tilemap3D.PrefabList[_tileIndex];
+                selectedTileInfo.tile = Tilemap.tileset[_tileIndex];
             }
             GUILayout.EndScrollView();
         }
 
-        private void DrawAddPrefabButton()
-        {
-            if (GUILayout.Button(_addIcon, EditorStyles.toolbarButton, GUILayout.Width(40f)) && _prefabPickerControlId == -1)
-            {
-                _prefabPickerControlId = GUIUtility.GetControlID(FocusType.Passive);
-                EditorGUIUtility.ShowObjectPicker<GameObject>(null, false, "pfb_tile", _prefabPickerControlId);
-            }
+        //private void DrawAddPrefabButton()
+        //{
+        //    if (GUILayout.Button(_addIcon, EditorStyles.toolbarButton, GUILayout.Width(40f)) && _prefabPickerControlId == -1)
+        //    {
+        //        _prefabPickerControlId = GUIUtility.GetControlID(FocusType.Passive);
+        //        EditorGUIUtility.ShowObjectPicker<GameObject>(null, false, "pfb_tile", _prefabPickerControlId);
+        //    }
 
-            string commandName = Event.current.commandName;
-            if (commandName == "ObjectSelectorClosed" && EditorGUIUtility.GetObjectPickerControlID() == _prefabPickerControlId)
-            {
-                GameObject prefab = EditorGUIUtility.GetObjectPickerObject() as GameObject;
-                if (prefab != null)
-                {
-                    if (_Tilemap3D.TryAddTilePrefab(prefab))
-                    {
-                        EditorUtility.SetDirty(_Tilemap3D);
-                    }
-                }
-                _prefabPickerControlId = -1;
-            }
-        }
+        //    string commandName = Event.current.commandName;
+        //    if (commandName == "ObjectSelectorClosed" && EditorGUIUtility.GetObjectPickerControlID() == _prefabPickerControlId)
+        //    {
+        //        GameObject prefab = EditorGUIUtility.GetObjectPickerObject() as GameObject;
+        //        if (prefab != null)
+        //        {
+        //            if (_Tilemap3D.TryAddTilePrefab(prefab))
+        //            {
+        //                EditorUtility.SetDirty(_Tilemap3D);
+        //            }
+        //        }
+        //        _prefabPickerControlId = -1;
+        //    }
+        //}
 
         private void OnSceneGUI()
         {

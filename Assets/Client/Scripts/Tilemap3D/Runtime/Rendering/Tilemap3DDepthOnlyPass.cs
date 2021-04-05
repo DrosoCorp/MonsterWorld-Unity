@@ -39,29 +39,12 @@ namespace MonsterWorld.Unity.Tilemap3D
                 var renderers = Tilemap3DRenderFeature.Tilemap3DRenderers;
                 for (int i = 0; i < renderers.Count; i++)
                 {
-                    DrawTilemap3DRenderer(ref context, cmd, renderers[i]);
+                    renderers[i].DrawOpaques(cmd, 1);
+                    context.ExecuteCommandBuffer(cmd);
+                    cmd.Clear();
                 }
             }
             CommandBufferPool.Release(cmd);
-        }
-
-        private void DrawTilemap3DRenderer(ref ScriptableRenderContext context, CommandBuffer cmd, Tilemap3DRenderer renderer)
-        {
-            var renderList = renderer.TileRenderList;
-            if (renderList == null) return;
-
-            cmd.BeginSample(renderer.name);
-            cmd.SetGlobalMatrix(Tilemap3DRenderFeature._TilemapMatrix, renderer.transform.localToWorldMatrix);
-            foreach (var renderData in renderList)
-            {
-                if (renderData.matrices.Count > 0)
-                {
-                    cmd.DrawMeshInstanced(renderData.mesh, 0, renderData.material, 1, renderData.matrices.ToArray());
-                }
-            }
-            cmd.EndSample(renderer.name);
-            context.ExecuteCommandBuffer(cmd);
-            cmd.Clear();
         }
 
         public override void FrameCleanup(CommandBuffer cmd) {}

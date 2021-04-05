@@ -11,12 +11,10 @@ using UnityEngine;
 
 namespace MonsterWorld.Unity.Tilemap3D
 {
-    [Serializable]
     public struct Tile3DRenderData
     {
         public Mesh mesh;
         public Material material;
-        public List<Vector3Int> positions;
-        public List<Matrix4x4> matrices;
+        public List<Matrix4x4[]> batches;
     }
 }

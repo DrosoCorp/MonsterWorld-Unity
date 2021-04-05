@@ -20,7 +20,7 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         protected Tilemap3DEditor Editor => _editor;
         protected Vector3Int TilePosition => _tilePosition;
-        protected TilePose TilePose => new TilePose() { position = _tilePosition, rotation = Editor.selectedTileInfo.rotation };
+        protected TilePose TilePose => new TilePose() { position = _tilePosition, rotation = Editor.selectedTileInfo.FinalRotation };
 
         public Tilemap3DEditorTool(Tilemap3DEditor editor)
         {
@@ -75,7 +75,7 @@ namespace MonsterWorld.Unity.Tilemap3D
 
             if (!erase)
             {
-                tilemap.AddTile(tileIndex, tilePose.position, tilePose.rotation);
+                tilemap.AddTile(tileIndex, tilePose);
                 EditorUtility.SetDirty(tilemap);
             }
         }

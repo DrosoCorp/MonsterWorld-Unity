@@ -42,11 +42,11 @@ namespace MonsterWorld.Unity.Tilemap3D
             var selectedTileInfo = Editor.selectedTileInfo;
             if (_isExpanding)
             {
-                cmd.DrawMeshInstanced(selectedTileInfo.mesh, 0, selectedTileInfo.material, 2, _previewMatrices.ToArray());
+                cmd.DrawMeshInstanced(selectedTileInfo.tile.Mesh, 0, selectedTileInfo.tile.Material, 2, _previewMatrices.Take(1023).ToArray());
             }
             else
             {
-                cmd.DrawMesh(selectedTileInfo.mesh, TilePose.Matrix * selectedTileInfo.prefab.transform.localToWorldMatrix, selectedTileInfo.material, 0, 2);
+                cmd.DrawMesh(selectedTileInfo.tile.Mesh, TilePose.Matrix * selectedTileInfo.tile.Prefab.transform.localToWorldMatrix, selectedTileInfo.tile.Material, 0, 2);
             }
         }
 
@@ -115,7 +115,7 @@ namespace MonsterWorld.Unity.Tilemap3D
         {
             var tilemap = Editor.Tilemap;
             int tileIndex = Editor.TileIndex;
-            int rotation = Editor.selectedTileInfo.rotation;
+            int rotation = Editor.selectedTileInfo.FinalRotation;
 
             Vector3Int min = new Vector3Int()
             {
@@ -151,9 +151,9 @@ namespace MonsterWorld.Unity.Tilemap3D
 
         private void UpdatePreviewMatrices()
         {
-            int rotation = Editor.selectedTileInfo.rotation;
-            if (Editor.selectedTileInfo.prefab == null) return;
-            Matrix4x4 prefabMatrix = Editor.selectedTileInfo.prefab.transform.localToWorldMatrix;
+            int rotation = Editor.selectedTileInfo.FinalRotation;
+            if (Editor.selectedTileInfo.tile == null || !Editor.selectedTileInfo.tile.IsValid()) return;
+            Matrix4x4 prefabMatrix = Editor.selectedTileInfo.tile.Prefab.transform.localToWorldMatrix;
 
             _previewMatrices.Clear();
 

@@ -18,15 +18,19 @@ namespace MonsterWorld.Unity.Tilemap3D
         public static readonly List<Tilemap3DRenderer> Tilemap3DRenderers = new List<Tilemap3DRenderer>();
 
         private Tilemap3DDepthOnlyPass _depthPrepass;
-        private Tilemap3DDrawPass _drawPass;
+        private Tilemap3DDrawPass _drawOpaquePass;
+        private Tilemap3DDrawPass _drawTransparentPass;
 
         public override void Create()
         {
             _depthPrepass = new Tilemap3DDepthOnlyPass();
             _depthPrepass.renderPassEvent = RenderPassEvent.AfterRenderingPrePasses;
 
-            _drawPass = new Tilemap3DDrawPass();
-            _drawPass.renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
+            _drawOpaquePass = new Tilemap3DDrawPass(true);
+            _drawOpaquePass.renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
+
+            _drawTransparentPass = new Tilemap3DDrawPass(false);
+            _drawTransparentPass.renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
         }
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
@@ -40,7 +44,8 @@ namespace MonsterWorld.Unity.Tilemap3D
                 {
                     renderer.EnqueuePass(_depthPrepass);
                 }
-                renderer.EnqueuePass(_drawPass);
+                renderer.EnqueuePass(_drawOpaquePass);
+                renderer.EnqueuePass(_drawTransparentPass);
             }
         }
 

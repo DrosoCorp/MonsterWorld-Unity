@@ -13,46 +13,45 @@ namespace MonsterWorld.Unity.Tilemap3D
 {
     public class Tilemap3DDrawPass : ScriptableRenderPass
     {
-        const string profilerTag = "Tilemap3D Pass";
-        private static readonly ProfilingSampler profilingSampler = new ProfilingSampler(profilerTag);
+        const string profilerTagOpaque = "Tilemap3D Pass (Opaque)";
+        const string profilerTagTransparent = "Tilemap3D Pass (Transparent)";
+        private static readonly ProfilingSampler profilingSamplerOpaque = new ProfilingSampler(profilerTagOpaque);
+        private static readonly ProfilingSampler profilingSamplerTransparent = new ProfilingSampler(profilerTagTransparent);
+
+        private bool _isOpaquePass;
+
+        public Tilemap3DDrawPass(bool opaque)
+        {
+            _isOpaquePass = opaque;
+        }
 
         public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor) {}
 
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
-            var cmd = CommandBufferPool.Get(profilerTag);
+            var cmd = CommandBufferPool.Get(_isOpaquePass ? profilerTagOpaque : profilerTagTransparent);
 
-            using (new ProfilingScope(cmd, profilingSampler))
+            using (new ProfilingScope(cmd, _isOpaquePass ? profilingSamplerOpaque : profilingSamplerTransparent))
             {
                 cmd.Clear();
 
                 var renderers = Tilemap3DRenderFeature.Tilemap3DRenderers;
                 for (int i = 0; i < renderers.Count; i++)
                 {
-                    DrawTilemap3DRenderer(ref context, cmd, renderers[i]);
+                    if (_isOpaquePass)
+                    {
+                        renderers[i].DrawOpaques(cmd, 0);
+                    }
+                    else
+                    {
+                        renderers[i].DrawTransparents(cmd);
+                    }
+                    context.ExecuteCommandBuffer(cmd);
+                    cmd.Clear();
                 }
             }
 
             CommandBufferPool.Release(cmd);
-        }
-
-        private void DrawTilemap3DRenderer(ref ScriptableRenderContext context, CommandBuffer cmd, Tilemap3DRenderer renderer)
-        {
-            var renderList = renderer.TileRenderList;
-            if (renderList == null) return;
-
-            cmd.BeginSample(renderer.name);
-            cmd.SetGlobalMatrix(Tilemap3DRenderFeature._TilemapMatrix, renderer.transform.localToWorldMatrix);
-            foreach (var renderData in renderList)
-            {
-                if (renderData.matrices.Count > 0)
-                {
-                    cmd.DrawMeshInstanced(renderData.mesh, 0, renderData.material, 0, renderData.matrices.ToArray());
-                }
-            }
-            cmd.EndSample(renderer.name);
-            context.ExecuteCommandBuffer(cmd);
-            cmd.Clear();
         }
 
         public override void FrameCleanup(CommandBuffer cmd) { }

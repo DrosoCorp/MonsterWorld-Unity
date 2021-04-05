@@ -2,7 +2,18 @@
 {
     Properties
     {
-        _BaseMap("Base Map", 2D) = "white"
+        _BaseMap("Texture", 2D) = "white" {}
+        _BaseColor("Color", Color) = (1, 1, 1, 1)
+        _Cutoff("AlphaCutout", Range(0.0, 1.0)) = 0.5
+
+        // BlendMode
+        [HideInInspector] _Surface("__surface", Float) = 0.0
+        [HideInInspector] _Blend("__blend", Float) = 0.0
+        [HideInInspector] _AlphaClip("__clip", Float) = 0.0
+        [HideInInspector] _SrcBlend("Src", Float) = 1.0
+        [HideInInspector] _DstBlend("Dst", Float) = 0.0
+        [HideInInspector] _ZWrite("ZWrite", Float) = 1.0
+        [HideInInspector] _Cull("__cull", Float) = 2.0
     }
 
     SubShader
@@ -12,39 +23,32 @@
             Name "Unlit"
             Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline" }
 
+            Blend[_SrcBlend][_DstBlend]
+            ZWrite[_ZWrite]
+            Cull[_Cull]
+
             HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
+            #pragma vertex TileVertex
+            #pragma fragment Fragment
+
+            // -------------------------------------
+            // Material Keywords
+            #pragma shader_feature _ALPHATEST_ON
+            //--------------------------------------
 
             #pragma multi_compile_instancing
             #pragma multi_compile __ TILE_PREVIEW
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Assets/Client/Shaders/Lib/TileUnlitInput.hlsl"
+            #include "Assets/Client/Shaders/Lib/TileVertex.hlsl"
 
-            Varyings vert(Attributes IN)
-            {
-                UNITY_SETUP_INSTANCE_ID(IN);
-
-                Varyings OUT;
-
-                #if defined(TILE_PREVIEW)
-                    OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                #else
-                    // Get the TileMapSpace position
-                    float4 positionTMS = mul(GetObjectToWorldMatrix(), float4(IN.positionOS.xyz, 1.0));
-                    float4 positionWS = mul(_TilemapMatrix, positionTMS);
-                    OUT.positionHCS = mul(GetWorldToHClipMatrix(), positionWS);
-                #endif
-
-                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
-
-                return OUT;
-            }
-
-            half4 frag(Varyings IN) : SV_Target
+            half4 Fragment(Varyings IN) : SV_Target
             {
                 half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
+                AlphaDiscard(color.a, _Cutoff);
+
+                color *= _BaseColor;
                 return color;
             }
             ENDHLSL
@@ -58,36 +62,26 @@
             ColorMask 0
 
             HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
+            #pragma vertex TileVertex
+            #pragma fragment DepthOnlyFragment
+
+            // -------------------------------------
+            // Material Keywords
+            #pragma shader_feature _ALPHATEST_ON
+            //--------------------------------------
 
             #pragma multi_compile_instancing
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Assets/Client/Shaders/Lib/TileUnlitInput.hlsl"
+            #include "Assets/Client/Shaders/Lib/TileVertex.hlsl"
 
-            Varyings vert(Attributes IN)
+            half4 DepthOnlyFragment(Varyings IN) : SV_Target
             {
-                UNITY_SETUP_INSTANCE_ID(IN);
-
-                Varyings OUT;
-
-                #if defined(TILE_PREVIEW)
-                    OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                #else
-                    // Get the TileMapSpace position
-                    float4 positionTMS = mul(GetObjectToWorldMatrix(), float4(IN.positionOS.xyz, 1.0));
-                    float4 positionWS = mul(_TilemapMatrix, positionTMS);
-                    OUT.positionHCS = mul(GetWorldToHClipMatrix(), positionWS);
+                #if defined(_ALPHATEST_ON)
+                    half alpha = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv).a;
+                    AlphaDiscard(alpha, _Cutoff);
                 #endif
-
-                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
-
-                return OUT;
-            }
-
-            half4 frag(Varyings IN) : SV_Target
-            {
                 return 0;
             }
             ENDHLSL
@@ -102,43 +96,27 @@
             Blend SrcAlpha OneMinusSrcAlpha
 
             HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
+            #pragma vertex TileVertex
+            #pragma fragment PreviewFragment
 
             #pragma multi_compile_instancing
             #pragma multi_compile __ TILE_PREVIEW
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Assets/Client/Shaders/Lib/TileUnlitInput.hlsl"
+            #include "Assets/Client/Shaders/Lib/TileVertex.hlsl"
 
-            Varyings vert(Attributes IN)
-            {
-                UNITY_SETUP_INSTANCE_ID(IN);
-
-                Varyings OUT;
-
-                #if defined(TILE_PREVIEW)
-                    OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                #else
-                // Get the TileMapSpace position
-                float4 positionTMS = mul(GetObjectToWorldMatrix(), float4(IN.positionOS.xyz, 1.0));
-                float4 positionWS = mul(_TilemapMatrix, positionTMS);
-                OUT.positionHCS = mul(GetWorldToHClipMatrix(), positionWS);
-                #endif
-
-                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
-
-                return OUT;
-            }
-
-            half4 frag(Varyings IN) : SV_Target
+            half4 PreviewFragment(Varyings IN) : SV_Target
             {
                 half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
-                color.a = 0.75;
+                AlphaDiscard(color.a, _Cutoff);
+
+                color *= _BaseColor;
+                color.a *= 0.75;
                 return color;
             }
             ENDHLSL
         }
     }
-
+    CustomEditor "MonsterWorld.Unity.Tilemap3D.TileUnlitShaderGUI"
 }
