@@ -14,10 +14,10 @@ namespace AWS
     public class Cognito : ICognito
     {
         // All these settings are found in the User Pool page on AWS Management Console
-        public const string AppClientID = "22qjiqao6au9p7d079o8r1fqje";       // find this under "App Client Settings"
-        public const string UserPoolId = "us-east-2_0IxDIAL55";               // Pool Id on the General Settings page
-        public const string UserPoolName = "0IxDIAL55";                       // the bit at the end of UserPoolID, after the region
-        RegionEndpoint CognitoIdentityRegion = RegionEndpoint.USEast2;
+        public const string AppClientID = "1k3ouom4v01ldg2vbr96786bnj";       // find this under "App Client Settings"
+        public const string UserPoolId = "eu-west-3_d8SAjI3bj";               // Pool Id on the General Settings page
+        public const string UserPoolName = "d8SAjI3bj";                       // the bit at the end of UserPoolID, after the region
+        RegionEndpoint CognitoIdentityRegion = RegionEndpoint.EUWest3;
 
 
         /// <summary>
@@ -68,6 +68,7 @@ namespace AWS
             }
             catch (Exception e)
             {
+                Debug.Log(e);
                 if (OnFailureF != null)
                     OnFailureF(e);
             }
