@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fbaca3b5873bc642b30d7a10315773a, type: 3}
+  m_Name: tile_cliff_rock_corner_out
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 7907288449821245465, guid: 375073fbb78e7044f874e5b2e2a1cc29, type: 3}
+  _canBeRotated: 1
+  _material: {fileID: 2100000, guid: 8ebba5ed93e42a243bbe0c82305287e7, type: 2}
+  _mesh: {fileID: 4300000, guid: 9dbd7019483c21442b26b0195ca229c1, type: 2}

@@ -16,15 +16,19 @@ namespace MonsterWorld.Unity.Tilemap3D
     public class Tilemap3D : MonoBehaviour, ISerializationCallbackReceiver
     {
         public Tileset3D tileset;
-        [SerializeField] private List<Tile3DInstanceData> _tileDataList;
+        [SerializeField] private List<Tile3DInstanceData> _tileDataList = null;
         private Dictionary<Vector3Int, int> _tiles;
         private List<Tilemap3DRenderer> _renderers = new List<Tilemap3DRenderer>(1);
 
         public List<Tile3DInstanceData> TileDataList => _tileDataList;
 
-        private void OnValidate()
+        public void OnValidate()
         {
-            if (tileset == null) return;
+            if (tileset == null)
+            {
+                if (_tileDataList != null) _tileDataList.Clear();
+                return;
+            }
 
             if (_tileDataList == null || _tileDataList.Count != tileset.Count)
             {
@@ -41,7 +45,7 @@ namespace MonsterWorld.Unity.Tilemap3D
                 {
                     _tileDataList.Add(new Tile3DInstanceData()
                     {
-                        tile = tileset[i],
+                        indexInTileset = i,
                         poses = new List<TilePose>()
                     });
                 }
@@ -70,7 +74,7 @@ namespace MonsterWorld.Unity.Tilemap3D
                 return false;
             }
 
-            if (!_tileDataList[index].tile.CanBeRotated && pose.rotation != 0)
+            if (!tileset[_tileDataList[index].indexInTileset].CanBeRotated && pose.rotation != 0)
             {
                 Debug.LogWarning("A tile was added with a rotation besire being marked as CanBeRotated = false.");
             }
@@ -96,53 +100,6 @@ namespace MonsterWorld.Unity.Tilemap3D
             }
             return false;
         }
-
-        //public bool TryAddTilePrefab(int indexInTileset)
-        //{
-        //    if (_tiles == null) _tiles = new Dictionary<Vector3Int, int>();
-
-        //    var tile = _tileset[indexInTileset];
-
-        //    var meshFilter = tile.Prefab.GetComponent<MeshFilter>();
-        //    var meshRenderer = tile.Prefab.GetComponent<MeshRenderer>();
-
-        //    if (_prefabList.Contains(prefab))
-        //    {
-        //        Debug.LogWarning("[Tilemap] Prefab : " + prefab.name + " is already added.");
-        //        return false;
-        //    }
-
-        //    if (meshFilter == null)
-        //    {
-        //        Debug.LogWarning("[Tilemap] Prefab : " + prefab.name + " does not have a MeshFilter component.");
-        //        return false;
-        //    }
-
-        //    if (meshRenderer == null)
-        //    {
-        //        Debug.LogWarning("[Tilemap] Prefab : " + prefab.name + " does not have a MeshRenderer component.");
-        //        return false;
-        //    }
-
-        //    var mesh = meshFilter.sharedMesh;
-        //    var material = meshRenderer.sharedMaterial;
-
-        //    if (material.enableInstancing == false)
-        //    {
-        //        Debug.LogWarning("[Tilemap] Prefab : " + prefab.name + " material's does not have GPU Instancing enabled.");
-        //        return false;
-        //    }
-
-        //    _prefabList.Add(prefab);
-        //    _tileRenderDataList.Add(new Tile3DRenderData()
-        //    {
-        //        mesh = mesh,
-        //        material = material,
-        //        positions = new List<Vector3Int>(),
-        //        matrices = new List<Matrix4x4>()
-        //    });
-        //    return true;
-        //}
 
         public void Subscribe(Tilemap3DRenderer renderer)
         {

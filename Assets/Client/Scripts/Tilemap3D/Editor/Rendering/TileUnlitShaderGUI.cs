@@ -293,7 +293,7 @@ namespace MonsterWorld.Unity.Tilemap3D
                 }
                 // General Transparent Material Settings
                 material.SetOverrideTag("RenderType", "Transparent");
-                material.SetInt("_ZWrite", 0);
+                material.SetInt("_ZWrite", 1);
                 material.renderQueue = queue + queueOffset;
                 material.SetShaderPassEnabled("ShadowCaster", false);
             }

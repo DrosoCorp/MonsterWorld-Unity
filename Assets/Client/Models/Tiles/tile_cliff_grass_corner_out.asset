@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fbaca3b5873bc642b30d7a10315773a, type: 3}
+  m_Name: tile_cliff_grass_corner_out
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 7907288449821245465, guid: 2ff32b88d9ad6c041a04a42ffdb06def, type: 3}
+  _canBeRotated: 1
+  _material: {fileID: 2100000, guid: ea7a4de839bf39545ae83bbecdb3043e, type: 2}
+  _mesh: {fileID: 4300000, guid: 9dbd7019483c21442b26b0195ca229c1, type: 2}

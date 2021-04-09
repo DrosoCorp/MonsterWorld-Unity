@@ -14,7 +14,7 @@ namespace MonsterWorld.Unity.Tilemap3D
     [Serializable]
     public struct Tile3DInstanceData
     {
-        public Tile3D tile;
+        public int indexInTileset;
         public List<TilePose> poses;
     }
 }

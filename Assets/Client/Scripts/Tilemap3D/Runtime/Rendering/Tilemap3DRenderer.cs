@@ -47,19 +47,20 @@ namespace MonsterWorld.Unity.Tilemap3D
         {
             if (_transparentRenderDataList == null) return;
 
-            cmd.BeginSample(name);
+            cmd.BeginSample("Draw Tiles");
             cmd.SetGlobalMatrix(Tilemap3DRenderFeature._TilemapMatrix, transform.localToWorldMatrix);
-            foreach (var renderData in _transparentRenderDataList)
+            for (int i = 0; i < _transparentRenderDataList.Count; i++)
             {
-                for (int i = 0; i < renderData.batches.Count; i++)
+                var renderData = _transparentRenderDataList[i];
+                for (int j = 0; j < renderData.batches.Count; j++)
                 {
-                    if (renderData.batches[i].Length > 0)
+                    if (renderData.batches[j].Length > 0)
                     {
-                        cmd.DrawMeshInstanced(renderData.mesh, 0, renderData.material, 0, renderData.batches[i]);
+                        cmd.DrawMeshInstanced(renderData.mesh, 0, renderData.material, 0, renderData.batches[j]);
                     }
                 }
             }
-            cmd.EndSample(name);
+            cmd.EndSample("Draw Tiles");
         }
 
         public void DrawOpaques(CommandBuffer cmd, int pass)
@@ -67,19 +68,20 @@ namespace MonsterWorld.Unity.Tilemap3D
             if (_isDirty) BuildTileRenderDataLists();
             if (_opaqueRenderDataList == null) return;
 
-            cmd.BeginSample(name);
+            cmd.BeginSample("Draw Tiles");
             cmd.SetGlobalMatrix(Tilemap3DRenderFeature._TilemapMatrix, transform.localToWorldMatrix);
-            foreach (var renderData in _opaqueRenderDataList)
+            for (int i = 0; i <_opaqueRenderDataList.Count; i++)
             {
-                for (int i = 0; i < renderData.batches.Count; i++)
+                var renderData = _opaqueRenderDataList[i];
+                for (int j = 0; j < renderData.batches.Count; j++)
                 {
-                    if (renderData.batches[i].Length > 0)
+                    if (renderData.batches[j].Length > 0)
                     {
-                        cmd.DrawMeshInstanced(renderData.mesh, 0, renderData.material, pass, renderData.batches[i]);
+                        cmd.DrawMeshInstanced(renderData.mesh, 0, renderData.material, pass, renderData.batches[j]);
                     }
                 }
             }
-            cmd.EndSample(name);
+            cmd.EndSample("Draw Tiles");
         }
 
         [Button("Refresh")]
@@ -103,10 +105,15 @@ namespace MonsterWorld.Unity.Tilemap3D
                 List<TilePose> poses = tileDataList[tileDataIndex].poses;
                 if (poses.Count == 0) continue;
 
-                Tile3D tile = tileDataList[tileDataIndex].tile;
-                Matrix4x4 prefabMatrix = tileDataList[tileDataIndex].tile.Prefab.transform.localToWorldMatrix;
+                int indexInTileset = tileDataList[tileDataIndex].indexInTileset;
+                if (indexInTileset >= _Tilemap3D.tileset.Count)
+                {
+                    tileDataList.RemoveAt(tileDataIndex--);
+                    continue;
+                }
+                Tile3D tile = _Tilemap3D.tileset[indexInTileset];
+                Matrix4x4 prefabMatrix = tile.Prefab.transform.localToWorldMatrix;
                 Tile3DRenderData renderData;
-
 
                 renderData.material = tile.Material;
                 renderData.mesh = tile.Mesh;
