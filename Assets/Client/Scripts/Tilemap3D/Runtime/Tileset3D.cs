@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MonsterWorld.Unity.Tilemap3D
+namespace MonsterWorld.Unity.Tilemap
 {
     [CreateAssetMenu(fileName = "New Tileset", menuName = "MonsterWorld/Tilemap/Tileset", order = 11)]
     public class Tileset3D : ScriptableObject, IEnumerable<Tile3D>

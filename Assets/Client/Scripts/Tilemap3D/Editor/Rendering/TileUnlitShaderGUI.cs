@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace MonsterWorld.Unity.Tilemap3D
+namespace MonsterWorld.Unity.Tilemap
 {
     public class TileUnlitShaderGUI : ShaderGUI
     {

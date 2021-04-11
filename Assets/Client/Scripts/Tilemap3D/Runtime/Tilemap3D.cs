@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace MonsterWorld.Unity.Tilemap3D
+namespace MonsterWorld.Unity.Tilemap
 {
     [ExecuteInEditMode]
     public class Tilemap3D : MonoBehaviour, ISerializationCallbackReceiver

@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MonsterWorld.Unity.Tilemap3D
+namespace MonsterWorld.Unity.Tilemap
 {
     [Serializable]
     public struct Tile3DInstanceData

@@ -13,7 +13,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace MonsterWorld.Unity.Tilemap3D
+namespace MonsterWorld.Unity.Tilemap
 {
     [CustomEditor(typeof(Tileset3D))]
     public class Tileset3DEditor : Editor

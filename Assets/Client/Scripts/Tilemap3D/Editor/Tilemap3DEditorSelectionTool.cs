@@ -13,7 +13,7 @@ using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace MonsterWorld.Unity.Tilemap3D
+namespace MonsterWorld.Unity.Tilemap
 {
     public class Tilemap3DEditorSelectionTool : Tilemap3DEditorTool
     {

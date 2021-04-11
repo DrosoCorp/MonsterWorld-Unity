@@ -8,7 +8,7 @@
 using System;
 using UnityEngine;
 
-namespace MonsterWorld.Unity.Tilemap3D
+namespace MonsterWorld.Unity.Tilemap
 {
     [Serializable]
     public struct TilePose
