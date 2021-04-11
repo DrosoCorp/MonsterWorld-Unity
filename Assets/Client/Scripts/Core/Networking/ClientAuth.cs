@@ -8,6 +8,7 @@
 using UnityEngine;
 using AWS;
 using System;
+using System.Threading.Tasks;
 
 namespace MonsterWorld.Unity.Network.Client
 {
@@ -37,7 +38,8 @@ namespace MonsterWorld.Unity.Network.Client
 
         // Start is called before the first frame update
         void Start()
-        {
+        {            
+            //Init connection with the server
             ClientNetworkManager.Init();
             ClientNetworkManager.RegisterHandler<ConnectPacket>();
             ClientNetworkManager.RegisterHandler<ValidateConnectionPacket>((paquet) => {
