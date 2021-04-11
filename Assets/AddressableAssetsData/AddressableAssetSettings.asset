@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
   m_DefaultGroup: 83674247583d2d3419415f021a9e3aea
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
   m_DisableCatalogUpdateOnStart: 0
   m_UniqueBundleIds: 0
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: f756932002732be459f7cdebe618aa6a
   m_RemoteCatalogLoadPath:
-    m_Id: 
+    m_Id: 544cd79885a498d489d0afc5543f830c
   m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: e89d284e9f7da6e48a2cb5f8f8ecac14, type: 2}
@@ -47,6 +47,20 @@ MonoBehaviour:
         m_Value: ServerData/[BuildTarget]
       - m_Id: 544cd79885a498d489d0afc5543f830c
         m_Value: http://localhost/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: 74b1cf9117c15c042935c791e93ebfaf
+      m_ProfileName: RemoteAWS
+      m_Values:
+      - m_Id: 651c2ebe2a643364dbc394d7c5e67070
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 28339e0024a68c947ab2662e0eed9864
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: 73cda4f1b9a8b344f9942779e7960bd0
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: f756932002732be459f7cdebe618aa6a
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 544cd79885a498d489d0afc5543f830c
+        m_Value: https://s3.eu-west-3.amazonaws.com/com.utopics.addressableassets/[BuildTarget]
     m_ProfileEntryNames:
     - m_Id: 651c2ebe2a643364dbc394d7c5e67070
       m_Name: BuildTarget
@@ -80,7 +94,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d55309a079dd09545be90a6d363d6fcc, type: 2}
   - {fileID: 11400000, guid: bb697da2b13cf2044aef054ce533a5a7, type: 2}
   - {fileID: 11400000, guid: 9927239f76b3ee343b93044d08ee6e3d, type: 2}
-  m_ActiveProfileId: 1f623dbb6b645e54e90289a156a512c8
+  m_ActiveProfileId: 74b1cf9117c15c042935c791e93ebfaf
   m_HostingServicesManager:
     m_HostingServiceInfos: []
     m_Settings: {fileID: 11400000}

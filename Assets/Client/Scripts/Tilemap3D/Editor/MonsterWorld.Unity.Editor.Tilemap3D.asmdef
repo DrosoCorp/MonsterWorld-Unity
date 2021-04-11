@@ -1,0 +1,17 @@
+{
+    "name": "MonsterWorld.Unity.Editor.Tilemap3D",
+    "references": [
+        "GUID:3e7c744e900deae46aa0d4d08a750e4f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -5,11 +5,7 @@
 // Author:       Noé Masse
 // Date:         28/03/2021
 //-----------------------------------------------------------------
-using System;
-using System.Linq;
-
 using UnityEditor;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.Rendering;
 
