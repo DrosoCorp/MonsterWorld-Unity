@@ -5,7 +5,7 @@
 // Author:       Noé Masse
 // Date:         27/02/2021
 //-----------------------------------------------------------------
-using Unity.Collections;
+using System.Collections.Generic;
 
 namespace MonsterWorld.Unity.BattleSystem
 {
@@ -15,11 +15,11 @@ namespace MonsterWorld.Unity.BattleSystem
 
         public bool IsValid => _IsStateValid;
 
-        public void ComputeTurn(NativeList<BattleCommand> commandBuffer, NativeList<BattleAction> results)
+        public void ComputeTurn(List<BattleCommand> commandBuffer, List<BattleAction> results)
         {
             results.Clear();
 
-            for (int i = 0; i < commandBuffer.Length; i++)
+            for (int i = 0; i < commandBuffer.Count; i++)
             {
 
                 var commandAction = new BattleAction();

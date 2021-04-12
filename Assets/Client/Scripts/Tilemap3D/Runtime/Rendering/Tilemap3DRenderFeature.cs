@@ -54,7 +54,10 @@ namespace MonsterWorld.Unity.Tilemap
             // From ForwardRenderer.cs
             bool isSceneViewCamera = cameraData.isSceneViewCamera;
             bool requiresDepthTexture = cameraData.requiresDepthTexture;
-            bool isStereoEnabled = cameraData.isStereoEnabled;
+            bool isStereoEnabled = false;
+#if ENABLE_VR && ENABLE_XR_MODULE
+            isStereoEnabled = cameraData.xr.enabled;
+#endif
 
             bool requiresDepthPrepass = isSceneViewCamera;
             requiresDepthPrepass |= (requiresDepthTexture && !CanCopyDepth(ref cameraData));

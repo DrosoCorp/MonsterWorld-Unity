@@ -15,12 +15,12 @@ namespace MonsterWorld.Unity.Tilemap
     public class Tilemap3DDepthOnlyPass : ScriptableRenderPass
     {
         const string profilerTag = "Tilemap3D Depth Prepass";
-        private static readonly ProfilingSampler profilingSampler = new ProfilingSampler(profilerTag);
         private RenderTargetHandle depthAttachmentHandle;
 
         public Tilemap3DDepthOnlyPass()
         {
             depthAttachmentHandle.Init("_CameraDepthTexture");
+            profilingSampler = new ProfilingSampler(profilerTag);
         }
 
         public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor) 
