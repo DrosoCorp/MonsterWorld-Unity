@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: PrototypeRegion
+  m_EditorClassIdentifier: 
+  m_GroupName: PrototypeRegion
+  m_Data:
+    m_SerializedData: []
+  m_GUID: b1a22003292c721409dbb5ee4f656b37
+  m_SerializeEntries:
+  - m_GUID: 72561e05aa4980745b8b8113c3d19ea7
+    m_Address: CalcinedHill
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Tileset
+    m_MainAsset: {fileID: 11400000, guid: 72561e05aa4980745b8b8113c3d19ea7, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: 72561e05aa4980745b8b8113c3d19ea7, type: 2}
+  - m_GUID: 72dacbdbb89a38547aa7c1df75808f6c
+    m_Address: Assets/Client/Tilesets/General.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Tileset
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 804dfac734e4b6f4a9bf4ed852502d14, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: da99895c6f1897e438bd39f5a1b11def, type: 2}
+    - {fileID: 11400000, guid: 0ead4fa178254f34b800ee3155a1f5a3, type: 2}

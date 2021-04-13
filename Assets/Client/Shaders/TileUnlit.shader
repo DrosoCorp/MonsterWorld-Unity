@@ -118,5 +118,5 @@
             ENDHLSL
         }
     }
-    CustomEditor "MonsterWorld.Unity.Tilemap3D.TileUnlitShaderGUI"
+    CustomEditor "MonsterWorld.Unity.Tilemap.TileUnlitShaderGUI"
 }

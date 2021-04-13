@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
   m_DefaultGroup: 83674247583d2d3419415f021a9e3aea
+  m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
-  m_DisableCatalogUpdateOnStart: 0
+  m_DisableCatalogUpdateOnStart: 1
+  m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
+  m_maxConcurrentWebRequests: 500
+  m_ContiguousBundles: 0
   m_RemoteCatalogBuildPath:
     m_Id: f756932002732be459f7cdebe618aa6a
   m_RemoteCatalogLoadPath:
@@ -25,7 +29,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: e89d284e9f7da6e48a2cb5f8f8ecac14, type: 2}
   - {fileID: 11400000, guid: d1c5ab104468b1d479f53633951c6cc3, type: 2}
-  - {fileID: 11400000, guid: bfd4742412c50194fbffc5b98ce8b9e0, type: 2}
+  - {fileID: 11400000, guid: 2566038465e5b164399e539768f7d92f, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -81,6 +85,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Tileset
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 8b7af9bfa1ea6374f932a16f73f4bb65, type: 2}
