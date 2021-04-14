@@ -23,7 +23,14 @@ namespace MonsterWorld.Unity.Network.Client
         private static bool _connectedToServer = false;
 
         private Action onSuccess = null;
-        private bool connected = false;
+
+        // Username
+        Action FailureChooseName = null;
+        Action SuccessChooseName = null;
+
+        // Personnal Data
+        Action<PlayerData> OnPlayerData = null;
+        Action<PlayerData> OnOtherPlayerData = null;
 
         ICognito cognito
         {
@@ -38,21 +45,53 @@ namespace MonsterWorld.Unity.Network.Client
 
         // Start is called before the first frame update
         void Start()
-        {            
+        {
             //Init connection with the server
             ClientNetworkManager.Init();
+            RegisterPacketsSendOnly();
+            RegisterPackets();
+            ClientNetworkManager.Connect();
+        }
+
+        void RegisterPacketsSendOnly()
+        {
             ClientNetworkManager.RegisterHandler<ConnectPacket>();
-            ClientNetworkManager.RegisterHandler<ValidateConnectionPacket>((paquet) => {
-                if(paquet.tokenValid)
+            ClientNetworkManager.RegisterHandler<ChooseNamePacket>();
+            ClientNetworkManager.RegisterHandler<RequestPlayerData>();
+        }
+
+        void RegisterPackets()
+        {
+            ClientNetworkManager.RegisterHandler<ValidateConnectionPacket>((packet) => {
+                if (packet.tokenValid)
                 {
                     _connectedToServer = true;
-                    if(onSuccess != null)
+                    if (onSuccess != null)
                     {
                         onSuccess();
                     }
                 }
             });
-            ClientNetworkManager.Connect(Connect);
+            ClientNetworkManager.RegisterHandler<ResponseChooseNamePacket>((packet) => {
+                if (packet.ok)
+                {
+                    SuccessChooseName();
+                }
+                else
+                {
+                    FailureChooseName();
+                }
+            });
+            ClientNetworkManager.RegisterHandler<PlayerData>((packet)=> {
+                if (packet.personnalData)
+                {
+                    OnPlayerData(packet);
+                }
+                else
+                {
+                    OnOtherPlayerData(packet);
+                }
+            });
         }
 
         // Update is called once per frame
@@ -63,10 +102,36 @@ namespace MonsterWorld.Unity.Network.Client
 
         public void SignIn(string email, string password, Action<Exception> onFailure = null, Action onSuccess = null)
         {
-            if (connected)
+            if (ClientNetworkManager.Connected)
             {
                 this.onSuccess = onSuccess;
                 cognito.TrySignInRequest(email, password,
+                    onFailure,
+                    (token, refreshToken) =>
+                    {
+                        ClientNetworkManager.SendPacket(
+                                new ConnectPacket()
+                                {
+                                    token = token
+                                }
+                            );
+                        PlayerPrefs.SetString("RefreshToken", refreshToken);
+                    }
+                );
+            } else
+            {
+                onFailure(new Exception("Not connected to the server, please wait. if this error is persistent," +
+                    " your internet connection may be down or the server is not available."));
+            }
+        }
+        
+        //Version which will use the refreshToken saved in the playerPref
+        public void SignIn(Action<Exception> onFailure = null, Action onSuccess = null)
+        {
+            if (ClientNetworkManager.Connected)
+            {
+                this.onSuccess = onSuccess;
+                cognito.TrySignInRequestRefreshToken(PlayerPrefs.GetString("RefreshToken"),
                     onFailure,
                     (token) =>
                     {
@@ -78,10 +143,10 @@ namespace MonsterWorld.Unity.Network.Client
                             );
                     }
                 );
-            } else
+            }
+            else
             {
-                onFailure(new Exception("Not connected to the server, please wait. if this error is persistent," +
-                    " your internet connection may be down or the server is not available."));
+                onFailure(new Exception("Not connected yet"));
             }
         }
 
@@ -93,9 +158,23 @@ namespace MonsterWorld.Unity.Network.Client
             );
         }
 
-        private void Connect()
+        public void ChangeUsername(string name, Action onFailure = null, Action onSuccess = null)
         {
-            connected = true;
+            FailureChooseName = onFailure;
+            SuccessChooseName = onSuccess;
+            if (ConnectedToServer)
+            {
+                ClientNetworkManager.SendPacket(new ChooseNamePacket
+                {
+                    name = name
+                });
+            }
+        }
+
+        public void GetPlayerData(Action<PlayerData> onPlayerData)
+        {
+            OnPlayerData = onPlayerData;
+            ClientNetworkManager.SendPacket(new RequestPlayerData());
         }
     }
 }
