@@ -7,7 +7,6 @@ using Amazon;
 using Amazon.Runtime;
 using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
-using System.Linq.Expressions;
 
 namespace AWS
 {
@@ -78,7 +77,7 @@ namespace AWS
         /// Try to sign in with email and password
         /// </summary>
         public async void TrySignInRequest(string username, string password,
-            Action<Exception> OnFailureF = null, Action<string> OnSuccessF = null)
+            Action<Exception> OnFailureF = null, Action<string, string> OnSuccessF = null)
         {
             //Get the SRP variables A and a
             var TupleAa = AuthenticationHelper.CreateAaTuple();
@@ -142,7 +141,7 @@ namespace AWS
                     string refreshToken = authResult.RefreshToken;
 
                     if (OnSuccessF != null)
-                        OnSuccessF(accessToken);
+                        OnSuccessF(accessToken, refreshToken);
                 }
                 catch (Exception e)
                 {
@@ -159,13 +158,35 @@ namespace AWS
             }
         }
 
+        public async void TrySignInRequestRefreshToken(string refreshToken, Action<Exception> OnFailureF = null, Action<string> OnSuccessF = null)
+        {
+            InitiateAuthRequest authRequest = new InitiateAuthRequest()
+            {
+                ClientId = AppClientID,
+                AuthFlow = AuthFlowType.REFRESH_TOKEN_AUTH,
+                AuthParameters = new Dictionary<string, string>() {
+                    { "REFRESH_TOKEN", refreshToken }}
+            };
+            try
+            {
+                var authResponse = await CognitoIDPClient.InitiateAuthAsync(authRequest);
+                if (OnSuccessF != null)
+                    OnSuccessF(authResponse.AuthenticationResult.AccessToken);
+            }
+            catch (Exception e)
+            {
+                if (OnFailureF != null)
+                    OnFailureF(e);
+                return;
+            }
+        }
+
         public async void GetUser(string token, Action<Exception> onFailure = null, Action<string> onSuccess = null)
         {
             GetUserRequest request = new GetUserRequest()
             {
                 AccessToken = token
             };
-
             try
             {
                 var response = await CognitoIDPClient.GetUserAsync(request);

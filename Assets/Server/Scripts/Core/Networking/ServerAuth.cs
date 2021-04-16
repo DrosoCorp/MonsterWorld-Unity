@@ -31,9 +31,21 @@ namespace MonsterWorld.Unity.Network.Server
         void Start()
         {
             ServerNetworkManager.Init();
+            RegisterPacketsSendOnly();
+            RegisterPackets();
+        }
+
+        void RegisterPacketsSendOnly()
+        {
             ServerNetworkManager.RegisterHandler<ValidateConnectionPacket>();
-            ServerNetworkManager.RegisterHandler<ConnectPacket>((paquet, connectionId) => {
-                cognito.GetUser(paquet.token,
+            ServerNetworkManager.RegisterHandler<ResponseChooseNamePacket>();
+            ServerNetworkManager.RegisterHandler<PlayerData>();
+        }
+
+        void RegisterPackets()
+        {
+            ServerNetworkManager.RegisterHandler<ConnectPacket>((packet, connectionId) => {
+                cognito.GetUser(packet.token,
                     (exception) =>
                     {
                         ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = false }, connectionId);
@@ -45,12 +57,54 @@ namespace MonsterWorld.Unity.Network.Server
                         Debug.Log($"User {uid} connected.");
                     });
             });
+            ServerNetworkManager.RegisterHandler<ChooseNamePacket>(async (packet, connectionId) =>
+            {
+                if (UserConnected(connectionId))
+                {
+                    ServerNetworkManager.SendPacket(new ResponseChooseNamePacket()
+                    {
+                        ok = await ServerDatabase.SetUsername(GetUID(connectionId).ToString(), packet.name)
+                    }, connectionId);
+                }
+            });
+            ServerNetworkManager.RegisterHandler<RequestPlayerData>(async (packet, connectionId) =>
+            {
+                if (UserConnected(connectionId))
+                {
+                    ServerNetworkManager.SendPacket(new PlayerData()
+                    {
+                        personnalData = true,
+                        playerName = await ServerDatabase.GetName(GetUID(connectionId).ToString())
+                    }, connectionId);
+                }
+            });
+
         }
 
         // Update is called once per frame
         void Update()
         {
             ServerNetworkManager.UpdateServer();
+        }
+
+        // Utility
+        private bool UserConnected(int connectionId)
+        {
+            return connectionIdToUID.ContainsKey(connectionId);
+        }
+
+        private Guid GetUID(int connectionId)
+        {
+            return connectionIdToUID[connectionId];
+        }
+
+        // Disconnection callback
+        public void Disconnection(int connection)
+        {
+            if (connectionIdToUID.ContainsKey(connection))
+            {
+                connectionIdToUID.Remove(connection);
+            }
         }
     }
 }

@@ -23,6 +23,9 @@ namespace MonsterWorld.Unity.Network.Server
         static readonly Dictionary<byte, NetworkMessageDelegate> handlers = new Dictionary<byte, NetworkMessageDelegate>();
         static readonly Dictionary<byte, byte[]> writebuffers = new Dictionary<byte, byte[]>();
 
+        // The server instance for callbacks
+        static ServerAuth serverInstance;
+
         public static void Init()
         {
             server = new Telepathy.Server(4096);
@@ -74,6 +77,11 @@ namespace MonsterWorld.Unity.Network.Server
             server.Tick(100);
         }
 
+        public static void addServerInstance(ServerAuth s)
+        {
+            serverInstance = s;
+        }
+
         private static void HandleConnection(int connectionId)
         {
             
@@ -81,7 +89,7 @@ namespace MonsterWorld.Unity.Network.Server
 
         private static void HandleDisconnection(int connectionId)
         {
-
+            serverInstance.Disconnection(connectionId);
         }
 
         static public void SendPacket(IPacket packet, int[] connectionList)

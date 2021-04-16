@@ -11,7 +11,11 @@ namespace AWS
         /// <summary>
         /// Try to sign in with email and password
         /// </summary>
-        void TrySignInRequest(string username, string password, Action<Exception> OnFailureF = null, Action<string> OnSuccessF = null);
+        void TrySignInRequest(string username, string password, Action<Exception> OnFailureF = null, Action<string, string> OnSuccessF = null);
+        /// <summary>
+        /// Try to sign in with refreshToken
+        /// </summary>
+        void TrySignInRequestRefreshToken(string refreshToken, Action<Exception> OnFailureF = null, Action<string> OnSuccessF = null);
         /// <summary>
         /// Take a token and try to get the user id from Cognito
         /// </summary>

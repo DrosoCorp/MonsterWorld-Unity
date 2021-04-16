@@ -14,9 +14,17 @@ namespace MonsterWorld.Unity.Network.Client
     public class ClientNetworkManager 
     {
         // Handles network messages on client and server
+        public static bool Connected
+        {
+            get
+            {
+                return connected;
+            }
+        }
+        private static bool connected = false;
         protected delegate void NetworkMessageDelegate(ArraySegment<byte> bytes);
         private static Telepathy.Client client;
-        private static Action load;
+        private static List<Action> loadActions = new List<Action>();
         /// <summary>
         /// The registered network message handlers.
         /// </summary>
@@ -73,15 +81,29 @@ namespace MonsterWorld.Unity.Network.Client
             client.Tick(100);
         }
 
-        public static void Connect(Action load)
+        public static void Connect()
         {
             client.Connect("localhost", 1337);
-            ClientNetworkManager.load = load;
+        }
+
+        public static void ConnectCallBack(Action load)
+        {
+            if(!connected)
+            {
+                ClientNetworkManager.loadActions.Add(load);
+            } else
+            {
+                load();
+            }
         }
 
         private static void HandleConnection()
         {
-            load();
+            connected = true;
+            foreach(Action load in loadActions)
+            {
+                load();
+            }
         }
 
         private static void HandleDisconnection()
