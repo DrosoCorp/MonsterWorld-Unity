@@ -6,55 +6,51 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace MonsterWorld.Unity
 {
     public class Startup : MonoBehaviour
     {
-        public string assetKey = "";
-        public TextMeshProUGUI updateTextGUI = null;
+        public AssetLabelReference assetLabel;
+        public UnityEvent<string> updateProgressText;
+        public UnityEvent<float> updateProgress;
 
         void Start()
         {
-            CheckForUpdates();
+            StartCoroutine(StartupRoutine());
         }
 
-        private void CheckForUpdates()
+        private IEnumerator StartupRoutine()
         {
-            Addressables.InitializeAsync().Completed += OnAddressablesInitialized;
-        }
+            // Initialize
+            updateProgressText.Invoke("Checking for Updates...");
+            yield return Addressables.InitializeAsync();
 
-        private void OnAddressablesInitialized(AsyncOperationHandle<IResourceLocator> obj)
-        {
-            Addressables.CheckForCatalogUpdates().Completed += UpdateCatalogs;
-        }
+            // Update Catalogs
+            var checkForUpdateHandle = Addressables.CheckForCatalogUpdates(autoReleaseHandle: false);
+            yield return checkForUpdateHandle;
+            var catalogs = checkForUpdateHandle.Result;
+            Addressables.Release(checkForUpdateHandle);
 
-        private void UpdateCatalogs(AsyncOperationHandle<List<string>> catalogs)
-        {
-            if (catalogs.Result.Count > 0)
+            if (catalogs.Count > 0)
             {
-                Addressables.UpdateCatalogs().Completed += (updates) => StartCoroutine(DownloadAssets());
+                yield return Addressables.UpdateCatalogs();
             }
-            else
+
+            // Download Updates
+            var downloadAssetsHandle = Addressables.DownloadDependenciesAsync(assetLabel);
+            while (downloadAssetsHandle.IsDone == false)
             {
-                StartCoroutine(DownloadAssets());
-            }
-        }
-
-        private IEnumerator DownloadAssets()
-        {
-            Addressables.ClearDependencyCacheAsync(assetKey);
-
-            yield return new WaitForSeconds(5f);
-
-            var handle = Addressables.DownloadDependenciesAsync(assetKey);
-            while (handle.IsDone == false)
-            {
-                Debug.Log(handle.PercentComplete);
-                updateTextGUI.text = "Downloading Asset... " + assetKey + " " + handle.PercentComplete * 100f + "%";
+                updateProgress.Invoke(downloadAssetsHandle.PercentComplete);
+                updateProgressText.Invoke($"Updating ... {downloadAssetsHandle.PercentComplete * 100f:F0} %");
                 yield return null;
             }
-            Debug.Log(handle.Result);
+            updateProgress.Invoke(1.0f);
+            Addressables.Release(downloadAssetsHandle);
+
+            updateProgressText.Invoke("Connecting...");
         }
     }
 

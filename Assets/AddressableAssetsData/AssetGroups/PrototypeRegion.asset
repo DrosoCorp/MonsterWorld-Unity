@@ -21,14 +21,7 @@ MonoBehaviour:
     m_Address: CalcinedHill
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Tileset
-    m_MainAsset: {fileID: 11400000, guid: 72561e05aa4980745b8b8113c3d19ea7, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 72561e05aa4980745b8b8113c3d19ea7, type: 2}
-  - m_GUID: 72dacbdbb89a38547aa7c1df75808f6c
-    m_Address: Assets/Client/Tilesets/General.mp4
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Tileset
+    - ClientContent
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
