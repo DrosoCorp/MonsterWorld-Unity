@@ -26,6 +26,7 @@ namespace MonsterWorld.Unity.Network.Server
         ICognito _cognito = null;
 
         public static Dictionary<int, Guid> connectionIdToUID = new Dictionary<int, Guid>();
+        public static Dictionary<int, Guid> connectionIdToUIDWithoutName = new Dictionary<int, Guid>();
 
         // Start is called before the first frame update
         void Start()
@@ -48,34 +49,76 @@ namespace MonsterWorld.Unity.Network.Server
                 cognito.GetUser(packet.token,
                     (exception) =>
                     {
-                        ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = false }, connectionId);
+                        ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = false, reasonInvalid = 1}, connectionId);
                     },
-                    (uid) =>
+                    async (uid) =>
                     {
-                        connectionIdToUID.Add(connectionId, new Guid(uid));
-                        ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = true }, connectionId);
-                        Debug.Log($"User {uid} connected.");
+                        Guid guid = new Guid(uid);
+                        // Check player exist in database
+                        bool userExist = await PlayerDatabase.LoadUser(guid);
+                        if (!userExist)
+                        {
+                            // You need to send an username to the server !
+                            if (!connectionIdToUIDWithoutName.ContainsKey(connectionId))
+                            {
+                                connectionIdToUIDWithoutName.Add(connectionId, guid);
+                            }
+                            ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = false, reasonInvalid = 2 }, connectionId);
+                        }
+                        else
+                        {
+                            connectionIdToUID.Add(connectionId, guid);
+                            ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = true }, connectionId);
+                        }
                     });
             });
             ServerNetworkManager.RegisterHandler<ChooseNamePacket>(async (packet, connectionId) =>
             {
                 if (UserConnected(connectionId))
                 {
+                    // A user is connected and want to change his username
                     ServerNetworkManager.SendPacket(new ResponseChooseNamePacket()
                     {
-                        ok = await ServerDatabase.SetUsername(GetUID(connectionId).ToString(), packet.name)
+                        ok = await PlayerDatabase.UpdateUser(connectionIdToUID[connectionId], packet.name)
                     }, connectionId);
+                }
+                else
+                { // The user have been check in cognito already
+                    if (connectionIdToUIDWithoutName.ContainsKey(connectionId)) {
+                        Guid uid = connectionIdToUIDWithoutName[connectionId];
+                        bool valid = await PlayerDatabase.UpdateUser(uid, packet.name); // UpdateUser can also create users
+                        if (!valid)
+                        {
+                            ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = false, reasonInvalid = 1 }, connectionId);
+                        }
+                        else
+                        {
+                            // Swap dictionnaries
+                            connectionIdToUID[connectionId] = connectionIdToUIDWithoutName[connectionId];
+                            connectionIdToUIDWithoutName.Remove(connectionId);
+                            // The entry have been created, return the validation
+                            ServerNetworkManager.SendPacket(new ResponseChooseNamePacket()
+                            {
+                                ok = true
+                            }, connectionId);
+                        }
+                    } else
+                    {
+                        // You can't change your name without being connected previously
+                        ServerNetworkManager.SendPacket(new ResponseChooseNamePacket() { ok = false }, connectionId);
+                    }
                 }
             });
             ServerNetworkManager.RegisterHandler<RequestPlayerData>(async (packet, connectionId) =>
             {
                 if (UserConnected(connectionId))
                 {
+                    PlayerStruct player = PlayerDatabase.GetPlayerData(GetUID(connectionId));
                     ServerNetworkManager.SendPacket(new PlayerData()
                     {
-                        personnalData = true,
-                        playerName = await ServerDatabase.GetName(GetUID(connectionId).ToString())
-                    }, connectionId);
+                        personnalData = true, // The packet RequestPlayerData is send only to retrieve the data of the player which send this packet
+                        playerName = player.name
+                    }, connectionId); ;
                 }
             });
 
@@ -104,6 +147,9 @@ namespace MonsterWorld.Unity.Network.Server
             if (connectionIdToUID.ContainsKey(connection))
             {
                 connectionIdToUID.Remove(connection);
+            } else if (connectionIdToUIDWithoutName.ContainsKey(connection))
+            {
+                connectionIdToUIDWithoutName.Remove(connection);
             }
         }
     }

@@ -86,6 +86,7 @@ namespace MonsterWorld.Unity.Network.Client
             client.Connect("localhost", 1337);
         }
 
+        // Add function to call when the game finished to load the network
         public static void ConnectCallBack(Action load)
         {
             if(!connected)
