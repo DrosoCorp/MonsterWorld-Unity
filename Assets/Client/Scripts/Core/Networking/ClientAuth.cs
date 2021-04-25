@@ -162,13 +162,10 @@ namespace MonsterWorld.Unity.Network.Client
         {
             FailureChooseName = onFailure;
             SuccessChooseName = onSuccess;
-            if (ConnectedToServer)
+            ClientNetworkManager.SendPacket(new ChooseNamePacket
             {
-                ClientNetworkManager.SendPacket(new ChooseNamePacket
-                {
-                    name = name
-                });
-            }
+                name = name
+            });
         }
 
         public void GetPlayerData(Action<PlayerData> onPlayerData)

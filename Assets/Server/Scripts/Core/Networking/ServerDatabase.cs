@@ -26,20 +26,20 @@ namespace MonsterWorld.Unity.Network.Server
         // Protection against malicious attack
         static Dictionary<string, long> lastChangeNameRequestDict = new Dictionary<string, long>();
 
-        public async static Task<string> GetName(string uid)
+        public async static Task<Document> GetUser(string uid)
         {
             Document res = await userTable.GetItemAsync(new Primitive(uid));
-            if(res == null)
-            {
-                return null;
+            if (res != null) { 
+                res.Remove("UID");
             }
-            return res["Name"].AsString();
+            return res;
         }
 
         /// <summary>
-        /// Change or set the name of an user, return false if name already taken
+        /// Change or set the name of an user, return false if name already taken. You can't update the user if he already has been updated 
+        /// in the last second
         /// </summary>
-        public async static Task<bool> SetUsername(string uid, string name)
+        public async static Task<bool> SetUser(string uid, Document data)
         {
             // Protection against malicious attack
             if (!lastChangeNameRequestDict.ContainsKey(uid))
@@ -48,7 +48,7 @@ namespace MonsterWorld.Unity.Network.Server
             }
             else
             {
-                if(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds()  - lastChangeNameRequestDict[uid] > 3600000)
+                if(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds()  - lastChangeNameRequestDict[uid] > 1000)
                 {
                     lastChangeNameRequestDict[uid] = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
                 }
@@ -58,6 +58,8 @@ namespace MonsterWorld.Unity.Network.Server
                 }
             }
 
+            string name = data["name"];
+            data["UID"] = uid;
             if(name == "")
             {
                 return false;
@@ -66,7 +68,7 @@ namespace MonsterWorld.Unity.Network.Server
             Primitive primitiveName = new Primitive(name);
             DynamoDBEntry[] values = new DynamoDBEntry[1] { primitiveName };
             ScanFilter scanFilter = new ScanFilter();
-            scanFilter.AddCondition("Name", ScanOperator.Equal, name);
+            scanFilter.AddCondition("name", ScanOperator.Equal, name);
             var response = userTable.Scan(scanFilter);
 
             List<Document> documentSet = new List<Document>();
@@ -77,15 +79,12 @@ namespace MonsterWorld.Unity.Network.Server
                 return false;
             }
             Document res = await userTable.GetItemAsync(new Primitive(uid));
-            Document input = new Document();
-            input.Add("UID", new Primitive(uid));
-            input.Add("Name", new Primitive(name));
             if (res == null) {
-                await userTable.PutItemAsync(input);
+                await userTable.PutItemAsync(data);
             }
             else
             {
-                await userTable.UpdateItemAsync(input);
+                await userTable.UpdateItemAsync(data);
             }
             return true;
         }

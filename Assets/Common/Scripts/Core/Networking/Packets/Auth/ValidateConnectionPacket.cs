@@ -12,9 +12,11 @@ namespace MonsterWorld.Unity.Network
     public struct ValidateConnectionPacket : IPacket
     {
         public bool tokenValid;
+        public byte reasonInvalid; // if 1 : Unknown user, 2 : Username requested
         public void Deserialize(BinaryReader reader)
         {
             this.tokenValid = reader.ReadBoolean();
+            this.reasonInvalid = reader.ReadByte();
         }
 
         public byte OpCode()
@@ -25,6 +27,7 @@ namespace MonsterWorld.Unity.Network
         public void Serialize(BinaryWriter writer)
         {
             writer.Write(this.tokenValid);
+            writer.Write(this.reasonInvalid);
         }
     }
 }
