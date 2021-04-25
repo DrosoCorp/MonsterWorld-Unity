@@ -142,7 +142,7 @@ namespace MonsterWorld.Unity.Tilemap
                             position = new Vector3Int(x, y, z), 
                             rotation = rotation 
                         };
-                        PutOrRemoveTile(tilemap, tileIndex, pose, Editor.IsEraserEnabled);
+                        PutOrRemoveTile(tileIndex, pose, Editor.IsEraserEnabled);
                     }
                 }
             }

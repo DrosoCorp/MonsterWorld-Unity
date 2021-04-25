@@ -13,9 +13,12 @@ namespace MonsterWorld.Unity.Tilemap
     [CreateAssetMenu(fileName = "New Tile", menuName = "MonsterWorld/Tilemap/Tile", order = 10)]
     public class Tile3D : ScriptableObject
     {
+        public const int LAYER_COUNT = 4;
+
         [SerializeField] private GameObject _prefab = null;
         [SerializeField] private bool _canBeRotated = true;
         [SerializeField] private int _flags = 0;
+        [SerializeField] [Range(0, LAYER_COUNT - 1)] private int _layer = 0;
 
         [HideInInspector] [SerializeField] private Material _material;
         [HideInInspector] [SerializeField] private Mesh _mesh;
@@ -26,6 +29,7 @@ namespace MonsterWorld.Unity.Tilemap
         public Material Material => _material;
         public bool IsOpaque => _material.renderQueue < 2950;
         public int Flags => _flags;
+        public int Layer => _layer;
 
         private void OnValidate()
         {

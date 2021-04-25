@@ -30,6 +30,7 @@ namespace MonsterWorld.Unity.Navigation
 
         public int Count => _nodes.Count;
         public Node this[int index] => _nodes[index];
+        public List<Node> Nodes => _nodes;
 
         public static NavigationGraph<U> ConvertNavigationGraph<U>(NavigationGraph<T> graph, Func<T, U> conversion) where U : struct
         {

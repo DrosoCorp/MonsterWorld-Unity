@@ -26,33 +26,58 @@ namespace MonsterWorld.Unity.Navigation
         {
             ClientNavigationGraph graph = new ClientNavigationGraph();
             var tileDataList = tilemap.TileDataList;
+
+            var mapFlags = new Dictionary<Vector3Int, int>();
+
             for (int tileDataIndex = 0; tileDataIndex < tileDataList.Count; tileDataIndex++)
             {
                 var tileData = tileDataList[tileDataIndex];
-                var tile = tilemap.tileset[tileData.indexInTileset];
-                if ((tile.Flags & 1) == 1)
+                var tile = tilemap.Tileset[tileData.indexInTileset];
+                for (int poseIndex = 0; poseIndex < tileData.poses.Count; poseIndex++)
+                {
+                    var position = tileData.poses[poseIndex].position;
+                    if (mapFlags.ContainsKey(position))
+                    {
+                        mapFlags[position] &= tile.Flags;
+                    }
+                    else
+                    {
+                        mapFlags.Add(position, tile.Flags);
+                    }
+                }
+            }
+
+            foreach (var entry in mapFlags)
+            {
+                var position = entry.Key;
+                var flags = entry.Value;
+
+                if ((flags & 1) == 1)
                 {
                     var offset = new Vector3(0.5f, 0.0f, 0.5f);
-                    if ((tile.Flags & 2) == 2)
+                    if ((flags & 2) == 2)
                     {
                         offset.y = 0.5f;
                     }
 
-                    for (int poseIndex = 0; poseIndex < tileData.poses.Count; poseIndex++)
+                    var nodeData = new ClientNavigationNodeData()
                     {
-                        var nodeData = new ClientNavigationNodeData()
-                        {
-                            position = tilemap.transform.localToWorldMatrix.MultiplyPoint3x4(tileData.poses[poseIndex].position + offset)
-                        };
+                        position = tilemap.transform.localToWorldMatrix.MultiplyPoint3x4(position + offset)
+                    };
 
-                        graph._nodes.Add(new Node()
-                        {
-                            data = nodeData
-                        });
-                    }
+                    graph._nodes.Add(new Node()
+                    {
+                        data = nodeData
+                    });
                 }
             }
+
             return graph;
+        }
+
+        public void Clear()
+        {
+            Nodes.Clear();
         }
     }
 }

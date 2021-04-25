@@ -46,14 +46,14 @@ namespace MonsterWorld.Unity.Tilemap
                 case EventType.MouseDrag:
                     if (Event.current.button == 0)
                     {
-                        PutOrRemoveTile(tilemap, tileIndex, TilePose, Editor.IsEraserEnabled);
+                        PutOrRemoveTile(tileIndex, TilePose, Editor.IsEraserEnabled);
                         Event.current.Use();
                     }
                     break;
                 case EventType.MouseDown:
                     if (Event.current.button == 0)
                     {
-                        PutOrRemoveTile(tilemap, tileIndex, TilePose, Editor.IsEraserEnabled);
+                        PutOrRemoveTile(tileIndex, TilePose, Editor.IsEraserEnabled);
                         Event.current.Use();
                     }
                     break;

@@ -65,17 +65,21 @@ namespace MonsterWorld.Unity.Tilemap
             return false;
         }
 
-        protected static void PutOrRemoveTile(Tilemap3D tilemap, int tileIndex, TilePose tilePose, bool erase)
+        protected void PutOrRemoveTile(int tileIndex, TilePose tilePose, bool erase)
         {
-            if (tilemap.HasTile(tilePose.position))
+            var tilemapBuilder = _editor.TilemapDataBuilder;
+            var tilemap = _editor.Tilemap;
+            var tile = tilemap.Tileset[tileIndex];
+
+            if (tilemapBuilder.HasTile(tile.Layer, tilePose.position))
             {
-                tilemap.RemoveTile(tilePose.position);
+                tilemapBuilder.RemoveTile(tile.Layer, tilePose.position);
                 EditorUtility.SetDirty(tilemap);
             }
 
             if (!erase)
             {
-                tilemap.AddTile(tileIndex, tilePose);
+                tilemapBuilder.AddTile(tileIndex, tilePose);
                 EditorUtility.SetDirty(tilemap);
             }
         }

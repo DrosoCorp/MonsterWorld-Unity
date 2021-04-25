@@ -38,12 +38,14 @@ namespace MonsterWorld.Unity.Tilemap
         }
 
         private Tilemap3D _Tilemap3D;
+        private Tilemap3D.DataBuilder _tilemapDataBuilder;
         private int _paletteIndex = -1;
         private int _tileIndex = -1;
         private int _height = 0;
         private bool _isEraserEnabled = false;
 
         public Tilemap3D Tilemap => _Tilemap3D;
+        public Tilemap3D.DataBuilder TilemapDataBuilder => _tilemapDataBuilder;
         public int TileIndex => _tileIndex;
         public int Height => _height;
         public bool IsEraserEnabled => _isEraserEnabled;
@@ -88,13 +90,14 @@ namespace MonsterWorld.Unity.Tilemap
             _searchFilter = "";
 
             _Tilemap3D = target as Tilemap3D;
+            _tilemapDataBuilder = _Tilemap3D.Builder();
             _commandBuffer = new CommandBuffer()
             {
                 name = "Tilemap 3D Editor Preview"
             };
             RenderPipelineManager.endCameraRendering += OnEndCameraRendering;
 
-            if (_Tilemap3D.tileset != null) selectedTileInfo.tile = _Tilemap3D.tileset[0];
+            if (_Tilemap3D.Tileset != null) selectedTileInfo.tile = _Tilemap3D.Tileset[0];
         }
 
         private void OnDisable()
@@ -149,9 +152,9 @@ namespace MonsterWorld.Unity.Tilemap
         public override void OnInspectorGUI()
         {
             HandleInputs();
-            EditorGUI.BeginDisabledGroup(_Tilemap3D.tileset != null);
+            EditorGUI.BeginDisabledGroup(_Tilemap3D.Tileset != null);
             EditorGUI.BeginChangeCheck();
-            _Tilemap3D.tileset = (Tileset3D) EditorGUILayout.ObjectField("Tileset", _Tilemap3D.tileset, typeof(Tileset3D), false);
+            _Tilemap3D.SetTileset((Tileset3D) EditorGUILayout.ObjectField("Tileset", _Tilemap3D.Tileset, typeof(Tileset3D), false));
             if (EditorGUI.EndChangeCheck())
             {
                 _Tilemap3D.OnValidate();
@@ -159,7 +162,7 @@ namespace MonsterWorld.Unity.Tilemap
             }
             EditorGUI.EndDisabledGroup();
 
-            if (_Tilemap3D.tileset != null)
+            if (_Tilemap3D.Tileset != null)
             {
                 DrawToolbar();
                 DrawTilePalette();
@@ -216,10 +219,10 @@ namespace MonsterWorld.Unity.Tilemap
             EditorGUILayout.EndHorizontal();
 
             bool changed = false;
-            Tileset3DEditor.DrawTilesetPalette(_Tilemap3D.tileset, _searchFilter, ref _tileIndex, ref _paletteIndex, ref _scrollPosition, ref changed, GUILayout.Height(300f));
+            Tileset3DEditor.DrawTilesetPalette(_Tilemap3D.Tileset, _searchFilter, ref _tileIndex, ref _paletteIndex, ref _scrollPosition, ref changed, GUILayout.Height(300f));
             if (changed)
             {
-                selectedTileInfo.tile = _Tilemap3D.tileset[_tileIndex];
+                selectedTileInfo.tile = _Tilemap3D.Tileset[_tileIndex];
             }
         }
 

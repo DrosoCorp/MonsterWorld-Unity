@@ -1,0 +1,5076 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &830691792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 830691793}
+  - component: {fileID: 830691794}
+  m_Layer: 0
+  m_Name: NavGraph
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &830691793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830691792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2057080559}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &830691794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830691792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb04aa07ffc251409682a831ba95844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graph:
+    _nodes:
+    - northIndex: 137
+      eastIndex: 9
+      southIndex: 1
+      westIndex: 3
+      data:
+        position: {x: 0.5, y: 0, z: -0.5}
+    - northIndex: 0
+      eastIndex: 10
+      southIndex: 12
+      westIndex: 2
+      data:
+        position: {x: 0.5, y: 0, z: -1.5}
+    - northIndex: 3
+      eastIndex: 1
+      southIndex: 13
+      westIndex: 24
+      data:
+        position: {x: -0.5, y: 0, z: -1.5}
+    - northIndex: 4
+      eastIndex: 0
+      southIndex: 2
+      westIndex: 82
+      data:
+        position: {x: -0.5, y: 0, z: -0.5}
+    - northIndex: 5
+      eastIndex: 137
+      southIndex: 3
+      westIndex: 23
+      data:
+        position: {x: -0.5, y: 0, z: 0.5}
+    - northIndex: 25
+      eastIndex: 6
+      southIndex: 4
+      westIndex: 22
+      data:
+        position: {x: -0.5, y: 0, z: 1.5}
+    - northIndex: 26
+      eastIndex: 7
+      southIndex: 137
+      westIndex: 5
+      data:
+        position: {x: 0.5, y: 0, z: 1.5}
+    - northIndex: 27
+      eastIndex: 29
+      southIndex: 8
+      westIndex: 6
+      data:
+        position: {x: 1.5, y: 0, z: 1.5}
+    - northIndex: 7
+      eastIndex: 30
+      southIndex: 9
+      westIndex: 137
+      data:
+        position: {x: 1.5, y: 0, z: 0.5}
+    - northIndex: 8
+      eastIndex: 31
+      southIndex: 10
+      westIndex: 0
+      data:
+        position: {x: 1.5, y: 0, z: -0.5}
+    - northIndex: 9
+      eastIndex: 32
+      southIndex: 11
+      westIndex: 1
+      data:
+        position: {x: 1.5, y: 0, z: -1.5}
+    - northIndex: 10
+      eastIndex: 33
+      southIndex: 35
+      westIndex: 12
+      data:
+        position: {x: 1.5, y: 0, z: -2.5}
+    - northIndex: 1
+      eastIndex: 11
+      southIndex: 36
+      westIndex: 13
+      data:
+        position: {x: 0.5, y: 0, z: -2.5}
+    - northIndex: 2
+      eastIndex: 12
+      southIndex: 37
+      westIndex: 14
+      data:
+        position: {x: -0.5, y: 0, z: -2.5}
+    - northIndex: 24
+      eastIndex: 13
+      southIndex: 38
+      westIndex: 15
+      data:
+        position: {x: -1.5, y: 0, z: -2.5}
+    - northIndex: 16
+      eastIndex: 14
+      southIndex: 39
+      westIndex: 41
+      data:
+        position: {x: -2.5, y: 0, z: -2.5}
+    - northIndex: 17
+      eastIndex: 24
+      southIndex: 15
+      westIndex: -1
+      data:
+        position: {x: -2.5, y: 0, z: -1.5}
+    - northIndex: 18
+      eastIndex: 82
+      southIndex: 16
+      westIndex: 44
+      data:
+        position: {x: -2.5, y: 0, z: -0.5}
+    - northIndex: 19
+      eastIndex: 23
+      southIndex: 17
+      westIndex: 43
+      data:
+        position: {x: -2.5, y: 0, z: 0.5}
+    - northIndex: 20
+      eastIndex: 22
+      southIndex: 18
+      westIndex: 42
+      data:
+        position: {x: -2.5, y: 0, z: 1.5}
+    - northIndex: 53
+      eastIndex: 21
+      southIndex: 19
+      westIndex: 80
+      data:
+        position: {x: -2.5, y: 0, z: 2.5}
+    - northIndex: 54
+      eastIndex: 25
+      southIndex: 22
+      westIndex: 20
+      data:
+        position: {x: -1.5, y: 0, z: 2.5}
+    - northIndex: 21
+      eastIndex: 5
+      southIndex: 23
+      westIndex: 19
+      data:
+        position: {x: -1.5, y: 0, z: 1.5}
+    - northIndex: 22
+      eastIndex: 4
+      southIndex: 82
+      westIndex: 18
+      data:
+        position: {x: -1.5, y: 0, z: 0.5}
+    - northIndex: 82
+      eastIndex: 2
+      southIndex: 14
+      westIndex: 16
+      data:
+        position: {x: -1.5, y: 0, z: -1.5}
+    - northIndex: 55
+      eastIndex: 26
+      southIndex: 5
+      westIndex: 21
+      data:
+        position: {x: -0.5, y: 0, z: 2.5}
+    - northIndex: 56
+      eastIndex: 27
+      southIndex: 6
+      westIndex: 25
+      data:
+        position: {x: 0.5, y: 0, z: 2.5}
+    - northIndex: 57
+      eastIndex: 28
+      southIndex: 7
+      westIndex: 26
+      data:
+        position: {x: 1.5, y: 0, z: 2.5}
+    - northIndex: 58
+      eastIndex: 59
+      southIndex: 29
+      westIndex: 27
+      data:
+        position: {x: 2.5, y: 0, z: 2.5}
+    - northIndex: 28
+      eastIndex: 60
+      southIndex: 30
+      westIndex: 7
+      data:
+        position: {x: 2.5, y: 0, z: 1.5}
+    - northIndex: 29
+      eastIndex: 61
+      southIndex: 31
+      westIndex: 8
+      data:
+        position: {x: 2.5, y: 0, z: 0.5}
+    - northIndex: 30
+      eastIndex: 62
+      southIndex: 32
+      westIndex: 9
+      data:
+        position: {x: 2.5, y: 0, z: -0.5}
+    - northIndex: 31
+      eastIndex: 63
+      southIndex: 33
+      westIndex: 10
+      data:
+        position: {x: 2.5, y: 0, z: -1.5}
+    - northIndex: 32
+      eastIndex: 64
+      southIndex: 34
+      westIndex: 11
+      data:
+        position: {x: 2.5, y: 0, z: -2.5}
+    - northIndex: 33
+      eastIndex: 65
+      southIndex: 145
+      westIndex: 35
+      data:
+        position: {x: 2.5, y: 0, z: -3.5}
+    - northIndex: 11
+      eastIndex: 34
+      southIndex: 144
+      westIndex: 36
+      data:
+        position: {x: 1.5, y: 0, z: -3.5}
+    - northIndex: 12
+      eastIndex: 35
+      southIndex: 143
+      westIndex: 37
+      data:
+        position: {x: 0.5, y: 0, z: -3.5}
+    - northIndex: 13
+      eastIndex: 36
+      southIndex: 142
+      westIndex: 38
+      data:
+        position: {x: -0.5, y: 0, z: -3.5}
+    - northIndex: 14
+      eastIndex: 37
+      southIndex: 141
+      westIndex: 39
+      data:
+        position: {x: -1.5, y: 0, z: -3.5}
+    - northIndex: 15
+      eastIndex: 38
+      southIndex: 140
+      westIndex: 40
+      data:
+        position: {x: -2.5, y: 0, z: -3.5}
+    - northIndex: 41
+      eastIndex: 39
+      southIndex: 139
+      westIndex: 45
+      data:
+        position: {x: -3.5, y: 0, z: -3.5}
+    - northIndex: -1
+      eastIndex: 15
+      southIndex: 40
+      westIndex: 46
+      data:
+        position: {x: -3.5, y: 0, z: -2.5}
+    - northIndex: 80
+      eastIndex: 19
+      southIndex: 43
+      westIndex: 50
+      data:
+        position: {x: -3.5, y: 0, z: 1.5}
+    - northIndex: 42
+      eastIndex: 18
+      southIndex: 44
+      westIndex: 49
+      data:
+        position: {x: -3.5, y: 0, z: 0.5}
+    - northIndex: 43
+      eastIndex: 17
+      southIndex: -1
+      westIndex: 48
+      data:
+        position: {x: -3.5, y: 0, z: -0.5}
+    - northIndex: 46
+      eastIndex: 40
+      southIndex: 138
+      westIndex: -1
+      data:
+        position: {x: -4.5, y: 0, z: -3.5}
+    - northIndex: 47
+      eastIndex: 41
+      southIndex: 45
+      westIndex: -1
+      data:
+        position: {x: -4.5, y: 0, z: -2.5}
+    - northIndex: 48
+      eastIndex: -1
+      southIndex: 46
+      westIndex: -1
+      data:
+        position: {x: -4.5, y: 0, z: -1.5}
+    - northIndex: 49
+      eastIndex: 44
+      southIndex: 47
+      westIndex: 564
+      data:
+        position: {x: -4.5, y: 0, z: -0.5}
+    - northIndex: 50
+      eastIndex: 43
+      southIndex: 48
+      westIndex: -1
+      data:
+        position: {x: -4.5, y: 0, z: 0.5}
+    - northIndex: 51
+      eastIndex: 42
+      southIndex: 49
+      westIndex: -1
+      data:
+        position: {x: -4.5, y: 0, z: 1.5}
+    - northIndex: 81
+      eastIndex: 80
+      southIndex: 50
+      westIndex: 559
+      data:
+        position: {x: -4.5, y: 0, z: 2.5}
+    - northIndex: -1
+      eastIndex: 53
+      southIndex: 80
+      westIndex: 81
+      data:
+        position: {x: -3.5, y: 0, z: 3.5}
+    - northIndex: -1
+      eastIndex: 54
+      southIndex: 20
+      westIndex: 52
+      data:
+        position: {x: -2.5, y: 0, z: 3.5}
+    - northIndex: -1
+      eastIndex: 55
+      southIndex: 21
+      westIndex: 53
+      data:
+        position: {x: -1.5, y: 0, z: 3.5}
+    - northIndex: 565
+      eastIndex: 56
+      southIndex: 25
+      westIndex: 54
+      data:
+        position: {x: -0.5, y: 0, z: 3.5}
+    - northIndex: 568
+      eastIndex: 57
+      southIndex: 26
+      westIndex: 55
+      data:
+        position: {x: 0.5, y: 0, z: 3.5}
+    - northIndex: 569
+      eastIndex: 58
+      southIndex: 27
+      westIndex: 56
+      data:
+        position: {x: 1.5, y: 0, z: 3.5}
+    - northIndex: -1
+      eastIndex: -1
+      southIndex: 28
+      westIndex: 57
+      data:
+        position: {x: 2.5, y: 0, z: 3.5}
+    - northIndex: -1
+      eastIndex: -1
+      southIndex: 60
+      westIndex: 28
+      data:
+        position: {x: 3.5, y: 0, z: 2.5}
+    - northIndex: 59
+      eastIndex: 75
+      southIndex: 61
+      westIndex: 29
+      data:
+        position: {x: 3.5, y: 0, z: 1.5}
+    - northIndex: 60
+      eastIndex: 70
+      southIndex: 62
+      westIndex: 30
+      data:
+        position: {x: 3.5, y: 0, z: 0.5}
+    - northIndex: 61
+      eastIndex: 69
+      southIndex: 63
+      westIndex: 31
+      data:
+        position: {x: 3.5, y: 0, z: -0.5}
+    - northIndex: 62
+      eastIndex: 68
+      southIndex: 64
+      westIndex: 32
+      data:
+        position: {x: 3.5, y: 0, z: -1.5}
+    - northIndex: 63
+      eastIndex: 67
+      southIndex: 65
+      westIndex: 33
+      data:
+        position: {x: 3.5, y: 0, z: -2.5}
+    - northIndex: 64
+      eastIndex: 66
+      southIndex: 146
+      westIndex: 34
+      data:
+        position: {x: 3.5, y: 0, z: -3.5}
+    - northIndex: 67
+      eastIndex: 79
+      southIndex: 147
+      westIndex: 65
+      data:
+        position: {x: 4.5, y: 0, z: -3.5}
+    - northIndex: 68
+      eastIndex: 78
+      southIndex: 66
+      westIndex: 64
+      data:
+        position: {x: 4.5, y: 0, z: -2.5}
+    - northIndex: 69
+      eastIndex: 77
+      southIndex: 67
+      westIndex: 63
+      data:
+        position: {x: 4.5, y: 0, z: -1.5}
+    - northIndex: 70
+      eastIndex: 76
+      southIndex: 68
+      westIndex: 62
+      data:
+        position: {x: 4.5, y: 0, z: -0.5}
+    - northIndex: 75
+      eastIndex: 71
+      southIndex: 69
+      westIndex: 61
+      data:
+        position: {x: 4.5, y: 0, z: 0.5}
+    - northIndex: 72
+      eastIndex: 560
+      southIndex: 76
+      westIndex: 70
+      data:
+        position: {x: 5.5, y: 0, z: 0.5}
+    - northIndex: -1
+      eastIndex: -1
+      southIndex: 71
+      westIndex: 75
+      data:
+        position: {x: 5.5, y: 0, z: 1.5}
+    - northIndex: -1
+      eastIndex: -1
+      southIndex: -1
+      westIndex: 74
+      data:
+        position: {x: 5.5, y: 0, z: 3.5}
+    - northIndex: 558
+      eastIndex: 73
+      southIndex: -1
+      westIndex: -1
+      data:
+        position: {x: 4.5, y: 0, z: 3.5}
+    - northIndex: -1
+      eastIndex: 72
+      southIndex: 70
+      westIndex: 60
+      data:
+        position: {x: 4.5, y: 0, z: 1.5}
+    - northIndex: 71
+      eastIndex: -1
+      southIndex: 77
+      westIndex: 69
+      data:
+        position: {x: 5.5, y: 0, z: -0.5}
+    - northIndex: 76
+      eastIndex: -1
+      southIndex: 78
+      westIndex: 68
+      data:
+        position: {x: 5.5, y: 0, z: -1.5}
+    - northIndex: 77
+      eastIndex: -1
+      southIndex: 79
+      westIndex: 67
+      data:
+        position: {x: 5.5, y: 0, z: -2.5}
+    - northIndex: 78
+      eastIndex: 561
+      southIndex: 148
+      westIndex: 66
+      data:
+        position: {x: 5.5, y: 0, z: -3.5}
+    - northIndex: 52
+      eastIndex: 20
+      southIndex: 42
+      westIndex: 51
+      data:
+        position: {x: -3.5, y: 0, z: 2.5}
+    - northIndex: -1
+      eastIndex: 52
+      southIndex: 51
+      westIndex: -1
+      data:
+        position: {x: -4.5, y: 0, z: 3.5}
+    - northIndex: 23
+      eastIndex: 3
+      southIndex: 24
+      westIndex: 17
+      data:
+        position: {x: -1.5, y: 0, z: -0.5}
+    - northIndex: 84
+      eastIndex: 86
+      southIndex: -1
+      westIndex: 173
+      data:
+        position: {x: -7.5, y: 1, z: 2.5}
+    - northIndex: 85
+      eastIndex: 87
+      southIndex: 83
+      westIndex: 174
+      data:
+        position: {x: -7.5, y: 1, z: 3.5}
+    - northIndex: 89
+      eastIndex: 88
+      southIndex: 84
+      westIndex: 175
+      data:
+        position: {x: -7.5, y: 1, z: 4.5}
+    - northIndex: 87
+      eastIndex: 559
+      southIndex: -1
+      westIndex: 83
+      data:
+        position: {x: -6.5, y: 1, z: 2.5}
+    - northIndex: 88
+      eastIndex: -1
+      southIndex: 86
+      westIndex: 84
+      data:
+        position: {x: -6.5, y: 1, z: 3.5}
+    - northIndex: 91
+      eastIndex: -1
+      southIndex: 87
+      westIndex: 85
+      data:
+        position: {x: -6.5, y: 1, z: 4.5}
+    - northIndex: 90
+      eastIndex: 91
+      southIndex: 85
+      westIndex: 176
+      data:
+        position: {x: -7.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 92
+      southIndex: 89
+      westIndex: 177
+      data:
+        position: {x: -7.5, y: 1, z: 6.5}
+    - northIndex: 92
+      eastIndex: 93
+      southIndex: 88
+      westIndex: 89
+      data:
+        position: {x: -6.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 94
+      southIndex: 91
+      westIndex: 90
+      data:
+        position: {x: -6.5, y: 1, z: 6.5}
+    - northIndex: 94
+      eastIndex: 95
+      southIndex: -1
+      westIndex: 91
+      data:
+        position: {x: -5.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 96
+      southIndex: 93
+      westIndex: 92
+      data:
+        position: {x: -5.5, y: 1, z: 6.5}
+    - northIndex: 96
+      eastIndex: 97
+      southIndex: -1
+      westIndex: 93
+      data:
+        position: {x: -4.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 98
+      southIndex: 95
+      westIndex: 94
+      data:
+        position: {x: -4.5, y: 1, z: 6.5}
+    - northIndex: 98
+      eastIndex: 99
+      southIndex: -1
+      westIndex: 95
+      data:
+        position: {x: -3.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 100
+      southIndex: 97
+      westIndex: 96
+      data:
+        position: {x: -3.5, y: 1, z: 6.5}
+    - northIndex: 100
+      eastIndex: 101
+      southIndex: -1
+      westIndex: 97
+      data:
+        position: {x: -2.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 102
+      southIndex: 99
+      westIndex: 98
+      data:
+        position: {x: -2.5, y: 1, z: 6.5}
+    - northIndex: 102
+      eastIndex: 103
+      southIndex: -1
+      westIndex: 99
+      data:
+        position: {x: -1.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 104
+      southIndex: 101
+      westIndex: 100
+      data:
+        position: {x: -1.5, y: 1, z: 6.5}
+    - northIndex: 104
+      eastIndex: 105
+      southIndex: 565
+      westIndex: 101
+      data:
+        position: {x: -0.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 106
+      southIndex: 103
+      westIndex: 102
+      data:
+        position: {x: -0.5, y: 1, z: 6.5}
+    - northIndex: 106
+      eastIndex: 107
+      southIndex: 568
+      westIndex: 103
+      data:
+        position: {x: 0.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 108
+      southIndex: 105
+      westIndex: 104
+      data:
+        position: {x: 0.5, y: 1, z: 6.5}
+    - northIndex: 108
+      eastIndex: -1
+      southIndex: 569
+      westIndex: 105
+      data:
+        position: {x: 1.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: -1
+      southIndex: 107
+      westIndex: 106
+      data:
+        position: {x: 1.5, y: 1, z: 6.5}
+    - northIndex: 110
+      eastIndex: 111
+      southIndex: 558
+      westIndex: -1
+      data:
+        position: {x: 4.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 112
+      southIndex: 109
+      westIndex: -1
+      data:
+        position: {x: 4.5, y: 1, z: 6.5}
+    - northIndex: 112
+      eastIndex: 113
+      southIndex: -1
+      westIndex: 109
+      data:
+        position: {x: 5.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 114
+      southIndex: 111
+      westIndex: 110
+      data:
+        position: {x: 5.5, y: 1, z: 6.5}
+    - northIndex: 114
+      eastIndex: 124
+      southIndex: -1
+      westIndex: 111
+      data:
+        position: {x: 6.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 125
+      southIndex: 113
+      westIndex: 112
+      data:
+        position: {x: 6.5, y: 1, z: 6.5}
+    - northIndex: 116
+      eastIndex: 126
+      southIndex: 150
+      westIndex: 561
+      data:
+        position: {x: 7.5, y: 1, z: -3.5}
+    - northIndex: 117
+      eastIndex: 127
+      southIndex: 115
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: -2.5}
+    - northIndex: 118
+      eastIndex: 128
+      southIndex: 116
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: -1.5}
+    - northIndex: 119
+      eastIndex: 129
+      southIndex: 117
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: -0.5}
+    - northIndex: 120
+      eastIndex: 130
+      southIndex: 118
+      westIndex: 560
+      data:
+        position: {x: 7.5, y: 1, z: 0.5}
+    - northIndex: 121
+      eastIndex: 131
+      southIndex: 119
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: 1.5}
+    - northIndex: 122
+      eastIndex: 132
+      southIndex: 120
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: 2.5}
+    - northIndex: 123
+      eastIndex: 133
+      southIndex: 121
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: 3.5}
+    - northIndex: 124
+      eastIndex: 134
+      southIndex: 122
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: 4.5}
+    - northIndex: 125
+      eastIndex: 135
+      southIndex: 123
+      westIndex: 113
+      data:
+        position: {x: 7.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 136
+      southIndex: 124
+      westIndex: 114
+      data:
+        position: {x: 7.5, y: 1, z: 6.5}
+    - northIndex: 127
+      eastIndex: -1
+      southIndex: 151
+      westIndex: 115
+      data:
+        position: {x: 8.5, y: 1, z: -3.5}
+    - northIndex: 128
+      eastIndex: -1
+      southIndex: 126
+      westIndex: 116
+      data:
+        position: {x: 8.5, y: 1, z: -2.5}
+    - northIndex: 129
+      eastIndex: -1
+      southIndex: 127
+      westIndex: 117
+      data:
+        position: {x: 8.5, y: 1, z: -1.5}
+    - northIndex: 130
+      eastIndex: -1
+      southIndex: 128
+      westIndex: 118
+      data:
+        position: {x: 8.5, y: 1, z: -0.5}
+    - northIndex: 131
+      eastIndex: -1
+      southIndex: 129
+      westIndex: 119
+      data:
+        position: {x: 8.5, y: 1, z: 0.5}
+    - northIndex: 132
+      eastIndex: -1
+      southIndex: 130
+      westIndex: 120
+      data:
+        position: {x: 8.5, y: 1, z: 1.5}
+    - northIndex: 133
+      eastIndex: -1
+      southIndex: 131
+      westIndex: 121
+      data:
+        position: {x: 8.5, y: 1, z: 2.5}
+    - northIndex: 134
+      eastIndex: -1
+      southIndex: 132
+      westIndex: 122
+      data:
+        position: {x: 8.5, y: 1, z: 3.5}
+    - northIndex: 135
+      eastIndex: -1
+      southIndex: 133
+      westIndex: 123
+      data:
+        position: {x: 8.5, y: 1, z: 4.5}
+    - northIndex: 136
+      eastIndex: -1
+      southIndex: 134
+      westIndex: 124
+      data:
+        position: {x: 8.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: -1
+      southIndex: 135
+      westIndex: 125
+      data:
+        position: {x: 8.5, y: 1, z: 6.5}
+    - northIndex: 6
+      eastIndex: 8
+      southIndex: 0
+      westIndex: 4
+      data:
+        position: {x: 0.5, y: 0, z: 0.5}
+    - northIndex: 45
+      eastIndex: 139
+      southIndex: 198
+      westIndex: -1
+      data:
+        position: {x: -4.5, y: 0, z: -4.5}
+    - northIndex: 40
+      eastIndex: 140
+      southIndex: 201
+      westIndex: 138
+      data:
+        position: {x: -3.5, y: 0, z: -4.5}
+    - northIndex: 39
+      eastIndex: 141
+      southIndex: 204
+      westIndex: 139
+      data:
+        position: {x: -2.5, y: 0, z: -4.5}
+    - northIndex: 38
+      eastIndex: 142
+      southIndex: 207
+      westIndex: 140
+      data:
+        position: {x: -1.5, y: 0, z: -4.5}
+    - northIndex: 37
+      eastIndex: 143
+      southIndex: 210
+      westIndex: 141
+      data:
+        position: {x: -0.5, y: 0, z: -4.5}
+    - northIndex: 36
+      eastIndex: 144
+      southIndex: 213
+      westIndex: 142
+      data:
+        position: {x: 0.5, y: 0, z: -4.5}
+    - northIndex: 35
+      eastIndex: 145
+      southIndex: 216
+      westIndex: 143
+      data:
+        position: {x: 1.5, y: 0, z: -4.5}
+    - northIndex: 34
+      eastIndex: 146
+      southIndex: 219
+      westIndex: 144
+      data:
+        position: {x: 2.5, y: 0, z: -4.5}
+    - northIndex: 65
+      eastIndex: 147
+      southIndex: 222
+      westIndex: 145
+      data:
+        position: {x: 3.5, y: 0, z: -4.5}
+    - northIndex: 66
+      eastIndex: 148
+      southIndex: 225
+      westIndex: 146
+      data:
+        position: {x: 4.5, y: 0, z: -4.5}
+    - northIndex: 79
+      eastIndex: -1
+      southIndex: 228
+      westIndex: 147
+      data:
+        position: {x: 5.5, y: 0, z: -4.5}
+    - northIndex: 150
+      eastIndex: 152
+      southIndex: -1
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: -5.5}
+    - northIndex: 115
+      eastIndex: 151
+      southIndex: 149
+      westIndex: -1
+      data:
+        position: {x: 7.5, y: 1, z: -4.5}
+    - northIndex: 126
+      eastIndex: -1
+      southIndex: 152
+      westIndex: 150
+      data:
+        position: {x: 8.5, y: 1, z: -4.5}
+    - northIndex: 151
+      eastIndex: -1
+      southIndex: -1
+      westIndex: 149
+      data:
+        position: {x: 8.5, y: 1, z: -5.5}
+    - northIndex: 154
+      eastIndex: 158
+      southIndex: -1
+      westIndex: 543
+      data:
+        position: {x: -12.5, y: 1, z: 2.5}
+    - northIndex: 155
+      eastIndex: 159
+      southIndex: 153
+      westIndex: 544
+      data:
+        position: {x: -12.5, y: 1, z: 3.5}
+    - northIndex: 156
+      eastIndex: 160
+      southIndex: 154
+      westIndex: 545
+      data:
+        position: {x: -12.5, y: 1, z: 4.5}
+    - northIndex: 157
+      eastIndex: 161
+      southIndex: 155
+      westIndex: 546
+      data:
+        position: {x: -12.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 162
+      southIndex: 156
+      westIndex: 547
+      data:
+        position: {x: -12.5, y: 1, z: 6.5}
+    - northIndex: 159
+      eastIndex: 163
+      southIndex: -1
+      westIndex: 153
+      data:
+        position: {x: -11.5, y: 1, z: 2.5}
+    - northIndex: 160
+      eastIndex: 164
+      southIndex: 158
+      westIndex: 154
+      data:
+        position: {x: -11.5, y: 1, z: 3.5}
+    - northIndex: 161
+      eastIndex: 165
+      southIndex: 159
+      westIndex: 155
+      data:
+        position: {x: -11.5, y: 1, z: 4.5}
+    - northIndex: 162
+      eastIndex: 166
+      southIndex: 160
+      westIndex: 156
+      data:
+        position: {x: -11.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 167
+      southIndex: 161
+      westIndex: 157
+      data:
+        position: {x: -11.5, y: 1, z: 6.5}
+    - northIndex: 164
+      eastIndex: 168
+      southIndex: 570
+      westIndex: 158
+      data:
+        position: {x: -10.5, y: 1, z: 2.5}
+    - northIndex: 165
+      eastIndex: 169
+      southIndex: 163
+      westIndex: 159
+      data:
+        position: {x: -10.5, y: 1, z: 3.5}
+    - northIndex: 166
+      eastIndex: 170
+      southIndex: 164
+      westIndex: 160
+      data:
+        position: {x: -10.5, y: 1, z: 4.5}
+    - northIndex: 167
+      eastIndex: 171
+      southIndex: 165
+      westIndex: 161
+      data:
+        position: {x: -10.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 172
+      southIndex: 166
+      westIndex: 162
+      data:
+        position: {x: -10.5, y: 1, z: 6.5}
+    - northIndex: 169
+      eastIndex: 173
+      southIndex: 566
+      westIndex: 163
+      data:
+        position: {x: -9.5, y: 1, z: 2.5}
+    - northIndex: 170
+      eastIndex: 174
+      southIndex: 168
+      westIndex: 164
+      data:
+        position: {x: -9.5, y: 1, z: 3.5}
+    - northIndex: 171
+      eastIndex: 175
+      southIndex: 169
+      westIndex: 165
+      data:
+        position: {x: -9.5, y: 1, z: 4.5}
+    - northIndex: 172
+      eastIndex: 176
+      southIndex: 170
+      westIndex: 166
+      data:
+        position: {x: -9.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 177
+      southIndex: 171
+      westIndex: 167
+      data:
+        position: {x: -9.5, y: 1, z: 6.5}
+    - northIndex: 174
+      eastIndex: 83
+      southIndex: -1
+      westIndex: 168
+      data:
+        position: {x: -8.5, y: 1, z: 2.5}
+    - northIndex: 175
+      eastIndex: 84
+      southIndex: 173
+      westIndex: 169
+      data:
+        position: {x: -8.5, y: 1, z: 3.5}
+    - northIndex: 176
+      eastIndex: 85
+      southIndex: 174
+      westIndex: 170
+      data:
+        position: {x: -8.5, y: 1, z: 4.5}
+    - northIndex: 177
+      eastIndex: 89
+      southIndex: 175
+      westIndex: 171
+      data:
+        position: {x: -8.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 90
+      southIndex: 176
+      westIndex: 172
+      data:
+        position: {x: -8.5, y: 1, z: 6.5}
+    - northIndex: 179
+      eastIndex: 181
+      southIndex: 261
+      westIndex: 440
+      data:
+        position: {x: -10.5, y: 0, z: -7.5}
+    - northIndex: 180
+      eastIndex: 182
+      southIndex: 178
+      westIndex: 441
+      data:
+        position: {x: -10.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 183
+      southIndex: 179
+      westIndex: 442
+      data:
+        position: {x: -10.5, y: 0, z: -5.5}
+    - northIndex: 182
+      eastIndex: 184
+      southIndex: 264
+      westIndex: 178
+      data:
+        position: {x: -9.5, y: 0, z: -7.5}
+    - northIndex: 183
+      eastIndex: 185
+      southIndex: 181
+      westIndex: 179
+      data:
+        position: {x: -9.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 186
+      southIndex: 182
+      westIndex: 180
+      data:
+        position: {x: -9.5, y: 0, z: -5.5}
+    - northIndex: 185
+      eastIndex: 187
+      southIndex: 267
+      westIndex: 181
+      data:
+        position: {x: -8.5, y: 0, z: -7.5}
+    - northIndex: 186
+      eastIndex: 188
+      southIndex: 184
+      westIndex: 182
+      data:
+        position: {x: -8.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 189
+      southIndex: 185
+      westIndex: 183
+      data:
+        position: {x: -8.5, y: 0, z: -5.5}
+    - northIndex: 188
+      eastIndex: 190
+      southIndex: 270
+      westIndex: 184
+      data:
+        position: {x: -7.5, y: 0, z: -7.5}
+    - northIndex: 189
+      eastIndex: 191
+      southIndex: 187
+      westIndex: 185
+      data:
+        position: {x: -7.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 192
+      southIndex: 188
+      westIndex: 186
+      data:
+        position: {x: -7.5, y: 0, z: -5.5}
+    - northIndex: 191
+      eastIndex: 193
+      southIndex: 273
+      westIndex: 187
+      data:
+        position: {x: -6.5, y: 0, z: -7.5}
+    - northIndex: 192
+      eastIndex: 194
+      southIndex: 190
+      westIndex: 188
+      data:
+        position: {x: -6.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 195
+      southIndex: 191
+      westIndex: 189
+      data:
+        position: {x: -6.5, y: 0, z: -5.5}
+    - northIndex: 194
+      eastIndex: 196
+      southIndex: 276
+      westIndex: 190
+      data:
+        position: {x: -5.5, y: 0, z: -7.5}
+    - northIndex: 195
+      eastIndex: 197
+      southIndex: 193
+      westIndex: 191
+      data:
+        position: {x: -5.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 198
+      southIndex: 194
+      westIndex: 192
+      data:
+        position: {x: -5.5, y: 0, z: -5.5}
+    - northIndex: 197
+      eastIndex: 199
+      southIndex: 279
+      westIndex: 193
+      data:
+        position: {x: -4.5, y: 0, z: -7.5}
+    - northIndex: 198
+      eastIndex: 200
+      southIndex: 196
+      westIndex: 194
+      data:
+        position: {x: -4.5, y: 0, z: -6.5}
+    - northIndex: 138
+      eastIndex: 201
+      southIndex: 197
+      westIndex: 195
+      data:
+        position: {x: -4.5, y: 0, z: -5.5}
+    - northIndex: 200
+      eastIndex: 202
+      southIndex: 282
+      westIndex: 196
+      data:
+        position: {x: -3.5, y: 0, z: -7.5}
+    - northIndex: 201
+      eastIndex: 203
+      southIndex: 199
+      westIndex: 197
+      data:
+        position: {x: -3.5, y: 0, z: -6.5}
+    - northIndex: 139
+      eastIndex: 204
+      southIndex: 200
+      westIndex: 198
+      data:
+        position: {x: -3.5, y: 0, z: -5.5}
+    - northIndex: 203
+      eastIndex: 205
+      southIndex: 285
+      westIndex: 199
+      data:
+        position: {x: -2.5, y: 0, z: -7.5}
+    - northIndex: 204
+      eastIndex: 206
+      southIndex: 202
+      westIndex: 200
+      data:
+        position: {x: -2.5, y: 0, z: -6.5}
+    - northIndex: 140
+      eastIndex: 207
+      southIndex: 203
+      westIndex: 201
+      data:
+        position: {x: -2.5, y: 0, z: -5.5}
+    - northIndex: 206
+      eastIndex: 208
+      southIndex: 288
+      westIndex: 202
+      data:
+        position: {x: -1.5, y: 0, z: -7.5}
+    - northIndex: 207
+      eastIndex: 209
+      southIndex: 205
+      westIndex: 203
+      data:
+        position: {x: -1.5, y: 0, z: -6.5}
+    - northIndex: 141
+      eastIndex: 210
+      southIndex: 206
+      westIndex: 204
+      data:
+        position: {x: -1.5, y: 0, z: -5.5}
+    - northIndex: 209
+      eastIndex: 211
+      southIndex: 291
+      westIndex: 205
+      data:
+        position: {x: -0.5, y: 0, z: -7.5}
+    - northIndex: 210
+      eastIndex: 212
+      southIndex: 208
+      westIndex: 206
+      data:
+        position: {x: -0.5, y: 0, z: -6.5}
+    - northIndex: 142
+      eastIndex: 213
+      southIndex: 209
+      westIndex: 207
+      data:
+        position: {x: -0.5, y: 0, z: -5.5}
+    - northIndex: 212
+      eastIndex: 214
+      southIndex: 294
+      westIndex: 208
+      data:
+        position: {x: 0.5, y: 0, z: -7.5}
+    - northIndex: 213
+      eastIndex: 215
+      southIndex: 211
+      westIndex: 209
+      data:
+        position: {x: 0.5, y: 0, z: -6.5}
+    - northIndex: 143
+      eastIndex: 216
+      southIndex: 212
+      westIndex: 210
+      data:
+        position: {x: 0.5, y: 0, z: -5.5}
+    - northIndex: 215
+      eastIndex: 217
+      southIndex: 297
+      westIndex: 211
+      data:
+        position: {x: 1.5, y: 0, z: -7.5}
+    - northIndex: 216
+      eastIndex: 218
+      southIndex: 214
+      westIndex: 212
+      data:
+        position: {x: 1.5, y: 0, z: -6.5}
+    - northIndex: 144
+      eastIndex: 219
+      southIndex: 215
+      westIndex: 213
+      data:
+        position: {x: 1.5, y: 0, z: -5.5}
+    - northIndex: 218
+      eastIndex: 220
+      southIndex: 300
+      westIndex: 214
+      data:
+        position: {x: 2.5, y: 0, z: -7.5}
+    - northIndex: 219
+      eastIndex: 221
+      southIndex: 217
+      westIndex: 215
+      data:
+        position: {x: 2.5, y: 0, z: -6.5}
+    - northIndex: 145
+      eastIndex: 222
+      southIndex: 218
+      westIndex: 216
+      data:
+        position: {x: 2.5, y: 0, z: -5.5}
+    - northIndex: 221
+      eastIndex: 223
+      southIndex: 303
+      westIndex: 217
+      data:
+        position: {x: 3.5, y: 0, z: -7.5}
+    - northIndex: 222
+      eastIndex: 224
+      southIndex: 220
+      westIndex: 218
+      data:
+        position: {x: 3.5, y: 0, z: -6.5}
+    - northIndex: 146
+      eastIndex: 225
+      southIndex: 221
+      westIndex: 219
+      data:
+        position: {x: 3.5, y: 0, z: -5.5}
+    - northIndex: 224
+      eastIndex: 226
+      southIndex: 306
+      westIndex: 220
+      data:
+        position: {x: 4.5, y: 0, z: -7.5}
+    - northIndex: 225
+      eastIndex: 227
+      southIndex: 223
+      westIndex: 221
+      data:
+        position: {x: 4.5, y: 0, z: -6.5}
+    - northIndex: 147
+      eastIndex: 228
+      southIndex: 224
+      westIndex: 222
+      data:
+        position: {x: 4.5, y: 0, z: -5.5}
+    - northIndex: 227
+      eastIndex: -1
+      southIndex: -1
+      westIndex: 223
+      data:
+        position: {x: 5.5, y: 0, z: -7.5}
+    - northIndex: 228
+      eastIndex: -1
+      southIndex: 226
+      westIndex: 224
+      data:
+        position: {x: 5.5, y: 0, z: -6.5}
+    - northIndex: 148
+      eastIndex: -1
+      southIndex: 227
+      westIndex: 225
+      data:
+        position: {x: 5.5, y: 0, z: -5.5}
+    - northIndex: 230
+      eastIndex: 235
+      southIndex: 253
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -7.5}
+    - northIndex: 231
+      eastIndex: 236
+      southIndex: 229
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -6.5}
+    - northIndex: 232
+      eastIndex: 237
+      southIndex: 230
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -5.5}
+    - northIndex: 233
+      eastIndex: 238
+      southIndex: 231
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -4.5}
+    - northIndex: 234
+      eastIndex: 239
+      southIndex: 232
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -3.5}
+    - northIndex: 243
+      eastIndex: 240
+      southIndex: 233
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -2.5}
+    - northIndex: 236
+      eastIndex: -1
+      southIndex: 258
+      westIndex: 229
+      data:
+        position: {x: -9.5, y: 3, z: -7.5}
+    - northIndex: 237
+      eastIndex: -1
+      southIndex: 235
+      westIndex: 230
+      data:
+        position: {x: -9.5, y: 3, z: -6.5}
+    - northIndex: 238
+      eastIndex: -1
+      southIndex: 236
+      westIndex: 231
+      data:
+        position: {x: -9.5, y: 3, z: -5.5}
+    - northIndex: 239
+      eastIndex: -1
+      southIndex: 237
+      westIndex: 232
+      data:
+        position: {x: -9.5, y: 3, z: -4.5}
+    - northIndex: 240
+      eastIndex: -1
+      southIndex: 238
+      westIndex: 233
+      data:
+        position: {x: -9.5, y: 3, z: -3.5}
+    - northIndex: 245
+      eastIndex: -1
+      southIndex: 239
+      westIndex: 234
+      data:
+        position: {x: -9.5, y: 3, z: -2.5}
+    - northIndex: 242
+      eastIndex: 243
+      southIndex: -1
+      westIndex: -1
+      data:
+        position: {x: -11.5, y: 3, z: -1.5}
+    - northIndex: -1
+      eastIndex: 244
+      southIndex: 241
+      westIndex: -1
+      data:
+        position: {x: -11.5, y: 3, z: -0.5}
+    - northIndex: 244
+      eastIndex: 245
+      southIndex: 234
+      westIndex: 241
+      data:
+        position: {x: -10.5, y: 3, z: -1.5}
+    - northIndex: 571
+      eastIndex: 246
+      southIndex: 243
+      westIndex: 242
+      data:
+        position: {x: -10.5, y: 3, z: -0.5}
+    - northIndex: 246
+      eastIndex: 247
+      southIndex: 240
+      westIndex: 243
+      data:
+        position: {x: -9.5, y: 3, z: -1.5}
+    - northIndex: 567
+      eastIndex: 248
+      southIndex: 245
+      westIndex: 244
+      data:
+        position: {x: -9.5, y: 3, z: -0.5}
+    - northIndex: 248
+      eastIndex: -1
+      southIndex: -1
+      westIndex: 245
+      data:
+        position: {x: -8.5, y: 3, z: -1.5}
+    - northIndex: -1
+      eastIndex: 562
+      southIndex: 247
+      westIndex: 246
+      data:
+        position: {x: -8.5, y: 3, z: -0.5}
+    - northIndex: 250
+      eastIndex: 254
+      southIndex: -1
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -12.5}
+    - northIndex: 251
+      eastIndex: 255
+      southIndex: 249
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -11.5}
+    - northIndex: 252
+      eastIndex: 256
+      southIndex: 250
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -10.5}
+    - northIndex: 253
+      eastIndex: 257
+      southIndex: 251
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -9.5}
+    - northIndex: 229
+      eastIndex: 258
+      southIndex: 252
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 3, z: -8.5}
+    - northIndex: 255
+      eastIndex: -1
+      southIndex: -1
+      westIndex: 249
+      data:
+        position: {x: -9.5, y: 3, z: -12.5}
+    - northIndex: 256
+      eastIndex: -1
+      southIndex: 254
+      westIndex: 250
+      data:
+        position: {x: -9.5, y: 3, z: -11.5}
+    - northIndex: 257
+      eastIndex: -1
+      southIndex: 255
+      westIndex: 251
+      data:
+        position: {x: -9.5, y: 3, z: -10.5}
+    - northIndex: 258
+      eastIndex: -1
+      southIndex: 256
+      westIndex: 252
+      data:
+        position: {x: -9.5, y: 3, z: -9.5}
+    - northIndex: 235
+      eastIndex: -1
+      southIndex: 257
+      westIndex: 253
+      data:
+        position: {x: -9.5, y: 3, z: -8.5}
+    - northIndex: 260
+      eastIndex: 262
+      southIndex: 308
+      westIndex: 437
+      data:
+        position: {x: -10.5, y: 0, z: -10.5}
+    - northIndex: 261
+      eastIndex: 263
+      southIndex: 259
+      westIndex: 438
+      data:
+        position: {x: -10.5, y: 0, z: -9.5}
+    - northIndex: 178
+      eastIndex: 264
+      southIndex: 260
+      westIndex: 439
+      data:
+        position: {x: -10.5, y: 0, z: -8.5}
+    - northIndex: 263
+      eastIndex: 265
+      southIndex: 310
+      westIndex: 259
+      data:
+        position: {x: -9.5, y: 0, z: -10.5}
+    - northIndex: 264
+      eastIndex: 266
+      southIndex: 262
+      westIndex: 260
+      data:
+        position: {x: -9.5, y: 0, z: -9.5}
+    - northIndex: 181
+      eastIndex: 267
+      southIndex: 263
+      westIndex: 261
+      data:
+        position: {x: -9.5, y: 0, z: -8.5}
+    - northIndex: 266
+      eastIndex: 268
+      southIndex: 312
+      westIndex: 262
+      data:
+        position: {x: -8.5, y: 0, z: -10.5}
+    - northIndex: 267
+      eastIndex: 269
+      southIndex: 265
+      westIndex: 263
+      data:
+        position: {x: -8.5, y: 0, z: -9.5}
+    - northIndex: 184
+      eastIndex: 270
+      southIndex: 266
+      westIndex: 264
+      data:
+        position: {x: -8.5, y: 0, z: -8.5}
+    - northIndex: 269
+      eastIndex: 271
+      southIndex: 314
+      westIndex: 265
+      data:
+        position: {x: -7.5, y: 0, z: -10.5}
+    - northIndex: 270
+      eastIndex: 272
+      southIndex: 268
+      westIndex: 266
+      data:
+        position: {x: -7.5, y: 0, z: -9.5}
+    - northIndex: 187
+      eastIndex: 273
+      southIndex: 269
+      westIndex: 267
+      data:
+        position: {x: -7.5, y: 0, z: -8.5}
+    - northIndex: 272
+      eastIndex: 274
+      southIndex: 316
+      westIndex: 268
+      data:
+        position: {x: -6.5, y: 0, z: -10.5}
+    - northIndex: 273
+      eastIndex: 275
+      southIndex: 271
+      westIndex: 269
+      data:
+        position: {x: -6.5, y: 0, z: -9.5}
+    - northIndex: 190
+      eastIndex: 276
+      southIndex: 272
+      westIndex: 270
+      data:
+        position: {x: -6.5, y: 0, z: -8.5}
+    - northIndex: 275
+      eastIndex: 277
+      southIndex: 318
+      westIndex: 271
+      data:
+        position: {x: -5.5, y: 0, z: -10.5}
+    - northIndex: 276
+      eastIndex: 278
+      southIndex: 274
+      westIndex: 272
+      data:
+        position: {x: -5.5, y: 0, z: -9.5}
+    - northIndex: 193
+      eastIndex: 279
+      southIndex: 275
+      westIndex: 273
+      data:
+        position: {x: -5.5, y: 0, z: -8.5}
+    - northIndex: 278
+      eastIndex: 280
+      southIndex: 320
+      westIndex: 274
+      data:
+        position: {x: -4.5, y: 0, z: -10.5}
+    - northIndex: 279
+      eastIndex: 281
+      southIndex: 277
+      westIndex: 275
+      data:
+        position: {x: -4.5, y: 0, z: -9.5}
+    - northIndex: 196
+      eastIndex: 282
+      southIndex: 278
+      westIndex: 276
+      data:
+        position: {x: -4.5, y: 0, z: -8.5}
+    - northIndex: 281
+      eastIndex: 283
+      southIndex: 322
+      westIndex: 277
+      data:
+        position: {x: -3.5, y: 0, z: -10.5}
+    - northIndex: 282
+      eastIndex: 284
+      southIndex: 280
+      westIndex: 278
+      data:
+        position: {x: -3.5, y: 0, z: -9.5}
+    - northIndex: 199
+      eastIndex: 285
+      southIndex: 281
+      westIndex: 279
+      data:
+        position: {x: -3.5, y: 0, z: -8.5}
+    - northIndex: 284
+      eastIndex: 286
+      southIndex: 324
+      westIndex: 280
+      data:
+        position: {x: -2.5, y: 0, z: -10.5}
+    - northIndex: 285
+      eastIndex: 287
+      southIndex: 283
+      westIndex: 281
+      data:
+        position: {x: -2.5, y: 0, z: -9.5}
+    - northIndex: 202
+      eastIndex: 288
+      southIndex: 284
+      westIndex: 282
+      data:
+        position: {x: -2.5, y: 0, z: -8.5}
+    - northIndex: 287
+      eastIndex: 289
+      southIndex: 326
+      westIndex: 283
+      data:
+        position: {x: -1.5, y: 0, z: -10.5}
+    - northIndex: 288
+      eastIndex: 290
+      southIndex: 286
+      westIndex: 284
+      data:
+        position: {x: -1.5, y: 0, z: -9.5}
+    - northIndex: 205
+      eastIndex: 291
+      southIndex: 287
+      westIndex: 285
+      data:
+        position: {x: -1.5, y: 0, z: -8.5}
+    - northIndex: 290
+      eastIndex: 292
+      southIndex: 328
+      westIndex: 286
+      data:
+        position: {x: -0.5, y: 0, z: -10.5}
+    - northIndex: 291
+      eastIndex: 293
+      southIndex: 289
+      westIndex: 287
+      data:
+        position: {x: -0.5, y: 0, z: -9.5}
+    - northIndex: 208
+      eastIndex: 294
+      southIndex: 290
+      westIndex: 288
+      data:
+        position: {x: -0.5, y: 0, z: -8.5}
+    - northIndex: 293
+      eastIndex: 295
+      southIndex: 330
+      westIndex: 289
+      data:
+        position: {x: 0.5, y: 0, z: -10.5}
+    - northIndex: 294
+      eastIndex: 296
+      southIndex: 292
+      westIndex: 290
+      data:
+        position: {x: 0.5, y: 0, z: -9.5}
+    - northIndex: 211
+      eastIndex: 297
+      southIndex: 293
+      westIndex: 291
+      data:
+        position: {x: 0.5, y: 0, z: -8.5}
+    - northIndex: 296
+      eastIndex: 298
+      southIndex: 332
+      westIndex: 292
+      data:
+        position: {x: 1.5, y: 0, z: -10.5}
+    - northIndex: 297
+      eastIndex: 299
+      southIndex: 295
+      westIndex: 293
+      data:
+        position: {x: 1.5, y: 0, z: -9.5}
+    - northIndex: 214
+      eastIndex: 300
+      southIndex: 296
+      westIndex: 294
+      data:
+        position: {x: 1.5, y: 0, z: -8.5}
+    - northIndex: 299
+      eastIndex: 301
+      southIndex: 334
+      westIndex: 295
+      data:
+        position: {x: 2.5, y: 0, z: -10.5}
+    - northIndex: 300
+      eastIndex: 302
+      southIndex: 298
+      westIndex: 296
+      data:
+        position: {x: 2.5, y: 0, z: -9.5}
+    - northIndex: 217
+      eastIndex: 303
+      southIndex: 299
+      westIndex: 297
+      data:
+        position: {x: 2.5, y: 0, z: -8.5}
+    - northIndex: 302
+      eastIndex: 304
+      southIndex: 336
+      westIndex: 298
+      data:
+        position: {x: 3.5, y: 0, z: -10.5}
+    - northIndex: 303
+      eastIndex: 305
+      southIndex: 301
+      westIndex: 299
+      data:
+        position: {x: 3.5, y: 0, z: -9.5}
+    - northIndex: 220
+      eastIndex: 306
+      southIndex: 302
+      westIndex: 300
+      data:
+        position: {x: 3.5, y: 0, z: -8.5}
+    - northIndex: 305
+      eastIndex: -1
+      southIndex: 338
+      westIndex: 301
+      data:
+        position: {x: 4.5, y: 0, z: -10.5}
+    - northIndex: 306
+      eastIndex: -1
+      southIndex: 304
+      westIndex: 302
+      data:
+        position: {x: 4.5, y: 0, z: -9.5}
+    - northIndex: 223
+      eastIndex: -1
+      southIndex: 305
+      westIndex: 303
+      data:
+        position: {x: 4.5, y: 0, z: -8.5}
+    - northIndex: 308
+      eastIndex: 309
+      southIndex: -1
+      westIndex: 435
+      data:
+        position: {x: -10.5, y: 0, z: -12.5}
+    - northIndex: 259
+      eastIndex: 310
+      southIndex: 307
+      westIndex: 436
+      data:
+        position: {x: -10.5, y: 0, z: -11.5}
+    - northIndex: 310
+      eastIndex: 311
+      southIndex: -1
+      westIndex: 307
+      data:
+        position: {x: -9.5, y: 0, z: -12.5}
+    - northIndex: 262
+      eastIndex: 312
+      southIndex: 309
+      westIndex: 308
+      data:
+        position: {x: -9.5, y: 0, z: -11.5}
+    - northIndex: 312
+      eastIndex: 313
+      southIndex: -1
+      westIndex: 309
+      data:
+        position: {x: -8.5, y: 0, z: -12.5}
+    - northIndex: 265
+      eastIndex: 314
+      southIndex: 311
+      westIndex: 310
+      data:
+        position: {x: -8.5, y: 0, z: -11.5}
+    - northIndex: 314
+      eastIndex: 315
+      southIndex: -1
+      westIndex: 311
+      data:
+        position: {x: -7.5, y: 0, z: -12.5}
+    - northIndex: 268
+      eastIndex: 316
+      southIndex: 313
+      westIndex: 312
+      data:
+        position: {x: -7.5, y: 0, z: -11.5}
+    - northIndex: 316
+      eastIndex: 317
+      southIndex: -1
+      westIndex: 313
+      data:
+        position: {x: -6.5, y: 0, z: -12.5}
+    - northIndex: 271
+      eastIndex: 318
+      southIndex: 315
+      westIndex: 314
+      data:
+        position: {x: -6.5, y: 0, z: -11.5}
+    - northIndex: 318
+      eastIndex: 319
+      southIndex: -1
+      westIndex: 315
+      data:
+        position: {x: -5.5, y: 0, z: -12.5}
+    - northIndex: 274
+      eastIndex: 320
+      southIndex: 317
+      westIndex: 316
+      data:
+        position: {x: -5.5, y: 0, z: -11.5}
+    - northIndex: 320
+      eastIndex: 321
+      southIndex: -1
+      westIndex: 317
+      data:
+        position: {x: -4.5, y: 0, z: -12.5}
+    - northIndex: 277
+      eastIndex: 322
+      southIndex: 319
+      westIndex: 318
+      data:
+        position: {x: -4.5, y: 0, z: -11.5}
+    - northIndex: 322
+      eastIndex: 323
+      southIndex: -1
+      westIndex: 319
+      data:
+        position: {x: -3.5, y: 0, z: -12.5}
+    - northIndex: 280
+      eastIndex: 324
+      southIndex: 321
+      westIndex: 320
+      data:
+        position: {x: -3.5, y: 0, z: -11.5}
+    - northIndex: 324
+      eastIndex: 325
+      southIndex: -1
+      westIndex: 321
+      data:
+        position: {x: -2.5, y: 0, z: -12.5}
+    - northIndex: 283
+      eastIndex: 326
+      southIndex: 323
+      westIndex: 322
+      data:
+        position: {x: -2.5, y: 0, z: -11.5}
+    - northIndex: 326
+      eastIndex: 327
+      southIndex: -1
+      westIndex: 323
+      data:
+        position: {x: -1.5, y: 0, z: -12.5}
+    - northIndex: 286
+      eastIndex: 328
+      southIndex: 325
+      westIndex: 324
+      data:
+        position: {x: -1.5, y: 0, z: -11.5}
+    - northIndex: 328
+      eastIndex: 329
+      southIndex: -1
+      westIndex: 325
+      data:
+        position: {x: -0.5, y: 0, z: -12.5}
+    - northIndex: 289
+      eastIndex: 330
+      southIndex: 327
+      westIndex: 326
+      data:
+        position: {x: -0.5, y: 0, z: -11.5}
+    - northIndex: 330
+      eastIndex: 331
+      southIndex: -1
+      westIndex: 327
+      data:
+        position: {x: 0.5, y: 0, z: -12.5}
+    - northIndex: 292
+      eastIndex: 332
+      southIndex: 329
+      westIndex: 328
+      data:
+        position: {x: 0.5, y: 0, z: -11.5}
+    - northIndex: 332
+      eastIndex: 333
+      southIndex: -1
+      westIndex: 329
+      data:
+        position: {x: 1.5, y: 0, z: -12.5}
+    - northIndex: 295
+      eastIndex: 334
+      southIndex: 331
+      westIndex: 330
+      data:
+        position: {x: 1.5, y: 0, z: -11.5}
+    - northIndex: 334
+      eastIndex: 335
+      southIndex: -1
+      westIndex: 331
+      data:
+        position: {x: 2.5, y: 0, z: -12.5}
+    - northIndex: 298
+      eastIndex: 336
+      southIndex: 333
+      westIndex: 332
+      data:
+        position: {x: 2.5, y: 0, z: -11.5}
+    - northIndex: 336
+      eastIndex: 337
+      southIndex: -1
+      westIndex: 333
+      data:
+        position: {x: 3.5, y: 0, z: -12.5}
+    - northIndex: 301
+      eastIndex: 338
+      southIndex: 335
+      westIndex: 334
+      data:
+        position: {x: 3.5, y: 0, z: -11.5}
+    - northIndex: 338
+      eastIndex: -1
+      southIndex: -1
+      westIndex: 335
+      data:
+        position: {x: 4.5, y: 0, z: -12.5}
+    - northIndex: 304
+      eastIndex: -1
+      southIndex: 337
+      westIndex: 336
+      data:
+        position: {x: 4.5, y: 0, z: -11.5}
+    - northIndex: 340
+      eastIndex: 347
+      southIndex: -1
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 0, z: -12.5}
+    - northIndex: 341
+      eastIndex: 348
+      southIndex: 339
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 0, z: -11.5}
+    - northIndex: 342
+      eastIndex: 349
+      southIndex: 340
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 0, z: -10.5}
+    - northIndex: 343
+      eastIndex: 350
+      southIndex: 341
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 0, z: -9.5}
+    - northIndex: 344
+      eastIndex: 351
+      southIndex: 342
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 0, z: -8.5}
+    - northIndex: 345
+      eastIndex: 352
+      southIndex: 343
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 0, z: -7.5}
+    - northIndex: 346
+      eastIndex: 353
+      southIndex: 344
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 354
+      southIndex: 345
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 0, z: -5.5}
+    - northIndex: 348
+      eastIndex: 355
+      southIndex: -1
+      westIndex: 339
+      data:
+        position: {x: -22.5, y: 0, z: -12.5}
+    - northIndex: 349
+      eastIndex: 356
+      southIndex: 347
+      westIndex: 340
+      data:
+        position: {x: -22.5, y: 0, z: -11.5}
+    - northIndex: 350
+      eastIndex: 357
+      southIndex: 348
+      westIndex: 341
+      data:
+        position: {x: -22.5, y: 0, z: -10.5}
+    - northIndex: 351
+      eastIndex: 358
+      southIndex: 349
+      westIndex: 342
+      data:
+        position: {x: -22.5, y: 0, z: -9.5}
+    - northIndex: 352
+      eastIndex: 359
+      southIndex: 350
+      westIndex: 343
+      data:
+        position: {x: -22.5, y: 0, z: -8.5}
+    - northIndex: 353
+      eastIndex: 360
+      southIndex: 351
+      westIndex: 344
+      data:
+        position: {x: -22.5, y: 0, z: -7.5}
+    - northIndex: 354
+      eastIndex: 361
+      southIndex: 352
+      westIndex: 345
+      data:
+        position: {x: -22.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 362
+      southIndex: 353
+      westIndex: 346
+      data:
+        position: {x: -22.5, y: 0, z: -5.5}
+    - northIndex: 356
+      eastIndex: 363
+      southIndex: -1
+      westIndex: 347
+      data:
+        position: {x: -21.5, y: 0, z: -12.5}
+    - northIndex: 357
+      eastIndex: 364
+      southIndex: 355
+      westIndex: 348
+      data:
+        position: {x: -21.5, y: 0, z: -11.5}
+    - northIndex: 358
+      eastIndex: 365
+      southIndex: 356
+      westIndex: 349
+      data:
+        position: {x: -21.5, y: 0, z: -10.5}
+    - northIndex: 359
+      eastIndex: 366
+      southIndex: 357
+      westIndex: 350
+      data:
+        position: {x: -21.5, y: 0, z: -9.5}
+    - northIndex: 360
+      eastIndex: 367
+      southIndex: 358
+      westIndex: 351
+      data:
+        position: {x: -21.5, y: 0, z: -8.5}
+    - northIndex: 361
+      eastIndex: 368
+      southIndex: 359
+      westIndex: 352
+      data:
+        position: {x: -21.5, y: 0, z: -7.5}
+    - northIndex: 362
+      eastIndex: 369
+      southIndex: 360
+      westIndex: 353
+      data:
+        position: {x: -21.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 370
+      southIndex: 361
+      westIndex: 354
+      data:
+        position: {x: -21.5, y: 0, z: -5.5}
+    - northIndex: 364
+      eastIndex: 371
+      southIndex: -1
+      westIndex: 355
+      data:
+        position: {x: -20.5, y: 0, z: -12.5}
+    - northIndex: 365
+      eastIndex: 372
+      southIndex: 363
+      westIndex: 356
+      data:
+        position: {x: -20.5, y: 0, z: -11.5}
+    - northIndex: 366
+      eastIndex: 373
+      southIndex: 364
+      westIndex: 357
+      data:
+        position: {x: -20.5, y: 0, z: -10.5}
+    - northIndex: 367
+      eastIndex: 374
+      southIndex: 365
+      westIndex: 358
+      data:
+        position: {x: -20.5, y: 0, z: -9.5}
+    - northIndex: 368
+      eastIndex: 375
+      southIndex: 366
+      westIndex: 359
+      data:
+        position: {x: -20.5, y: 0, z: -8.5}
+    - northIndex: 369
+      eastIndex: 376
+      southIndex: 367
+      westIndex: 360
+      data:
+        position: {x: -20.5, y: 0, z: -7.5}
+    - northIndex: 370
+      eastIndex: 377
+      southIndex: 368
+      westIndex: 361
+      data:
+        position: {x: -20.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 378
+      southIndex: 369
+      westIndex: 362
+      data:
+        position: {x: -20.5, y: 0, z: -5.5}
+    - northIndex: 372
+      eastIndex: 379
+      southIndex: -1
+      westIndex: 363
+      data:
+        position: {x: -19.5, y: 0, z: -12.5}
+    - northIndex: 373
+      eastIndex: 380
+      southIndex: 371
+      westIndex: 364
+      data:
+        position: {x: -19.5, y: 0, z: -11.5}
+    - northIndex: 374
+      eastIndex: 381
+      southIndex: 372
+      westIndex: 365
+      data:
+        position: {x: -19.5, y: 0, z: -10.5}
+    - northIndex: 375
+      eastIndex: 382
+      southIndex: 373
+      westIndex: 366
+      data:
+        position: {x: -19.5, y: 0, z: -9.5}
+    - northIndex: 376
+      eastIndex: 383
+      southIndex: 374
+      westIndex: 367
+      data:
+        position: {x: -19.5, y: 0, z: -8.5}
+    - northIndex: 377
+      eastIndex: 384
+      southIndex: 375
+      westIndex: 368
+      data:
+        position: {x: -19.5, y: 0, z: -7.5}
+    - northIndex: 378
+      eastIndex: 385
+      southIndex: 376
+      westIndex: 369
+      data:
+        position: {x: -19.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 386
+      southIndex: 377
+      westIndex: 370
+      data:
+        position: {x: -19.5, y: 0, z: -5.5}
+    - northIndex: 380
+      eastIndex: 387
+      southIndex: -1
+      westIndex: 371
+      data:
+        position: {x: -18.5, y: 0, z: -12.5}
+    - northIndex: 381
+      eastIndex: 388
+      southIndex: 379
+      westIndex: 372
+      data:
+        position: {x: -18.5, y: 0, z: -11.5}
+    - northIndex: 382
+      eastIndex: 389
+      southIndex: 380
+      westIndex: 373
+      data:
+        position: {x: -18.5, y: 0, z: -10.5}
+    - northIndex: 383
+      eastIndex: 390
+      southIndex: 381
+      westIndex: 374
+      data:
+        position: {x: -18.5, y: 0, z: -9.5}
+    - northIndex: 384
+      eastIndex: 391
+      southIndex: 382
+      westIndex: 375
+      data:
+        position: {x: -18.5, y: 0, z: -8.5}
+    - northIndex: 385
+      eastIndex: 392
+      southIndex: 383
+      westIndex: 376
+      data:
+        position: {x: -18.5, y: 0, z: -7.5}
+    - northIndex: 386
+      eastIndex: 393
+      southIndex: 384
+      westIndex: 377
+      data:
+        position: {x: -18.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 394
+      southIndex: 385
+      westIndex: 378
+      data:
+        position: {x: -18.5, y: 0, z: -5.5}
+    - northIndex: 388
+      eastIndex: 395
+      southIndex: -1
+      westIndex: 379
+      data:
+        position: {x: -17.5, y: 0, z: -12.5}
+    - northIndex: 389
+      eastIndex: 396
+      southIndex: 387
+      westIndex: 380
+      data:
+        position: {x: -17.5, y: 0, z: -11.5}
+    - northIndex: 390
+      eastIndex: 397
+      southIndex: 388
+      westIndex: 381
+      data:
+        position: {x: -17.5, y: 0, z: -10.5}
+    - northIndex: 391
+      eastIndex: 398
+      southIndex: 389
+      westIndex: 382
+      data:
+        position: {x: -17.5, y: 0, z: -9.5}
+    - northIndex: 392
+      eastIndex: 399
+      southIndex: 390
+      westIndex: 383
+      data:
+        position: {x: -17.5, y: 0, z: -8.5}
+    - northIndex: 393
+      eastIndex: 400
+      southIndex: 391
+      westIndex: 384
+      data:
+        position: {x: -17.5, y: 0, z: -7.5}
+    - northIndex: 394
+      eastIndex: 401
+      southIndex: 392
+      westIndex: 385
+      data:
+        position: {x: -17.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 402
+      southIndex: 393
+      westIndex: 386
+      data:
+        position: {x: -17.5, y: 0, z: -5.5}
+    - northIndex: 396
+      eastIndex: 403
+      southIndex: -1
+      westIndex: 387
+      data:
+        position: {x: -16.5, y: 0, z: -12.5}
+    - northIndex: 397
+      eastIndex: 404
+      southIndex: 395
+      westIndex: 388
+      data:
+        position: {x: -16.5, y: 0, z: -11.5}
+    - northIndex: 398
+      eastIndex: 405
+      southIndex: 396
+      westIndex: 389
+      data:
+        position: {x: -16.5, y: 0, z: -10.5}
+    - northIndex: 399
+      eastIndex: 406
+      southIndex: 397
+      westIndex: 390
+      data:
+        position: {x: -16.5, y: 0, z: -9.5}
+    - northIndex: 400
+      eastIndex: 407
+      southIndex: 398
+      westIndex: 391
+      data:
+        position: {x: -16.5, y: 0, z: -8.5}
+    - northIndex: 401
+      eastIndex: 408
+      southIndex: 399
+      westIndex: 392
+      data:
+        position: {x: -16.5, y: 0, z: -7.5}
+    - northIndex: 402
+      eastIndex: 409
+      southIndex: 400
+      westIndex: 393
+      data:
+        position: {x: -16.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 410
+      southIndex: 401
+      westIndex: 394
+      data:
+        position: {x: -16.5, y: 0, z: -5.5}
+    - northIndex: 404
+      eastIndex: 411
+      southIndex: -1
+      westIndex: 395
+      data:
+        position: {x: -15.5, y: 0, z: -12.5}
+    - northIndex: 405
+      eastIndex: 412
+      southIndex: 403
+      westIndex: 396
+      data:
+        position: {x: -15.5, y: 0, z: -11.5}
+    - northIndex: 406
+      eastIndex: 413
+      southIndex: 404
+      westIndex: 397
+      data:
+        position: {x: -15.5, y: 0, z: -10.5}
+    - northIndex: 407
+      eastIndex: 414
+      southIndex: 405
+      westIndex: 398
+      data:
+        position: {x: -15.5, y: 0, z: -9.5}
+    - northIndex: 408
+      eastIndex: 415
+      southIndex: 406
+      westIndex: 399
+      data:
+        position: {x: -15.5, y: 0, z: -8.5}
+    - northIndex: 409
+      eastIndex: 416
+      southIndex: 407
+      westIndex: 400
+      data:
+        position: {x: -15.5, y: 0, z: -7.5}
+    - northIndex: 410
+      eastIndex: 417
+      southIndex: 408
+      westIndex: 401
+      data:
+        position: {x: -15.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 418
+      southIndex: 409
+      westIndex: 402
+      data:
+        position: {x: -15.5, y: 0, z: -5.5}
+    - northIndex: 412
+      eastIndex: 419
+      southIndex: -1
+      westIndex: 403
+      data:
+        position: {x: -14.5, y: 0, z: -12.5}
+    - northIndex: 413
+      eastIndex: 420
+      southIndex: 411
+      westIndex: 404
+      data:
+        position: {x: -14.5, y: 0, z: -11.5}
+    - northIndex: 414
+      eastIndex: 421
+      southIndex: 412
+      westIndex: 405
+      data:
+        position: {x: -14.5, y: 0, z: -10.5}
+    - northIndex: 415
+      eastIndex: 422
+      southIndex: 413
+      westIndex: 406
+      data:
+        position: {x: -14.5, y: 0, z: -9.5}
+    - northIndex: 416
+      eastIndex: 423
+      southIndex: 414
+      westIndex: 407
+      data:
+        position: {x: -14.5, y: 0, z: -8.5}
+    - northIndex: 417
+      eastIndex: 424
+      southIndex: 415
+      westIndex: 408
+      data:
+        position: {x: -14.5, y: 0, z: -7.5}
+    - northIndex: 418
+      eastIndex: 425
+      southIndex: 416
+      westIndex: 409
+      data:
+        position: {x: -14.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 426
+      southIndex: 417
+      westIndex: 410
+      data:
+        position: {x: -14.5, y: 0, z: -5.5}
+    - northIndex: 420
+      eastIndex: 427
+      southIndex: -1
+      westIndex: 411
+      data:
+        position: {x: -13.5, y: 0, z: -12.5}
+    - northIndex: 421
+      eastIndex: 428
+      southIndex: 419
+      westIndex: 412
+      data:
+        position: {x: -13.5, y: 0, z: -11.5}
+    - northIndex: 422
+      eastIndex: 429
+      southIndex: 420
+      westIndex: 413
+      data:
+        position: {x: -13.5, y: 0, z: -10.5}
+    - northIndex: 423
+      eastIndex: 430
+      southIndex: 421
+      westIndex: 414
+      data:
+        position: {x: -13.5, y: 0, z: -9.5}
+    - northIndex: 424
+      eastIndex: 431
+      southIndex: 422
+      westIndex: 415
+      data:
+        position: {x: -13.5, y: 0, z: -8.5}
+    - northIndex: 425
+      eastIndex: 432
+      southIndex: 423
+      westIndex: 416
+      data:
+        position: {x: -13.5, y: 0, z: -7.5}
+    - northIndex: 426
+      eastIndex: 433
+      southIndex: 424
+      westIndex: 417
+      data:
+        position: {x: -13.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 434
+      southIndex: 425
+      westIndex: 418
+      data:
+        position: {x: -13.5, y: 0, z: -5.5}
+    - northIndex: 428
+      eastIndex: 435
+      southIndex: -1
+      westIndex: 419
+      data:
+        position: {x: -12.5, y: 0, z: -12.5}
+    - northIndex: 429
+      eastIndex: 436
+      southIndex: 427
+      westIndex: 420
+      data:
+        position: {x: -12.5, y: 0, z: -11.5}
+    - northIndex: 430
+      eastIndex: 437
+      southIndex: 428
+      westIndex: 421
+      data:
+        position: {x: -12.5, y: 0, z: -10.5}
+    - northIndex: 431
+      eastIndex: 438
+      southIndex: 429
+      westIndex: 422
+      data:
+        position: {x: -12.5, y: 0, z: -9.5}
+    - northIndex: 432
+      eastIndex: 439
+      southIndex: 430
+      westIndex: 423
+      data:
+        position: {x: -12.5, y: 0, z: -8.5}
+    - northIndex: 433
+      eastIndex: 440
+      southIndex: 431
+      westIndex: 424
+      data:
+        position: {x: -12.5, y: 0, z: -7.5}
+    - northIndex: 434
+      eastIndex: 441
+      southIndex: 432
+      westIndex: 425
+      data:
+        position: {x: -12.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 442
+      southIndex: 433
+      westIndex: 426
+      data:
+        position: {x: -12.5, y: 0, z: -5.5}
+    - northIndex: 436
+      eastIndex: 307
+      southIndex: -1
+      westIndex: 427
+      data:
+        position: {x: -11.5, y: 0, z: -12.5}
+    - northIndex: 437
+      eastIndex: 308
+      southIndex: 435
+      westIndex: 428
+      data:
+        position: {x: -11.5, y: 0, z: -11.5}
+    - northIndex: 438
+      eastIndex: 259
+      southIndex: 436
+      westIndex: 429
+      data:
+        position: {x: -11.5, y: 0, z: -10.5}
+    - northIndex: 439
+      eastIndex: 260
+      southIndex: 437
+      westIndex: 430
+      data:
+        position: {x: -11.5, y: 0, z: -9.5}
+    - northIndex: 440
+      eastIndex: 261
+      southIndex: 438
+      westIndex: 431
+      data:
+        position: {x: -11.5, y: 0, z: -8.5}
+    - northIndex: 441
+      eastIndex: 178
+      southIndex: 439
+      westIndex: 432
+      data:
+        position: {x: -11.5, y: 0, z: -7.5}
+    - northIndex: 442
+      eastIndex: 179
+      southIndex: 440
+      westIndex: 433
+      data:
+        position: {x: -11.5, y: 0, z: -6.5}
+    - northIndex: -1
+      eastIndex: 180
+      southIndex: 441
+      westIndex: 434
+      data:
+        position: {x: -11.5, y: 0, z: -5.5}
+    - northIndex: 444
+      eastIndex: 453
+      southIndex: -1
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: -3.5}
+    - northIndex: 445
+      eastIndex: 454
+      southIndex: 443
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: -2.5}
+    - northIndex: 446
+      eastIndex: 455
+      southIndex: 444
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: -1.5}
+    - northIndex: 447
+      eastIndex: 456
+      southIndex: 445
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: -0.5}
+    - northIndex: 448
+      eastIndex: 457
+      southIndex: 446
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: 0.5}
+    - northIndex: 449
+      eastIndex: 458
+      southIndex: 447
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: 1.5}
+    - northIndex: 450
+      eastIndex: 459
+      southIndex: 448
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: 2.5}
+    - northIndex: 451
+      eastIndex: 460
+      southIndex: 449
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: 3.5}
+    - northIndex: 452
+      eastIndex: 461
+      southIndex: 450
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: 4.5}
+    - northIndex: 548
+      eastIndex: 462
+      southIndex: 451
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: 5.5}
+    - northIndex: 454
+      eastIndex: 463
+      southIndex: -1
+      westIndex: 443
+      data:
+        position: {x: -22.5, y: 1, z: -3.5}
+    - northIndex: 455
+      eastIndex: 464
+      southIndex: 453
+      westIndex: 444
+      data:
+        position: {x: -22.5, y: 1, z: -2.5}
+    - northIndex: 456
+      eastIndex: 465
+      southIndex: 454
+      westIndex: 445
+      data:
+        position: {x: -22.5, y: 1, z: -1.5}
+    - northIndex: 457
+      eastIndex: 466
+      southIndex: 455
+      westIndex: 446
+      data:
+        position: {x: -22.5, y: 1, z: -0.5}
+    - northIndex: 458
+      eastIndex: 467
+      southIndex: 456
+      westIndex: 447
+      data:
+        position: {x: -22.5, y: 1, z: 0.5}
+    - northIndex: 459
+      eastIndex: 468
+      southIndex: 457
+      westIndex: 448
+      data:
+        position: {x: -22.5, y: 1, z: 1.5}
+    - northIndex: 460
+      eastIndex: 469
+      southIndex: 458
+      westIndex: 449
+      data:
+        position: {x: -22.5, y: 1, z: 2.5}
+    - northIndex: 461
+      eastIndex: 470
+      southIndex: 459
+      westIndex: 450
+      data:
+        position: {x: -22.5, y: 1, z: 3.5}
+    - northIndex: 462
+      eastIndex: 471
+      southIndex: 460
+      westIndex: 451
+      data:
+        position: {x: -22.5, y: 1, z: 4.5}
+    - northIndex: 549
+      eastIndex: 472
+      southIndex: 461
+      westIndex: 452
+      data:
+        position: {x: -22.5, y: 1, z: 5.5}
+    - northIndex: 464
+      eastIndex: 473
+      southIndex: -1
+      westIndex: 453
+      data:
+        position: {x: -21.5, y: 1, z: -3.5}
+    - northIndex: 465
+      eastIndex: 474
+      southIndex: 463
+      westIndex: 454
+      data:
+        position: {x: -21.5, y: 1, z: -2.5}
+    - northIndex: 466
+      eastIndex: 475
+      southIndex: 464
+      westIndex: 455
+      data:
+        position: {x: -21.5, y: 1, z: -1.5}
+    - northIndex: 467
+      eastIndex: 476
+      southIndex: 465
+      westIndex: 456
+      data:
+        position: {x: -21.5, y: 1, z: -0.5}
+    - northIndex: 468
+      eastIndex: 477
+      southIndex: 466
+      westIndex: 457
+      data:
+        position: {x: -21.5, y: 1, z: 0.5}
+    - northIndex: 469
+      eastIndex: 478
+      southIndex: 467
+      westIndex: 458
+      data:
+        position: {x: -21.5, y: 1, z: 1.5}
+    - northIndex: 470
+      eastIndex: 479
+      southIndex: 468
+      westIndex: 459
+      data:
+        position: {x: -21.5, y: 1, z: 2.5}
+    - northIndex: 471
+      eastIndex: 480
+      southIndex: 469
+      westIndex: 460
+      data:
+        position: {x: -21.5, y: 1, z: 3.5}
+    - northIndex: 472
+      eastIndex: 481
+      southIndex: 470
+      westIndex: 461
+      data:
+        position: {x: -21.5, y: 1, z: 4.5}
+    - northIndex: 550
+      eastIndex: 482
+      southIndex: 471
+      westIndex: 462
+      data:
+        position: {x: -21.5, y: 1, z: 5.5}
+    - northIndex: 474
+      eastIndex: 483
+      southIndex: -1
+      westIndex: 463
+      data:
+        position: {x: -20.5, y: 1, z: -3.5}
+    - northIndex: 475
+      eastIndex: 484
+      southIndex: 473
+      westIndex: 464
+      data:
+        position: {x: -20.5, y: 1, z: -2.5}
+    - northIndex: 476
+      eastIndex: 485
+      southIndex: 474
+      westIndex: 465
+      data:
+        position: {x: -20.5, y: 1, z: -1.5}
+    - northIndex: 477
+      eastIndex: 486
+      southIndex: 475
+      westIndex: 466
+      data:
+        position: {x: -20.5, y: 1, z: -0.5}
+    - northIndex: 478
+      eastIndex: 487
+      southIndex: 476
+      westIndex: 467
+      data:
+        position: {x: -20.5, y: 1, z: 0.5}
+    - northIndex: 479
+      eastIndex: 488
+      southIndex: 477
+      westIndex: 468
+      data:
+        position: {x: -20.5, y: 1, z: 1.5}
+    - northIndex: 480
+      eastIndex: 489
+      southIndex: 478
+      westIndex: 469
+      data:
+        position: {x: -20.5, y: 1, z: 2.5}
+    - northIndex: 481
+      eastIndex: 490
+      southIndex: 479
+      westIndex: 470
+      data:
+        position: {x: -20.5, y: 1, z: 3.5}
+    - northIndex: 482
+      eastIndex: 491
+      southIndex: 480
+      westIndex: 471
+      data:
+        position: {x: -20.5, y: 1, z: 4.5}
+    - northIndex: 551
+      eastIndex: 492
+      southIndex: 481
+      westIndex: 472
+      data:
+        position: {x: -20.5, y: 1, z: 5.5}
+    - northIndex: 484
+      eastIndex: 493
+      southIndex: -1
+      westIndex: 473
+      data:
+        position: {x: -19.5, y: 1, z: -3.5}
+    - northIndex: 485
+      eastIndex: 494
+      southIndex: 483
+      westIndex: 474
+      data:
+        position: {x: -19.5, y: 1, z: -2.5}
+    - northIndex: 486
+      eastIndex: 495
+      southIndex: 484
+      westIndex: 475
+      data:
+        position: {x: -19.5, y: 1, z: -1.5}
+    - northIndex: 487
+      eastIndex: 496
+      southIndex: 485
+      westIndex: 476
+      data:
+        position: {x: -19.5, y: 1, z: -0.5}
+    - northIndex: 488
+      eastIndex: 497
+      southIndex: 486
+      westIndex: 477
+      data:
+        position: {x: -19.5, y: 1, z: 0.5}
+    - northIndex: 489
+      eastIndex: 498
+      southIndex: 487
+      westIndex: 478
+      data:
+        position: {x: -19.5, y: 1, z: 1.5}
+    - northIndex: 490
+      eastIndex: 499
+      southIndex: 488
+      westIndex: 479
+      data:
+        position: {x: -19.5, y: 1, z: 2.5}
+    - northIndex: 491
+      eastIndex: 500
+      southIndex: 489
+      westIndex: 480
+      data:
+        position: {x: -19.5, y: 1, z: 3.5}
+    - northIndex: 492
+      eastIndex: 501
+      southIndex: 490
+      westIndex: 481
+      data:
+        position: {x: -19.5, y: 1, z: 4.5}
+    - northIndex: 552
+      eastIndex: 502
+      southIndex: 491
+      westIndex: 482
+      data:
+        position: {x: -19.5, y: 1, z: 5.5}
+    - northIndex: 494
+      eastIndex: 503
+      southIndex: -1
+      westIndex: 483
+      data:
+        position: {x: -18.5, y: 1, z: -3.5}
+    - northIndex: 495
+      eastIndex: 504
+      southIndex: 493
+      westIndex: 484
+      data:
+        position: {x: -18.5, y: 1, z: -2.5}
+    - northIndex: 496
+      eastIndex: 505
+      southIndex: 494
+      westIndex: 485
+      data:
+        position: {x: -18.5, y: 1, z: -1.5}
+    - northIndex: 497
+      eastIndex: 506
+      southIndex: 495
+      westIndex: 486
+      data:
+        position: {x: -18.5, y: 1, z: -0.5}
+    - northIndex: 498
+      eastIndex: 507
+      southIndex: 496
+      westIndex: 487
+      data:
+        position: {x: -18.5, y: 1, z: 0.5}
+    - northIndex: 499
+      eastIndex: 508
+      southIndex: 497
+      westIndex: 488
+      data:
+        position: {x: -18.5, y: 1, z: 1.5}
+    - northIndex: 500
+      eastIndex: 509
+      southIndex: 498
+      westIndex: 489
+      data:
+        position: {x: -18.5, y: 1, z: 2.5}
+    - northIndex: 501
+      eastIndex: 510
+      southIndex: 499
+      westIndex: 490
+      data:
+        position: {x: -18.5, y: 1, z: 3.5}
+    - northIndex: 502
+      eastIndex: 511
+      southIndex: 500
+      westIndex: 491
+      data:
+        position: {x: -18.5, y: 1, z: 4.5}
+    - northIndex: 553
+      eastIndex: 512
+      southIndex: 501
+      westIndex: 492
+      data:
+        position: {x: -18.5, y: 1, z: 5.5}
+    - northIndex: 504
+      eastIndex: 513
+      southIndex: -1
+      westIndex: 493
+      data:
+        position: {x: -17.5, y: 1, z: -3.5}
+    - northIndex: 505
+      eastIndex: 514
+      southIndex: 503
+      westIndex: 494
+      data:
+        position: {x: -17.5, y: 1, z: -2.5}
+    - northIndex: 506
+      eastIndex: 515
+      southIndex: 504
+      westIndex: 495
+      data:
+        position: {x: -17.5, y: 1, z: -1.5}
+    - northIndex: 507
+      eastIndex: 516
+      southIndex: 505
+      westIndex: 496
+      data:
+        position: {x: -17.5, y: 1, z: -0.5}
+    - northIndex: 508
+      eastIndex: 517
+      southIndex: 506
+      westIndex: 497
+      data:
+        position: {x: -17.5, y: 1, z: 0.5}
+    - northIndex: 509
+      eastIndex: 518
+      southIndex: 507
+      westIndex: 498
+      data:
+        position: {x: -17.5, y: 1, z: 1.5}
+    - northIndex: 510
+      eastIndex: 519
+      southIndex: 508
+      westIndex: 499
+      data:
+        position: {x: -17.5, y: 1, z: 2.5}
+    - northIndex: 511
+      eastIndex: 520
+      southIndex: 509
+      westIndex: 500
+      data:
+        position: {x: -17.5, y: 1, z: 3.5}
+    - northIndex: 512
+      eastIndex: 521
+      southIndex: 510
+      westIndex: 501
+      data:
+        position: {x: -17.5, y: 1, z: 4.5}
+    - northIndex: 554
+      eastIndex: 522
+      southIndex: 511
+      westIndex: 502
+      data:
+        position: {x: -17.5, y: 1, z: 5.5}
+    - northIndex: 514
+      eastIndex: 523
+      southIndex: -1
+      westIndex: 503
+      data:
+        position: {x: -16.5, y: 1, z: -3.5}
+    - northIndex: 515
+      eastIndex: 524
+      southIndex: 513
+      westIndex: 504
+      data:
+        position: {x: -16.5, y: 1, z: -2.5}
+    - northIndex: 516
+      eastIndex: 525
+      southIndex: 514
+      westIndex: 505
+      data:
+        position: {x: -16.5, y: 1, z: -1.5}
+    - northIndex: 517
+      eastIndex: 526
+      southIndex: 515
+      westIndex: 506
+      data:
+        position: {x: -16.5, y: 1, z: -0.5}
+    - northIndex: 518
+      eastIndex: 527
+      southIndex: 516
+      westIndex: 507
+      data:
+        position: {x: -16.5, y: 1, z: 0.5}
+    - northIndex: 519
+      eastIndex: 528
+      southIndex: 517
+      westIndex: 508
+      data:
+        position: {x: -16.5, y: 1, z: 1.5}
+    - northIndex: 520
+      eastIndex: 529
+      southIndex: 518
+      westIndex: 509
+      data:
+        position: {x: -16.5, y: 1, z: 2.5}
+    - northIndex: 521
+      eastIndex: 530
+      southIndex: 519
+      westIndex: 510
+      data:
+        position: {x: -16.5, y: 1, z: 3.5}
+    - northIndex: 522
+      eastIndex: 531
+      southIndex: 520
+      westIndex: 511
+      data:
+        position: {x: -16.5, y: 1, z: 4.5}
+    - northIndex: 555
+      eastIndex: 532
+      southIndex: 521
+      westIndex: 512
+      data:
+        position: {x: -16.5, y: 1, z: 5.5}
+    - northIndex: 524
+      eastIndex: 533
+      southIndex: -1
+      westIndex: 513
+      data:
+        position: {x: -15.5, y: 1, z: -3.5}
+    - northIndex: 525
+      eastIndex: 534
+      southIndex: 523
+      westIndex: 514
+      data:
+        position: {x: -15.5, y: 1, z: -2.5}
+    - northIndex: 526
+      eastIndex: 535
+      southIndex: 524
+      westIndex: 515
+      data:
+        position: {x: -15.5, y: 1, z: -1.5}
+    - northIndex: 527
+      eastIndex: 536
+      southIndex: 525
+      westIndex: 516
+      data:
+        position: {x: -15.5, y: 1, z: -0.5}
+    - northIndex: 528
+      eastIndex: 537
+      southIndex: 526
+      westIndex: 517
+      data:
+        position: {x: -15.5, y: 1, z: 0.5}
+    - northIndex: 529
+      eastIndex: 538
+      southIndex: 527
+      westIndex: 518
+      data:
+        position: {x: -15.5, y: 1, z: 1.5}
+    - northIndex: 530
+      eastIndex: 539
+      southIndex: 528
+      westIndex: 519
+      data:
+        position: {x: -15.5, y: 1, z: 2.5}
+    - northIndex: 531
+      eastIndex: 540
+      southIndex: 529
+      westIndex: 520
+      data:
+        position: {x: -15.5, y: 1, z: 3.5}
+    - northIndex: 532
+      eastIndex: 541
+      southIndex: 530
+      westIndex: 521
+      data:
+        position: {x: -15.5, y: 1, z: 4.5}
+    - northIndex: 556
+      eastIndex: 542
+      southIndex: 531
+      westIndex: 522
+      data:
+        position: {x: -15.5, y: 1, z: 5.5}
+    - northIndex: 534
+      eastIndex: -1
+      southIndex: -1
+      westIndex: 523
+      data:
+        position: {x: -14.5, y: 1, z: -3.5}
+    - northIndex: 535
+      eastIndex: -1
+      southIndex: 533
+      westIndex: 524
+      data:
+        position: {x: -14.5, y: 1, z: -2.5}
+    - northIndex: 536
+      eastIndex: -1
+      southIndex: 534
+      westIndex: 525
+      data:
+        position: {x: -14.5, y: 1, z: -1.5}
+    - northIndex: 537
+      eastIndex: -1
+      southIndex: 535
+      westIndex: 526
+      data:
+        position: {x: -14.5, y: 1, z: -0.5}
+    - northIndex: 538
+      eastIndex: -1
+      southIndex: 536
+      westIndex: 527
+      data:
+        position: {x: -14.5, y: 1, z: 0.5}
+    - northIndex: 539
+      eastIndex: -1
+      southIndex: 537
+      westIndex: 528
+      data:
+        position: {x: -14.5, y: 1, z: 1.5}
+    - northIndex: 540
+      eastIndex: 543
+      southIndex: 538
+      westIndex: 529
+      data:
+        position: {x: -14.5, y: 1, z: 2.5}
+    - northIndex: 541
+      eastIndex: 544
+      southIndex: 539
+      westIndex: 530
+      data:
+        position: {x: -14.5, y: 1, z: 3.5}
+    - northIndex: 542
+      eastIndex: 545
+      southIndex: 540
+      westIndex: 531
+      data:
+        position: {x: -14.5, y: 1, z: 4.5}
+    - northIndex: 557
+      eastIndex: 546
+      southIndex: 541
+      westIndex: 532
+      data:
+        position: {x: -14.5, y: 1, z: 5.5}
+    - northIndex: 544
+      eastIndex: 153
+      southIndex: -1
+      westIndex: 539
+      data:
+        position: {x: -13.5, y: 1, z: 2.5}
+    - northIndex: 545
+      eastIndex: 154
+      southIndex: 543
+      westIndex: 540
+      data:
+        position: {x: -13.5, y: 1, z: 3.5}
+    - northIndex: 546
+      eastIndex: 155
+      southIndex: 544
+      westIndex: 541
+      data:
+        position: {x: -13.5, y: 1, z: 4.5}
+    - northIndex: 547
+      eastIndex: 156
+      southIndex: 545
+      westIndex: 542
+      data:
+        position: {x: -13.5, y: 1, z: 5.5}
+    - northIndex: -1
+      eastIndex: 157
+      southIndex: 546
+      westIndex: 557
+      data:
+        position: {x: -13.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 549
+      southIndex: 452
+      westIndex: -1
+      data:
+        position: {x: -23.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 550
+      southIndex: 462
+      westIndex: 548
+      data:
+        position: {x: -22.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 551
+      southIndex: 472
+      westIndex: 549
+      data:
+        position: {x: -21.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 552
+      southIndex: 482
+      westIndex: 550
+      data:
+        position: {x: -20.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 553
+      southIndex: 492
+      westIndex: 551
+      data:
+        position: {x: -19.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 554
+      southIndex: 502
+      westIndex: 552
+      data:
+        position: {x: -18.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 555
+      southIndex: 512
+      westIndex: 553
+      data:
+        position: {x: -17.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 556
+      southIndex: 522
+      westIndex: 554
+      data:
+        position: {x: -16.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 557
+      southIndex: 532
+      westIndex: 555
+      data:
+        position: {x: -15.5, y: 1, z: 6.5}
+    - northIndex: -1
+      eastIndex: 547
+      southIndex: 542
+      westIndex: 556
+      data:
+        position: {x: -14.5, y: 1, z: 6.5}
+    - northIndex: 109
+      eastIndex: -1
+      southIndex: 74
+      westIndex: -1
+      data:
+        position: {x: 4.5, y: 0.5, z: 4.5}
+    - northIndex: -1
+      eastIndex: 51
+      southIndex: -1
+      westIndex: 86
+      data:
+        position: {x: -5.5, y: 0.5, z: 2.5}
+    - northIndex: -1
+      eastIndex: 119
+      southIndex: -1
+      westIndex: 71
+      data:
+        position: {x: 6.5, y: 0.5, z: 0.5}
+    - northIndex: -1
+      eastIndex: 115
+      southIndex: -1
+      westIndex: 79
+      data:
+        position: {x: 6.5, y: 0.5, z: -3.5}
+    - northIndex: -1
+      eastIndex: 563
+      southIndex: -1
+      westIndex: 248
+      data:
+        position: {x: -7.5, y: 2.5, z: -0.5}
+    - northIndex: -1
+      eastIndex: 564
+      southIndex: -1
+      westIndex: 562
+      data:
+        position: {x: -6.5, y: 1.5, z: -0.5}
+    - northIndex: -1
+      eastIndex: 48
+      southIndex: -1
+      westIndex: 563
+      data:
+        position: {x: -5.5, y: 0.5, z: -0.5}
+    - northIndex: 103
+      eastIndex: 568
+      southIndex: 55
+      westIndex: -1
+      data:
+        position: {x: -0.5, y: 0.5, z: 4.5}
+    - northIndex: 168
+      eastIndex: -1
+      southIndex: 567
+      westIndex: 570
+      data:
+        position: {x: -9.5, y: 1.5, z: 1.5}
+    - northIndex: 566
+      eastIndex: -1
+      southIndex: 246
+      westIndex: 571
+      data:
+        position: {x: -9.5, y: 2.5, z: 0.5}
+    - northIndex: 105
+      eastIndex: 569
+      southIndex: 56
+      westIndex: 565
+      data:
+        position: {x: 0.5, y: 0.5, z: 4.5}
+    - northIndex: 107
+      eastIndex: -1
+      southIndex: 57
+      westIndex: 568
+      data:
+        position: {x: 1.5, y: 0.5, z: 4.5}
+    - northIndex: 163
+      eastIndex: 566
+      southIndex: 571
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 1.5, z: 1.5}
+    - northIndex: 570
+      eastIndex: 567
+      southIndex: 244
+      westIndex: -1
+      data:
+        position: {x: -10.5, y: 2.5, z: 0.5}
+--- !u!1 &1917243707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1917243708}
+  - component: {fileID: 1917243710}
+  - component: {fileID: 1917243709}
+  m_Layer: 0
+  m_Name: chunk-00
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1917243708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917243707}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2057080559}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1917243709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917243707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fd3b0b6f60af940b5b66d0ea6cd56d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1917243710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917243707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3c03f0f8d37b34c9e405f058a13962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tileset: {fileID: 11400000, guid: 72561e05aa4980745b8b8113c3d19ea7, type: 2}
+  _tileDataList:
+  - indexInTileset: 0
+    poses:
+    - position: {x: 0, y: 0, z: -1}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -2}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -2}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -1}
+      rotation: 0
+    - position: {x: -1, y: 0, z: 0}
+      rotation: 0
+    - position: {x: -1, y: 0, z: 1}
+      rotation: 0
+    - position: {x: 0, y: 0, z: 1}
+      rotation: 0
+    - position: {x: 1, y: 0, z: 1}
+      rotation: 0
+    - position: {x: 1, y: 0, z: 0}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -1}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -2}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -3}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -3}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -3}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -3}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -3}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -2}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -1}
+      rotation: 0
+    - position: {x: -3, y: 0, z: 0}
+      rotation: 0
+    - position: {x: -3, y: 0, z: 1}
+      rotation: 0
+    - position: {x: -3, y: 0, z: 2}
+      rotation: 0
+    - position: {x: -2, y: 0, z: 2}
+      rotation: 0
+    - position: {x: -2, y: 0, z: 1}
+      rotation: 0
+    - position: {x: -2, y: 0, z: 0}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -2}
+      rotation: 0
+    - position: {x: -1, y: 0, z: 2}
+      rotation: 0
+    - position: {x: 0, y: 0, z: 2}
+      rotation: 0
+    - position: {x: 1, y: 0, z: 2}
+      rotation: 0
+    - position: {x: 2, y: 0, z: 2}
+      rotation: 0
+    - position: {x: 2, y: 0, z: 1}
+      rotation: 0
+    - position: {x: 2, y: 0, z: 0}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -1}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -2}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -3}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -4}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -4}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -4}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -4}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -4}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -4}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -4}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -3}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -2}
+      rotation: 0
+    - position: {x: -4, y: 0, z: 1}
+      rotation: 0
+    - position: {x: -4, y: 0, z: 0}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -1}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -4}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -3}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -2}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -1}
+      rotation: 0
+    - position: {x: -5, y: 0, z: 0}
+      rotation: 0
+    - position: {x: -5, y: 0, z: 1}
+      rotation: 0
+    - position: {x: -5, y: 0, z: 2}
+      rotation: 0
+    - position: {x: -4, y: 0, z: 3}
+      rotation: 0
+    - position: {x: -3, y: 0, z: 3}
+      rotation: 0
+    - position: {x: -2, y: 0, z: 3}
+      rotation: 0
+    - position: {x: -1, y: 0, z: 3}
+      rotation: 0
+    - position: {x: 0, y: 0, z: 3}
+      rotation: 0
+    - position: {x: 1, y: 0, z: 3}
+      rotation: 0
+    - position: {x: 2, y: 0, z: 3}
+      rotation: 0
+    - position: {x: 3, y: 0, z: 3}
+      rotation: 0
+    - position: {x: 3, y: 0, z: 2}
+      rotation: 0
+    - position: {x: 3, y: 0, z: 1}
+      rotation: 0
+    - position: {x: 3, y: 0, z: 0}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -1}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -2}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -3}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -4}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -4}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -3}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -2}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -1}
+      rotation: 0
+    - position: {x: 4, y: 0, z: 0}
+      rotation: 0
+    - position: {x: 5, y: 0, z: 0}
+      rotation: 0
+    - position: {x: 5, y: 0, z: 1}
+      rotation: 0
+    - position: {x: 5, y: 0, z: 2}
+      rotation: 0
+    - position: {x: 5, y: 0, z: 3}
+      rotation: 0
+    - position: {x: 4, y: 0, z: 3}
+      rotation: 0
+    - position: {x: 4, y: 0, z: 2}
+      rotation: 0
+    - position: {x: 4, y: 0, z: 1}
+      rotation: 0
+    - position: {x: 5, y: 0, z: -1}
+      rotation: 0
+    - position: {x: 5, y: 0, z: -2}
+      rotation: 0
+    - position: {x: 5, y: 0, z: -3}
+      rotation: 0
+    - position: {x: 5, y: 0, z: -4}
+      rotation: 0
+    - position: {x: -4, y: 0, z: 2}
+      rotation: 0
+    - position: {x: -5, y: 0, z: 3}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -1}
+      rotation: 0
+    - position: {x: -8, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -8, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -8, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -7, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -7, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -7, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -8, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -8, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -7, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -7, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -6, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -6, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -5, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -5, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -4, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -4, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -3, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -3, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -2, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -2, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -1, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -1, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 0, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 0, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 1, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 1, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 2, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 2, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 3, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 3, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 4, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 4, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 5, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 5, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 6, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 6, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 7, y: 1, z: -4}
+      rotation: 0
+    - position: {x: 7, y: 1, z: -3}
+      rotation: 0
+    - position: {x: 7, y: 1, z: -2}
+      rotation: 0
+    - position: {x: 7, y: 1, z: -1}
+      rotation: 0
+    - position: {x: 7, y: 1, z: 0}
+      rotation: 0
+    - position: {x: 7, y: 1, z: 1}
+      rotation: 0
+    - position: {x: 7, y: 1, z: 2}
+      rotation: 0
+    - position: {x: 7, y: 1, z: 3}
+      rotation: 0
+    - position: {x: 7, y: 1, z: 4}
+      rotation: 0
+    - position: {x: 7, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 7, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 8, y: 1, z: -4}
+      rotation: 0
+    - position: {x: 8, y: 1, z: -3}
+      rotation: 0
+    - position: {x: 8, y: 1, z: -2}
+      rotation: 0
+    - position: {x: 8, y: 1, z: -1}
+      rotation: 0
+    - position: {x: 8, y: 1, z: 0}
+      rotation: 0
+    - position: {x: 8, y: 1, z: 1}
+      rotation: 0
+    - position: {x: 8, y: 1, z: 2}
+      rotation: 0
+    - position: {x: 8, y: 1, z: 3}
+      rotation: 0
+    - position: {x: 8, y: 1, z: 4}
+      rotation: 0
+    - position: {x: 8, y: 1, z: 5}
+      rotation: 0
+    - position: {x: 8, y: 1, z: 6}
+      rotation: 0
+    - position: {x: 0, y: 0, z: 0}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -5}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -5}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -5}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -5}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -5}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -5}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -5}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -5}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -5}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -5}
+      rotation: 0
+    - position: {x: 5, y: 0, z: -5}
+      rotation: 0
+    - position: {x: 7, y: 1, z: -6}
+      rotation: 0
+    - position: {x: 7, y: 1, z: -5}
+      rotation: 0
+    - position: {x: 8, y: 1, z: -5}
+      rotation: 0
+    - position: {x: 8, y: 1, z: -6}
+      rotation: 0
+    - position: {x: -13, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -13, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -13, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -13, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -13, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -12, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -12, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -12, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -12, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -12, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -11, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -11, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -11, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -11, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -11, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -10, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -10, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -10, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -10, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -10, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -9, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -9, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -9, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -9, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -9, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -11, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -11, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -11, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -10, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -10, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -10, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -9, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -9, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -9, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -8, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -8, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -8, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -7, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -7, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -7, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -6, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -6, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -6, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -6}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -8}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -7}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -6}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -8}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -7}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -6}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -8}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -7}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -6}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -8}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -7}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -6}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -8}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -7}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -6}
+      rotation: 0
+    - position: {x: 5, y: 0, z: -8}
+      rotation: 0
+    - position: {x: 5, y: 0, z: -7}
+      rotation: 0
+    - position: {x: 5, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -8}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -7}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -6}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -5}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -4}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -3}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -8}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -7}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -6}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -5}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -4}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -3}
+      rotation: 0
+    - position: {x: -12, y: 3, z: -2}
+      rotation: 0
+    - position: {x: -12, y: 3, z: -1}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -2}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -1}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -2}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -1}
+      rotation: 0
+    - position: {x: -9, y: 3, z: -2}
+      rotation: 0
+    - position: {x: -9, y: 3, z: -1}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -13}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -12}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -11}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -10}
+      rotation: 0
+    - position: {x: -11, y: 3, z: -9}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -13}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -12}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -11}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -10}
+      rotation: 0
+    - position: {x: -10, y: 3, z: -9}
+      rotation: 0
+    - position: {x: -11, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -11, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -11, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -10, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -10, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -10, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -9, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -9, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -9, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -8, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -8, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -8, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -7, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -7, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -7, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -6, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -6, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -6, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -9}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -11}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -10}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -9}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -11}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -10}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -9}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -11}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -10}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -9}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -11}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -10}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -9}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -11}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -10}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -11, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -11, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -10, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -10, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -9, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -9, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -8, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -8, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -7, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -7, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -6, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -6, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -5, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -3, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -2, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -1, y: 0, z: -12}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -13}
+      rotation: 0
+    - position: {x: 0, y: 0, z: -12}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -13}
+      rotation: 0
+    - position: {x: 1, y: 0, z: -12}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -13}
+      rotation: 0
+    - position: {x: 2, y: 0, z: -12}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -13}
+      rotation: 0
+    - position: {x: 3, y: 0, z: -12}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -13}
+      rotation: 0
+    - position: {x: 4, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -24, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -24, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -24, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -24, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -24, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -24, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -24, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -24, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -23, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -23, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -23, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -23, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -23, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -23, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -23, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -23, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -22, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -22, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -22, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -22, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -22, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -22, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -22, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -22, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -21, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -21, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -21, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -21, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -21, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -21, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -21, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -21, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -20, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -20, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -20, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -20, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -20, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -20, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -20, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -20, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -19, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -19, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -19, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -19, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -19, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -19, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -19, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -19, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -18, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -18, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -18, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -18, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -18, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -18, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -18, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -18, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -17, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -17, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -17, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -17, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -17, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -17, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -17, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -17, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -16, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -16, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -16, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -16, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -16, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -16, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -16, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -16, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -15, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -15, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -15, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -15, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -15, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -15, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -15, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -15, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -14, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -14, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -14, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -14, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -14, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -14, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -14, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -14, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -13, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -13, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -13, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -13, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -13, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -13, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -13, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -13, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -12, y: 0, z: -13}
+      rotation: 0
+    - position: {x: -12, y: 0, z: -12}
+      rotation: 0
+    - position: {x: -12, y: 0, z: -11}
+      rotation: 0
+    - position: {x: -12, y: 0, z: -10}
+      rotation: 0
+    - position: {x: -12, y: 0, z: -9}
+      rotation: 0
+    - position: {x: -12, y: 0, z: -8}
+      rotation: 0
+    - position: {x: -12, y: 0, z: -7}
+      rotation: 0
+    - position: {x: -12, y: 0, z: -6}
+      rotation: 0
+    - position: {x: -24, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -24, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -24, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -24, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -24, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -24, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -24, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -24, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -24, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -24, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -23, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -23, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -23, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -23, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -23, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -23, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -23, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -23, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -23, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -23, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -22, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -22, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -22, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -22, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -22, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -22, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -22, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -22, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -22, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -22, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -21, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -21, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -21, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -21, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -21, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -21, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -21, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -21, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -21, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -21, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -20, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -20, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -20, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -20, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -20, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -20, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -20, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -20, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -20, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -20, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -19, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -19, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -19, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -19, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -19, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -19, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -19, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -19, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -19, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -19, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -18, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -18, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -18, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -18, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -18, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -18, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -18, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -18, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -18, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -18, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -17, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -17, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -17, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -17, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -17, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -17, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -17, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -17, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -17, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -17, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -16, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -16, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -16, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -16, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -16, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -16, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -16, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -16, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -16, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -16, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -15, y: 1, z: -4}
+      rotation: 0
+    - position: {x: -15, y: 1, z: -3}
+      rotation: 0
+    - position: {x: -15, y: 1, z: -2}
+      rotation: 0
+    - position: {x: -15, y: 1, z: -1}
+      rotation: 0
+    - position: {x: -15, y: 1, z: 0}
+      rotation: 0
+    - position: {x: -15, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -15, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -15, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -15, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -15, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -14, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -14, y: 1, z: 2}
+      rotation: 0
+    - position: {x: -14, y: 1, z: 3}
+      rotation: 0
+    - position: {x: -14, y: 1, z: 4}
+      rotation: 0
+    - position: {x: -14, y: 1, z: 5}
+      rotation: 0
+    - position: {x: -14, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -24, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -23, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -22, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -21, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -20, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -19, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -18, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -17, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -16, y: 1, z: 6}
+      rotation: 0
+    - position: {x: -15, y: 1, z: 6}
+      rotation: 0
+  - indexInTileset: 1
+    poses:
+    - position: {x: -6, y: 0, z: 4}
+      rotation: 1
+    - position: {x: 6, y: 0, z: 4}
+      rotation: 2
+    - position: {x: -9, y: 2, z: -3}
+      rotation: 1
+    - position: {x: -12, y: 2, z: -3}
+      rotation: 2
+  - indexInTileset: 2
+    poses:
+    - position: {x: -5, y: 0, z: 4}
+      rotation: 2
+    - position: {x: -4, y: 0, z: 4}
+      rotation: 2
+    - position: {x: -3, y: 0, z: 4}
+      rotation: 2
+    - position: {x: -2, y: 0, z: 4}
+      rotation: 2
+    - position: {x: 2, y: 0, z: 4}
+      rotation: 2
+    - position: {x: 3, y: 0, z: 4}
+      rotation: 2
+    - position: {x: 5, y: 0, z: 4}
+      rotation: 2
+    - position: {x: -6, y: 0, z: -4}
+      rotation: 1
+    - position: {x: -6, y: 0, z: -3}
+      rotation: 1
+    - position: {x: -6, y: 0, z: -2}
+      rotation: 1
+    - position: {x: -6, y: 0, z: 0}
+      rotation: 1
+    - position: {x: -6, y: 0, z: 1}
+      rotation: 1
+    - position: {x: -6, y: 0, z: 3}
+      rotation: 1
+    - position: {x: 6, y: 0, z: -3}
+      rotation: 3
+    - position: {x: 6, y: 0, z: -2}
+      rotation: 3
+    - position: {x: 6, y: 0, z: -1}
+      rotation: 3
+    - position: {x: 6, y: 0, z: 1}
+      rotation: 3
+    - position: {x: 6, y: 0, z: 2}
+      rotation: 3
+    - position: {x: 6, y: 0, z: 3}
+      rotation: 3
+    - position: {x: 2, y: 1, z: 6}
+      rotation: 3
+    - position: {x: 3, y: 1, z: 6}
+      rotation: 1
+    - position: {x: -7, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -8, y: 0, z: -5}
+      rotation: 2
+    - position: {x: 6, y: 0, z: -5}
+      rotation: 3
+    - position: {x: 6, y: 0, z: -6}
+      rotation: 3
+    - position: {x: -13, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -12, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -11, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -10, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -9, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -13, y: 1, z: -4}
+      rotation: 2
+    - position: {x: -12, y: 1, z: -4}
+      rotation: 2
+    - position: {x: -11, y: 1, z: -4}
+      rotation: 2
+    - position: {x: -10, y: 1, z: -4}
+      rotation: 2
+    - position: {x: -9, y: 1, z: -4}
+      rotation: 2
+    - position: {x: -8, y: 1, z: -4}
+      rotation: 2
+    - position: {x: -9, y: 2, z: -6}
+      rotation: 1
+    - position: {x: -9, y: 2, z: -5}
+      rotation: 1
+    - position: {x: -9, y: 2, z: -4}
+      rotation: 1
+    - position: {x: -12, y: 2, z: -6}
+      rotation: 3
+    - position: {x: -12, y: 2, z: -5}
+      rotation: 3
+    - position: {x: -12, y: 2, z: -4}
+      rotation: 3
+    - position: {x: -7, y: 1, z: -3}
+      rotation: 1
+    - position: {x: -7, y: 1, z: -2}
+      rotation: 1
+    - position: {x: -7, y: 1, z: 0}
+      rotation: 1
+    - position: {x: -8, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -13, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -12, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -9, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -8, y: 2, z: -2}
+      rotation: 1
+    - position: {x: -12, y: 2, z: 0}
+      rotation: 0
+    - position: {x: -9, y: 2, z: 0}
+      rotation: 0
+    - position: {x: -9, y: 2, z: -8}
+      rotation: 1
+    - position: {x: -9, y: 2, z: -7}
+      rotation: 1
+    - position: {x: -12, y: 2, z: -8}
+      rotation: 3
+    - position: {x: -12, y: 2, z: -7}
+      rotation: 3
+    - position: {x: -13, y: 2, z: -2}
+      rotation: 3
+    - position: {x: -13, y: 2, z: -1}
+      rotation: 3
+    - position: {x: -9, y: 2, z: -13}
+      rotation: 1
+    - position: {x: -9, y: 2, z: -12}
+      rotation: 1
+    - position: {x: -9, y: 2, z: -11}
+      rotation: 1
+    - position: {x: -9, y: 2, z: -10}
+      rotation: 1
+    - position: {x: -9, y: 2, z: -9}
+      rotation: 1
+    - position: {x: -12, y: 2, z: -13}
+      rotation: 3
+    - position: {x: -12, y: 2, z: -12}
+      rotation: 3
+    - position: {x: -12, y: 2, z: -11}
+      rotation: 3
+    - position: {x: -12, y: 2, z: -10}
+      rotation: 3
+    - position: {x: -12, y: 2, z: -9}
+      rotation: 3
+    - position: {x: -23, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -22, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -21, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -20, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -19, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -18, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -17, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -16, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -15, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -14, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -24, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -14, y: 1, z: -3}
+      rotation: 3
+    - position: {x: -14, y: 1, z: -2}
+      rotation: 3
+    - position: {x: -14, y: 1, z: -1}
+      rotation: 3
+    - position: {x: -14, y: 1, z: 0}
+      rotation: 3
+  - indexInTileset: 3
+    poses:
+    - position: {x: 3, y: 1, z: 5}
+      rotation: 2
+    - position: {x: 2, y: 1, z: 5}
+      rotation: 3
+    - position: {x: -6, y: 0, z: -5}
+      rotation: 2
+    - position: {x: -8, y: 2, z: -3}
+      rotation: 2
+    - position: {x: -13, y: 2, z: -3}
+      rotation: 3
+    - position: {x: -7, y: 1, z: -4}
+      rotation: 2
+    - position: {x: -8, y: 2, z: 0}
+      rotation: 1
+    - position: {x: -13, y: 2, z: 0}
+      rotation: 0
+    - position: {x: -7, y: 1, z: 1}
+      rotation: 1
+    - position: {x: -14, y: 1, z: -4}
+      rotation: 3
+    - position: {x: -14, y: 1, z: 1}
+      rotation: 0
+  - indexInTileset: 4
+    poses:
+    - position: {x: 4, y: 0, z: 4}
+      rotation: 2
+    - position: {x: -6, y: 0, z: 2}
+      rotation: 1
+    - position: {x: 6, y: 0, z: 0}
+      rotation: 3
+    - position: {x: 6, y: 0, z: -4}
+      rotation: 3
+    - position: {x: -8, y: 2, z: -1}
+      rotation: 1
+    - position: {x: -7, y: 1, z: -1}
+      rotation: 1
+    - position: {x: -6, y: 0, z: -1}
+      rotation: 1
+  - indexInTileset: 5
+    poses:
+    - position: {x: -1, y: 0, z: 4}
+      rotation: 2
+    - position: {x: -10, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -10, y: 2, z: 0}
+      rotation: 0
+  - indexInTileset: 6
+    poses:
+    - position: {x: 0, y: 0, z: 4}
+      rotation: 2
+  - indexInTileset: 7
+    poses:
+    - position: {x: 1, y: 0, z: 4}
+      rotation: 2
+    - position: {x: -11, y: 1, z: 1}
+      rotation: 0
+    - position: {x: -11, y: 2, z: 0}
+      rotation: 0
+  - indexInTileset: 8
+    poses:
+    - position: {x: 3, y: 0, z: 3}
+      rotation: 0
+    - position: {x: 4, y: 0, z: 2}
+      rotation: 0
+    - position: {x: 5, y: 0, z: 2}
+      rotation: 0
+    - position: {x: -4, y: 0, z: -2}
+      rotation: 0
+--- !u!1 &2057080558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2057080559}
+  m_Layer: 0
+  m_Name: WorldData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2057080559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057080558}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 830691793}
+  - {fileID: 1917243708}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -25,8 +25,11 @@ namespace MonsterWorld.Unity.Tilemap
             if (tile == null || tile.Prefab == null)
                 return null;
 
+            var preview = AssetPreview.GetAssetPreview(tile.Prefab);
+            if (preview == null) return null;
+
             Texture2D cache = new Texture2D(width, height);
-            EditorUtility.CopySerialized(AssetPreview.GetAssetPreview(tile.Prefab), cache);
+            EditorUtility.CopySerialized(preview, cache);
             return cache;
         }
     }

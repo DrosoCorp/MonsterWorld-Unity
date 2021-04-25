@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 7907288449821245465, guid: 8241e6bf73902ee45a0aa2264d7a332c, type: 3}
   _canBeRotated: 1
+  _flags: 1
+  _layer: 1
   _material: {fileID: 2100000, guid: 10e7219a76da9c346b4b27af7586a3f3, type: 2}
   _mesh: {fileID: 4300000, guid: 9dbd7019483c21442b26b0195ca229c1, type: 2}

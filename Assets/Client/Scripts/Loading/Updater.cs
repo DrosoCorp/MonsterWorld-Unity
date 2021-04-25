@@ -11,11 +11,12 @@ using UnityEngine.Events;
 
 namespace MonsterWorld.Unity
 {
-    public class Startup : MonoBehaviour
+    public class Updater : MonoBehaviour
     {
         public AssetLabelReference assetLabel;
         public UnityEvent<string> updateProgressText;
         public UnityEvent<float> updateProgress;
+        public UnityEvent loadGameMode;
 
         void Start()
         {
@@ -51,6 +52,10 @@ namespace MonsterWorld.Unity
             Addressables.Release(downloadAssetsHandle);
 
             updateProgressText.Invoke("Connecting...");
+            yield return new WaitForSeconds(2f);
+
+            updateProgressText.Invoke("Loading...");
+            loadGameMode.Invoke();
         }
     }
 

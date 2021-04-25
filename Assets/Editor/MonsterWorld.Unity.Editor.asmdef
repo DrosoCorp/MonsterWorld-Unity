@@ -1,7 +1,10 @@
 {
-    "name": "MonsterWorld.Unity.Editor.Tilemap3D",
+    "name": "MonsterWorld.Unity.Editor",
+    "rootNamespace": "",
     "references": [
-        "GUID:3e7c744e900deae46aa0d4d08a750e4f"
+        "GUID:3e7c744e900deae46aa0d4d08a750e4f",
+        "GUID:89955d637ebb21e4eb74134d58df644d",
+        "GUID:47eb25da0df3b3f46a94dfd855713a84"
     ],
     "includePlatforms": [
         "Editor"

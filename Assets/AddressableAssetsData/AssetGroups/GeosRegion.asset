@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: GeosRegion
+  m_EditorClassIdentifier: 
+  m_GroupName: GeosRegion
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d9b06a080e8d51047b49c7faf26e7280
+  m_SerializeEntries:
+  - m_GUID: 7b2e0e952e1e5654e976900d6d21c5fd
+    m_Address: Regions/Geos.unity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ClientContent
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 804dfac734e4b6f4a9bf4ed852502d14, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c81b3c810930a834db2165a2ee69831b, type: 2}
+    - {fileID: 11400000, guid: 08d1a5ac2dc528240b6d7c11785ee12e, type: 2}

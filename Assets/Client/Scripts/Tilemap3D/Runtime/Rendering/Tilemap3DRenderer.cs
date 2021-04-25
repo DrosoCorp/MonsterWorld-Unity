@@ -87,7 +87,9 @@ namespace MonsterWorld.Unity.Tilemap
         [Button("Refresh")]
         private void BuildTileRenderDataLists()
         {
+            _isDirty = false;
             var tileDataList = _Tilemap3D.TileDataList;
+            if (tileDataList == null) return;
 
             if (_opaqueRenderDataList == null)
             {
@@ -106,12 +108,12 @@ namespace MonsterWorld.Unity.Tilemap
                 if (poses.Count == 0) continue;
 
                 int indexInTileset = tileDataList[tileDataIndex].indexInTileset;
-                if (indexInTileset >= _Tilemap3D.tileset.Count)
+                if (indexInTileset >= _Tilemap3D.Tileset.Count)
                 {
                     tileDataList.RemoveAt(tileDataIndex--);
                     continue;
                 }
-                Tile3D tile = _Tilemap3D.tileset[indexInTileset];
+                Tile3D tile = _Tilemap3D.Tileset[indexInTileset];
                 Matrix4x4 prefabMatrix = tile.Prefab.transform.localToWorldMatrix;
                 Tile3DRenderData renderData;
 
@@ -144,8 +146,6 @@ namespace MonsterWorld.Unity.Tilemap
                     _transparentRenderDataList.Add(renderData);
                 }
             }
-
-            _isDirty = false;
         }
     }
 }
