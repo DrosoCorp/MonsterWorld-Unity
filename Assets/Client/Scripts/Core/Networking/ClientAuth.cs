@@ -23,14 +23,15 @@ namespace MonsterWorld.Unity.Network.Client
         private static bool _connectedToServer = false;
 
         private Action onSuccess = null;
+        private Action<byte> onFailure = null;
 
         // Username
-        Action FailureChooseName = null;
+        Action<byte> FailureChooseName = null;
         Action SuccessChooseName = null;
 
         // Personnal Data
-        Action<PlayerData> OnPlayerData = null;
-        Action<PlayerData> OnOtherPlayerData = null;
+        Action<PlayerDataPacket> OnPlayerData = null;
+        Action<PlayerDataPacket> OnOtherPlayerData = null;
 
         ICognito cognito
         {
@@ -70,6 +71,12 @@ namespace MonsterWorld.Unity.Network.Client
                     {
                         onSuccess();
                     }
+                } else
+                {
+                    if(onFailure != null)
+                    {
+                        onFailure(packet.reasonInvalid);
+                    }
                 }
             });
             ClientNetworkManager.RegisterHandler<ResponseChooseNamePacket>((packet) => {
@@ -79,10 +86,10 @@ namespace MonsterWorld.Unity.Network.Client
                 }
                 else
                 {
-                    FailureChooseName();
+                    FailureChooseName(packet.reasonInvalid);
                 }
             });
-            ClientNetworkManager.RegisterHandler<PlayerData>((packet)=> {
+            ClientNetworkManager.RegisterHandler<PlayerDataPacket>((packet)=> {
                 if (packet.personnalData)
                 {
                     OnPlayerData(packet);
@@ -126,13 +133,14 @@ namespace MonsterWorld.Unity.Network.Client
         }
         
         //Version which will use the refreshToken saved in the playerPref
-        public void SignIn(Action<Exception> onFailure = null, Action onSuccess = null)
+        public void SignIn(Action<byte> onFailure = null, Action onSuccess = null)
         {
             if (ClientNetworkManager.Connected)
             {
                 this.onSuccess = onSuccess;
+                this.onFailure = onFailure;
                 cognito.TrySignInRequestRefreshToken(PlayerPrefs.GetString("RefreshToken"),
-                    onFailure,
+                    (Exception) => onFailure((byte)1),
                     (token) =>
                     {
                         ClientNetworkManager.SendPacket(
@@ -146,7 +154,7 @@ namespace MonsterWorld.Unity.Network.Client
             }
             else
             {
-                onFailure(new Exception("Not connected yet"));
+                onFailure(0); // Not connected yet 
             }
         }
 
@@ -158,7 +166,7 @@ namespace MonsterWorld.Unity.Network.Client
             );
         }
 
-        public void ChangeUsername(string name, Action onFailure = null, Action onSuccess = null)
+        public void ChangeUsername(string name, Action<byte> onFailure = null, Action onSuccess = null)
         {
             FailureChooseName = onFailure;
             SuccessChooseName = onSuccess;
@@ -168,7 +176,7 @@ namespace MonsterWorld.Unity.Network.Client
             });
         }
 
-        public void GetPlayerData(Action<PlayerData> onPlayerData)
+        public void GetPlayerData(Action<PlayerDataPacket> onPlayerData)
         {
             OnPlayerData = onPlayerData;
             ClientNetworkManager.SendPacket(new RequestPlayerData());

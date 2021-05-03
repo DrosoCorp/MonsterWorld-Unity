@@ -9,7 +9,7 @@ using System.IO;
 
 namespace MonsterWorld.Unity.Network
 {
-    public struct PlayerData : IPacket
+    public struct PlayerDataPacket : IPacket
     {
         public bool personnalData; // True if the player receive this packet is the player described in this packet
         public string playerName;
