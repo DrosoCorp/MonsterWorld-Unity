@@ -1081,6 +1081,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5686326676420519299, guid: e7dae5ea29f395345b5c3c9dfec452b0,
         type: 3}
+      propertyPath: _name
+      value: OverworldGameMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686326676420519299, guid: e7dae5ea29f395345b5c3c9dfec452b0,
+        type: 3}
       propertyPath: GameModeLoadComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 330382152}

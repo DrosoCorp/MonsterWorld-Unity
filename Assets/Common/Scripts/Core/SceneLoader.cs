@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 
-using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
@@ -65,6 +64,7 @@ namespace MonsterWorld.Unity
                     if (_operation.Completed != null)
                     {
                         _operation.Completed.Invoke(SceneLoadingResult.Succeeded);
+                        _operation.Completed = null;
                     }
                 }
             }
@@ -73,6 +73,7 @@ namespace MonsterWorld.Unity
                 if (_operation.Completed != null)
                 {
                     _operation.Completed.Invoke(SceneLoadingResult.Failed);
+                    _operation.Completed = null;
                 }
             }
         }
