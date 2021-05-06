@@ -40,7 +40,7 @@ namespace MonsterWorld.Unity.Network.Server
         {
             ServerNetworkManager.RegisterHandler<ValidateConnectionPacket>();
             ServerNetworkManager.RegisterHandler<ResponseChooseNamePacket>();
-            ServerNetworkManager.RegisterHandler<PlayerData>();
+            ServerNetworkManager.RegisterHandler<PlayerDataPacket>();
         }
 
         void RegisterPackets()
@@ -55,7 +55,7 @@ namespace MonsterWorld.Unity.Network.Server
                     {
                         Guid guid = new Guid(uid);
                         // Check player exist in database
-                        bool userExist = await PlayerDatabase.LoadUser(guid);
+                        bool userExist = await PlayerDatabase.PlayerConnection(guid);
                         if (!userExist)
                         {
                             // You need to send an username to the server !
@@ -76,23 +76,38 @@ namespace MonsterWorld.Unity.Network.Server
             {
                 if (UserConnected(connectionId))
                 {
+                    // return;
                     // A user is connected and want to change his username
+                    Guid uid = connectionIdToUID[connectionId];
+                    int result = await ServerDatabase.UsernameAvailable(uid.ToString(), packet.name);
+                    bool ok = result == 0;
+                    if (ok)
+                    {
+                        PlayerData p = PlayerDatabase.GetPlayerData(uid);
+                        p.name = packet.name;
+                        PlayerDatabase.MarkForUpdate(p);
+                    }
                     ServerNetworkManager.SendPacket(new ResponseChooseNamePacket()
                     {
-                        ok = await PlayerDatabase.UpdateUser(connectionIdToUID[connectionId], packet.name)
+                        ok = ok,
+                        reasonInvalid = (byte)result
                     }, connectionId);
                 }
                 else
                 { // The user have been check in cognito already
                     if (connectionIdToUIDWithoutName.ContainsKey(connectionId)) {
                         Guid uid = connectionIdToUIDWithoutName[connectionId];
-                        bool valid = await PlayerDatabase.UpdateUser(uid, packet.name); // UpdateUser can also create users
-                        if (!valid)
+                        int valid = await ServerDatabase.UsernameAvailable(uid.ToString(), packet.name);
+                        bool ok = valid == 0;
+                        if (!ok)
                         {
-                            ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = false, reasonInvalid = 1 }, connectionId);
+                            ServerNetworkManager.SendPacket(new ValidateConnectionPacket() { tokenValid = false, reasonInvalid = (byte)valid }, connectionId);
                         }
                         else
                         {
+                            PlayerData p = PlayerDatabase.GetEmptyPlayer(connectionIdToUIDWithoutName[connectionId], packet.name);
+                            PlayerDatabase.CreateUser(connectionIdToUIDWithoutName[connectionId], p); // Create the user
+
                             // Swap dictionnaries
                             connectionIdToUID[connectionId] = connectionIdToUIDWithoutName[connectionId];
                             connectionIdToUIDWithoutName.Remove(connectionId);
@@ -109,12 +124,12 @@ namespace MonsterWorld.Unity.Network.Server
                     }
                 }
             });
-            ServerNetworkManager.RegisterHandler<RequestPlayerData>(async (packet, connectionId) =>
+            ServerNetworkManager.RegisterHandler<RequestPlayerData>((packet, connectionId) =>
             {
                 if (UserConnected(connectionId))
                 {
-                    PlayerStruct player = PlayerDatabase.GetPlayerData(GetUID(connectionId));
-                    ServerNetworkManager.SendPacket(new PlayerData()
+                    PlayerData player = PlayerDatabase.GetPlayerData(GetUID(connectionId));
+                    ServerNetworkManager.SendPacket(new PlayerDataPacket()
                     {
                         personnalData = true, // The packet RequestPlayerData is send only to retrieve the data of the player which send this packet
                         playerName = player.name
@@ -136,7 +151,7 @@ namespace MonsterWorld.Unity.Network.Server
             return connectionIdToUID.ContainsKey(connectionId);
         }
 
-        private Guid GetUID(int connectionId)
+        public static Guid GetUID(int connectionId)
         {
             return connectionIdToUID[connectionId];
         }
@@ -151,6 +166,11 @@ namespace MonsterWorld.Unity.Network.Server
             {
                 connectionIdToUIDWithoutName.Remove(connection);
             }
+        }
+
+        public void OnDestroy()
+        {
+            ServerNetworkManager.Stop();
         }
     }
 }

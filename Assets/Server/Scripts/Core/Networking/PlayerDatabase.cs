@@ -5,111 +5,117 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-public struct PlayerStruct
+public class PlayerData
 {
+    [NonSerialized]
+    public string uid;
+    [NonSerialized]
+    public bool dirty = false;
+
     public string name;
     public List<string> coordinates;
+
+    public PlayerData(string uid, string name, List<string> coordinates)
+    {
+        this.name = name;
+        this.coordinates = coordinates;
+    }
 }
 
 namespace MonsterWorld.Unity.Network.Server
 {
-    public class PlayerDatabase : MonoBehaviour
+    public static class PlayerDatabase
     {
-        static Dictionary<Guid, PlayerStruct> playersDict = new Dictionary<Guid, PlayerStruct>();
 
-        /// <summary>
-        /// Function to call to initialize a player, will retrieve the data of a player and return false if this data doesn't exists.
-        /// </summary>
-        public async static Task<bool> LoadUser(Guid uid)
+        static Dictionary<Guid, PlayerData> playersDict = new Dictionary<Guid, PlayerData>();
+
+        public static void MarkForUpdate(PlayerData p)
         {
-            Document p = await ServerDatabase.GetUser(uid.ToString());
-            if(p == null)
+            p.dirty = true;
+        }
+
+
+        public async static Task<bool> PlayerConnection(Guid uid)
+        {
+            if (!playersDict.ContainsKey(uid))
             {
-                return false;
+                return await LoadUser(uid);
             }
-            playersDict[uid] = DocumentToPlayerStruct(p);
             return true;
         }
 
-        ///<summary>
-        /// Update a user without update the database
-        ///</summary>
-        public static void UpdateUserNoDatabase(Guid uid, PlayerStruct p)
-        {
-            playersDict[uid] = p;
-        }
-
-        public async static Task<bool> UpdateUser(Guid uid, PlayerStruct p)
-        {
-            playersDict[uid] = p;
-            return await UpdateOrCreateUser(uid, p);
-        }
-
-        public async static Task<bool> UpdateUser(Guid uid, string name)
-        {
-            if (playersDict.ContainsKey(uid))
-            {
-                PlayerStruct p = playersDict[uid];
-                p.name = name;
-                return await UpdateOrCreateUser(uid, p);
-            } else
-            {
-                Document doc = await ServerDatabase.GetUser(uid.ToString());
-                if(doc == null)
-                {
-                    return await InitializeNewUser(uid, name);
-                } else
-                {
-                    PlayerStruct p = DocumentToPlayerStruct(doc);
-                    p.name = name;
-                    return await UpdateOrCreateUser(uid, p);
-                }
-            }
-        }
-
-        public static PlayerStruct GetPlayerData(Guid uid)
+        public static PlayerData GetPlayerData(Guid uid)
         {
             return playersDict[uid];
         }
 
-        public static void PlayerDisconnect(Guid uid)
+        /// <summary>
+        /// /!\ BULK UPDATE THE DATABASE /!\
+        /// </summary>
+        public static void UpdateUsers()
         {
-            if(playersDict.ContainsKey(uid))
+            foreach (var player in playersDict)
             {
-                playersDict.Remove(uid);
+                Guid uid = player.Key;
+                PlayerData playerState = player.Value;
+                if(playerState.dirty)
+                {
+                    UpdateOrCreateUser(uid, playerState);
+                    playerState.dirty = false;
+                }
+                
             }
+        }
+
+        /// <summary>
+        /// /!\ UPDATE THE DATABASE /!\
+        /// </summary>
+        public static void CreateUser(Guid uid, PlayerData p)
+        {
+            UpdateOrCreateUser(uid, p);
         }
 
 
         // Utility
 
         /// <summary>
-        /// Initialize a non existing user in database
+        /// Function to call to initialize a player, will retrieve the data of a player and return false if this data doesn't exists.
         /// </summary>
-        private async static Task<bool> InitializeNewUser(Guid uid, string name)
+        private async static Task<bool> LoadUser(Guid uid)
         {
-            PlayerStruct p = new PlayerStruct()
+            Document p = await ServerDatabase.GetUser(uid.ToString());
+            if (p == null)
             {
-                name = name,
-                coordinates  = new List<string>() { "1" }
-            };
-            return await UpdateOrCreateUser(uid, p);
+                playersDict[uid] = null;
+                return false;
+            }
+            playersDict[uid] = DocumentToPlayerStruct(p);
+
+            return true;
         }
 
-        private async static Task<bool> UpdateOrCreateUser(Guid uid, PlayerStruct p)
+        /// <summary>
+        /// Utility function to get a sample User
+        /// </summary>
+        public static PlayerData GetEmptyPlayer(Guid uid, string name)
         {
-            return await ServerDatabase.SetUser(uid.ToString(), PlayerStructToDocument(p));
+            return new PlayerData(uid.ToString(), name, new List<string>() { "1" });
         }
 
-        private static Document PlayerStructToDocument(PlayerStruct data)
+        private static void UpdateOrCreateUser(Guid uid, PlayerData p)
+        {
+            ServerDatabase.SetUser(uid.ToString(), PlayerStructToDocument(p));
+        }
+
+        private static Document PlayerStructToDocument(PlayerData data)
         {
             Document input = Document.FromJson(JsonUtility.ToJson(data));
             return input;
         }
 
-        private static PlayerStruct DocumentToPlayerStruct(Document doc)
+        private static PlayerData DocumentToPlayerStruct(Document doc)
         {
-            return JsonUtility.FromJson<PlayerStruct>(doc.ToJson());
+            return JsonUtility.FromJson<PlayerData>(doc.ToJson());
         }
 
 

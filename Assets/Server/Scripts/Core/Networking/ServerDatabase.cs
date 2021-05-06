@@ -26,20 +26,7 @@ namespace MonsterWorld.Unity.Network.Server
         // Protection against malicious attack
         static Dictionary<string, long> lastChangeNameRequestDict = new Dictionary<string, long>();
 
-        public async static Task<Document> GetUser(string uid)
-        {
-            Document res = await userTable.GetItemAsync(new Primitive(uid));
-            if (res != null) { 
-                res.Remove("UID");
-            }
-            return res;
-        }
-
-        /// <summary>
-        /// Change or set the name of an user, return false if name already taken. You can't update the user if he already has been updated 
-        /// in the last second
-        /// </summary>
-        public async static Task<bool> SetUser(string uid, Document data)
+        public async static Task<int> UsernameAvailable(string uid, string name)
         {
             // Protection against malicious attack
             if (!lastChangeNameRequestDict.ContainsKey(uid))
@@ -48,21 +35,19 @@ namespace MonsterWorld.Unity.Network.Server
             }
             else
             {
-                if(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds()  - lastChangeNameRequestDict[uid] > 1000)
+                if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() - lastChangeNameRequestDict[uid] > 60)
                 {
                     lastChangeNameRequestDict[uid] = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
                 }
                 else
                 {
-                    return false;
+                    return 1; // timeout
                 }
             }
 
-            string name = data["name"];
-            data["UID"] = uid;
-            if(name == "")
+            if (name == "")
             {
-                return false;
+                return 3; // invalid
             }
             // Check availability
             Primitive primitiveName = new Primitive(name);
@@ -76,8 +61,28 @@ namespace MonsterWorld.Unity.Network.Server
 
             if (documentSet.Count > 0)
             {
-                return false;
+                return 2; // Already taken
             }
+            return 0;
+        }
+
+        public async static Task<Document> GetUser(string uid)
+        {
+            Document res = await userTable.GetItemAsync(new Primitive(uid));
+            if (res != null) { 
+                res.Remove("UID");
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Change or set the name of an user, return false if name already taken. You can't update the user if he already has been updated 
+        /// in the last second
+        /// </summary>
+        public async static void SetUser(string uid, Document data)
+        {
+            string name = data["name"];
+            data["UID"] = uid;
             Document res = await userTable.GetItemAsync(new Primitive(uid));
             if (res == null) {
                 await userTable.PutItemAsync(data);
@@ -86,7 +91,6 @@ namespace MonsterWorld.Unity.Network.Server
             {
                 await userTable.UpdateItemAsync(data);
             }
-            return true;
         }
     }
 }

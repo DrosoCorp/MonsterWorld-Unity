@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Ports;
 
 namespace MonsterWorld.Unity.Network.Server
 {
@@ -84,7 +85,7 @@ namespace MonsterWorld.Unity.Network.Server
 
         private static void HandleConnection(int connectionId)
         {
-            
+            var a = 1;
         }
 
         private static void HandleDisconnection(int connectionId)
@@ -105,6 +106,11 @@ namespace MonsterWorld.Unity.Network.Server
         {
             ArraySegment<byte> bytes = GetBytesFromPacket(packet);
             server.Send(connectionId, bytes);
+        }
+
+        static public void Stop()
+        {
+            server.Stop();
         }
 
     }
