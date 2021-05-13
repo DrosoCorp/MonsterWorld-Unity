@@ -34,7 +34,6 @@ namespace MonsterWorld.Unity.Network.Server
             p.dirty = true;
         }
 
-
         public async static Task<bool> PlayerConnection(Guid uid)
         {
             if (!playersDict.ContainsKey(uid))
@@ -97,7 +96,7 @@ namespace MonsterWorld.Unity.Network.Server
         /// <summary>
         /// Utility function to get a sample User
         /// </summary>
-        public static PlayerData GetEmptyPlayer(Guid uid, string name)
+        public static PlayerData CreatePlayerData(Guid uid, string name)
         {
             return new PlayerData(uid.ToString(), name, new List<string>() { "1" });
         }

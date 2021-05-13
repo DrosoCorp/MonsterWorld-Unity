@@ -5,7 +5,12 @@
 // Author:       Noé Masse
 // Date:         16/04/2021
 //-----------------------------------------------------------------
+using System;
 using UnityEngine;
+
+using MonsterWorld.Unity.Network;
+using MonsterWorld.Unity.Network.Client;
+using System.Collections;
 
 namespace MonsterWorld.Unity.Systems.Characters
 {
@@ -24,15 +29,17 @@ namespace MonsterWorld.Unity.Systems.Characters
             LoadScenes(scene).Completed += (result) =>
             {
                 _characterPool = GameObject.Find("CharacterPool");
-                StoreCharacter();
+
+                LocalPlayer = StoreCharacter(StartupRoutine.localPlayerName);
                 TerminateInitialization();
             };
         }
 
-        public void StoreCharacter()
+        public Character StoreCharacter(string displayName)
         {
             var go = Instantiate(characterPrefab, _characterPool.transform);
-            LocalPlayer = go.GetComponent<Character>();
+            go.name = $"Player ({displayName})";
+            return go.GetComponent<Character>();
             //chara.Sprite = ...
         }
 

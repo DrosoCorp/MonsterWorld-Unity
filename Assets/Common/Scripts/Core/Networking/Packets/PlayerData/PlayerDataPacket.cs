@@ -11,24 +11,21 @@ namespace MonsterWorld.Unity.Network
 {
     public struct PlayerDataPacket : IPacket
     {
-        public bool personnalData; // True if the player receive this packet is the player described in this packet
-        public string playerName;
+        public byte OpCode => 4;
+
+        public bool isLocalPlayer;
+        public string displayName;
         
         public void Deserialize(BinaryReader reader)
         {
-            personnalData = reader.ReadBoolean();
-            playerName = reader.ReadString();
-        }
-
-        public byte OpCode()
-        {
-            return 6;
+            isLocalPlayer = reader.ReadBoolean();
+            displayName = reader.ReadString();
         }
 
         public void Serialize(BinaryWriter writer)
         {
-            writer.Write(personnalData);
-            writer.Write(playerName);
+            writer.Write(isLocalPlayer);
+            writer.Write(displayName);
         }
     }
 }

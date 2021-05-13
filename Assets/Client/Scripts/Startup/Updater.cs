@@ -9,6 +9,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+using MonsterWorld.Unity.Network.Client;
+
 namespace MonsterWorld.Unity
 {
     public class Updater : MonoBehaviour
@@ -16,7 +18,8 @@ namespace MonsterWorld.Unity
         public AssetLabelReference assetLabel;
         public UnityEvent<string> updateProgressText;
         public UnityEvent<float> updateProgress;
-        public UnityEvent loadGameMode;
+
+        public Action UpdateTerminated;
 
         void Start()
         {
@@ -27,7 +30,6 @@ namespace MonsterWorld.Unity
         {
             // Initialize
             updateProgressText.Invoke("Checking for Updates...");
-            yield return Addressables.InitializeAsync();
 
             // Update Catalogs
             var checkForUpdateHandle = Addressables.CheckForCatalogUpdates(autoReleaseHandle: false);
@@ -51,11 +53,7 @@ namespace MonsterWorld.Unity
             updateProgress.Invoke(1.0f);
             Addressables.Release(downloadAssetsHandle);
 
-            updateProgressText.Invoke("Connecting...");
-            yield return new WaitForSeconds(2f);
-
-            updateProgressText.Invoke("Loading...");
-            loadGameMode.Invoke();
+            UpdateTerminated();
         }
     }
 

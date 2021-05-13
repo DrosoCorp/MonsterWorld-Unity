@@ -19,7 +19,7 @@ public class NetworkManager
     {
         MemoryStream stream = new MemoryStream(512);
         BinaryWriter writer = new BinaryWriter(stream);
-        writer.Write(packet.OpCode());
+        writer.Write(packet.OpCode);
         packet.Serialize(writer);
         stream.TryGetBuffer(out ArraySegment<byte> segment);
         return segment;
@@ -33,13 +33,13 @@ public class NetworkManager
         NetworkMessageDelegate del = (connectionID) =>
         {
             T packet = default;
-            packet.Deserialize(new BinaryReader(memories[packet.OpCode()]));
+            packet.Deserialize(new BinaryReader(memories[packet.OpCode]));
             handler(packet, connectionID);
         };
         T p = default;
-        handlers.Add(p.OpCode(), del);
+        handlers.Add(p.OpCode, del);
         int size = System.Runtime.InteropServices.Marshal.SizeOf(typeof(T));
-        memories.Add(p.OpCode(), new MemoryStream(size));
+        memories.Add(p.OpCode, new MemoryStream(size));
     }
 
     protected static void HandlePacket(ArraySegment<byte> bytes, int connectionID)

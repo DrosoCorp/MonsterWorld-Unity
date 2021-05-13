@@ -35,7 +35,7 @@ namespace MonsterWorld.Unity.Network.Server
             }
             else
             {
-                if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() - lastChangeNameRequestDict[uid] > 60)
+                if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() - lastChangeNameRequestDict[uid] > 5)
                 {
                     lastChangeNameRequestDict[uid] = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
                 }

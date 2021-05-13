@@ -11,7 +11,7 @@ namespace MonsterWorld.Unity.Network
 {
     public interface IPacket
     {
-        byte OpCode();
+        public byte OpCode { get; }
 
         void Deserialize(BinaryReader reader);
 

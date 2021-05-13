@@ -39,26 +39,37 @@ namespace MonsterWorld.Unity.Network.Client
             client.OnDisconnected = () => HandleDisconnection();
         }
 
+        public static void Stop()
+        {
+            client.Disconnect();
+        }
+
         //Send packet
         static protected ArraySegment<byte> GetBytesFromPacket(IPacket packet)
         {
-            var writeBuffer = writebuffers[packet.OpCode()];
+            var writeBuffer = writebuffers[packet.OpCode];
             MemoryStream stream = new MemoryStream(writeBuffer, true);
             BinaryWriter writer = new BinaryWriter(stream);
-            writer.Write(packet.OpCode());
+            writer.Write(packet.OpCode);
             packet.Serialize(writer);
             var segment = new ArraySegment<byte>(writeBuffer, 0, (int)stream.Length);
             return segment;
         }
 
+        public static void RegisterPacket<T>() where T : struct, IPacket
+        {
+            T packet = default;
+            writebuffers.Add(packet.OpCode, new byte[4096]);
+        }
+
         /// <summary>
         /// This function register an handler for a packet
         /// </summary>
-        public static void RegisterHandler<T>(Action<T> handler = null) where T : struct, IPacket
+        public static void RegisterHandler<T>(Action<T> handler) where T : struct, IPacket
         {
             if (handler == null)
             {
-                handler = (a) => { };
+                return;
             }
             NetworkMessageDelegate del = (bytes) =>
             {
@@ -66,14 +77,16 @@ namespace MonsterWorld.Unity.Network.Client
                 packet.Deserialize(new BinaryReader(new MemoryStream(bytes.Array, bytes.Offset + 1, bytes.Count - 1, false)));
                 handler(packet);
             };
-            T p = default;
-            handlers.Add(p.OpCode(), del);
-            writebuffers.Add(p.OpCode(), new byte[4096]);
+            T packet = default;
+            handlers.Add(packet.OpCode, del);
         }
 
         protected static void HandlePacket(ArraySegment<byte> bytes)
         {
-            handlers[bytes.Array[bytes.Offset]](bytes);
+            if (handlers.TryGetValue(bytes.Array[bytes.Offset], out NetworkMessageDelegate handler))
+            {
+                handler(bytes);
+            }
         }
 
         public static void UpdateClient()
@@ -81,9 +94,9 @@ namespace MonsterWorld.Unity.Network.Client
             client.Tick(100);
         }
 
-        public static void Connect()
+        public static void Connect(string ip, int port)
         {
-            client.Connect("localhost", 1337);
+            client.Connect(ip, port);
         }
 
         // Add function to call when the game finished to load the network
@@ -91,7 +104,7 @@ namespace MonsterWorld.Unity.Network.Client
         {
             if(!connected)
             {
-                ClientNetworkManager.loadActions.Add(load);
+                loadActions.Add(load);
             } else
             {
                 load();
