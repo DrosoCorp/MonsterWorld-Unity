@@ -43,7 +43,7 @@ namespace MonsterWorld.Unity.Network.Server
             ServerNetworkManager.RegisterPacket<PlayerDataPacket>();
 
             ServerNetworkManager.RegisterHandler<ConnectionPacket>(OnConnectionPacket);
-            ServerNetworkManager.RegisterHandler<PlayerCreationPacket>(OnPlayerCreationPacket);
+            ServerNetworkManager.RegisterHandler<PlayerCreationPacket>((ref PlayerCreationPacket packet, int connectionID) => OnPlayerCreationPacket(packet, connectionID));
             ServerNetworkManager.RegisterHandler<RequestPlayerDataPacket>(OnRequestPlayerDataPacket);
         }
 
@@ -69,7 +69,7 @@ namespace MonsterWorld.Unity.Network.Server
         }
 
         #region Handlers
-        private void OnConnectionPacket(ConnectionPacket packet, int connectionId)
+        private void OnConnectionPacket(ref ConnectionPacket packet, int connectionId)
         {
             _cognito.GetUser(packet.token,
             // On Authentication Failed
@@ -79,7 +79,7 @@ namespace MonsterWorld.Unity.Network.Server
                 {
                     responseType = ConnectionResponsePacket.ResponseType.InvalidToken
                 };
-                ServerNetworkManager.SendPacket(connectionId, response);
+                ServerNetworkManager.SendPacket(connectionId, ref response);
             },
             // On Authentication Success
             async (uid) =>
@@ -101,7 +101,7 @@ namespace MonsterWorld.Unity.Network.Server
                     response.responseType = ConnectionResponsePacket.ResponseType.Success;
                 }
                 Console.WriteLine("Response :" + response.responseType);
-                ServerNetworkManager.SendPacket(connectionId, response);
+                ServerNetworkManager.SendPacket(connectionId, ref response);
             });
         }
 
@@ -141,7 +141,7 @@ namespace MonsterWorld.Unity.Network.Server
                     response.responseType = PlayerCreationResponsePacket.ResponseType.ClientNotAuthenticated;
                 }
             }
-            ServerNetworkManager.SendPacket(connectionId, response);
+            ServerNetworkManager.SendPacket(connectionId, ref response);
         }
 
         public void OnClientDisconnected(int connectionId)
@@ -156,7 +156,7 @@ namespace MonsterWorld.Unity.Network.Server
             }
         }
 
-        private void OnRequestPlayerDataPacket(RequestPlayerDataPacket packet, int connectionId)
+        private void OnRequestPlayerDataPacket(ref RequestPlayerDataPacket packet, int connectionId)
         {
             if (TryGetUID(connectionId, out Guid guid))
             {
@@ -167,7 +167,7 @@ namespace MonsterWorld.Unity.Network.Server
                     displayName = data.name
                 };
 
-                ServerNetworkManager.SendPacket(connectionId, playerDataPacket);
+                ServerNetworkManager.SendPacket(connectionId, ref playerDataPacket);
             }
         }
         #endregion
