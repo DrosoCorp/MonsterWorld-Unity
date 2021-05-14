@@ -127,8 +127,7 @@ namespace MonsterWorld.Unity.Network.Server
                     }
                     else
                     {
-                        PlayerData playerData = PlayerDatabase.CreatePlayerData(pendingPlayerCreationRequests[connectionId], packet.name);
-                        PlayerDatabase.CreateUser(pendingPlayerCreationRequests[connectionId], playerData); // Create the user
+                        PlayerDatabase.CreatePlayerData(uid, packet.name);
 
                         // Swap dictionnaries
                         connectionIdToUID[connectionId] = uid;
@@ -161,10 +160,11 @@ namespace MonsterWorld.Unity.Network.Server
         {
             if (TryGetUID(connectionId, out Guid guid))
             {
+                var data = PlayerDatabase.GetPlayerData(guid);
                 var playerDataPacket = new PlayerDataPacket()
                 {
                     isLocalPlayer = true,
-                    displayName = PlayerDatabase.GetPlayerData(guid).name
+                    displayName = data.name
                 };
 
                 ServerNetworkManager.SendPacket(connectionId, playerDataPacket);

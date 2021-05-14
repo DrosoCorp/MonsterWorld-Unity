@@ -11,20 +11,25 @@ namespace MonsterWorld.Unity.Startup
     {
 
         [SerializeField] private AssetReferenceScene _playerCreationSceneReference;
-        private AsyncOperationHandle<SceneInstance> _loadplayerCreationSceneHandle;
+        private AsyncOperationHandle<SceneInstance> _loadPlayerCreationSceneHandle;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _loadplayerCreationSceneHandle = _playerCreationSceneReference.LoadSceneAsync(UnityEngine.SceneManagement.LoadSceneMode.Additive);
-            _loadplayerCreationSceneHandle.Completed += (handle) =>
+            _loadPlayerCreationSceneHandle = _playerCreationSceneReference.LoadSceneAsync(UnityEngine.SceneManagement.LoadSceneMode.Additive);
+            _loadPlayerCreationSceneHandle.Completed += (handle) =>
             {
-                var scene = _loadplayerCreationSceneHandle.Result.Scene;
+                var scene = _loadPlayerCreationSceneHandle.Result.Scene;
+                var playerCreation = scene.GetRootGameObjects()[0].GetComponent<PlayerCreation>();
+                playerCreation.OnCreationSuccess += () =>
+                {
+                    animator.SetBool(StartupFSMContext.Parameters.PlayerConnectedId, true);
+                };
             };
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Addressables.UnloadSceneAsync(_loadplayerCreationSceneHandle);
+            Addressables.UnloadSceneAsync(_loadPlayerCreationSceneHandle);
         }
     }
 }

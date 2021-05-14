@@ -66,15 +66,6 @@ namespace MonsterWorld.Unity.Network.Server
             }
         }
 
-        /// <summary>
-        /// /!\ UPDATE THE DATABASE /!\
-        /// </summary>
-        public static void CreateUser(Guid uid, PlayerData p)
-        {
-            UpdateOrCreateUser(uid, p);
-        }
-
-
         // Utility
 
         /// <summary>
@@ -85,7 +76,6 @@ namespace MonsterWorld.Unity.Network.Server
             Document p = await ServerDatabase.GetUser(uid.ToString());
             if (p == null)
             {
-                playersDict[uid] = null;
                 return false;
             }
             playersDict[uid] = DocumentToPlayerStruct(p);
@@ -96,11 +86,23 @@ namespace MonsterWorld.Unity.Network.Server
         /// <summary>
         /// Utility function to get a sample User
         /// </summary>
-        public static PlayerData CreatePlayerData(Guid uid, string name)
+        public static void CreatePlayerData(Guid uid, string name)
         {
-            return new PlayerData(uid.ToString(), name, new List<string>() { "1" });
+            if (playersDict.TryGetValue(uid, out PlayerData playerData))
+            {
+                return;
+            }
+            else
+            {
+                playerData = new PlayerData(uid.ToString(), name, new List<string>() { "1" });
+                playersDict.Add(uid, playerData);
+                UpdateOrCreateUser(uid, playerData);
+            }
         }
 
+        /// <summary>
+        /// /!\ UPDATE THE DATABASE /!\
+        /// </summary>
         private static void UpdateOrCreateUser(Guid uid, PlayerData p)
         {
             ServerDatabase.SetUser(uid.ToString(), PlayerStructToDocument(p));
