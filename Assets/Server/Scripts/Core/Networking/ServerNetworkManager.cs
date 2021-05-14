@@ -25,6 +25,7 @@ namespace MonsterWorld.Unity.Network.Server
         static readonly Dictionary<byte, NetworkMessageDelegate> handlers = new Dictionary<byte, NetworkMessageDelegate>();
         static readonly Dictionary<byte, byte[]> writebuffers = new Dictionary<byte, byte[]>();
 
+        public delegate void PacketHandlerDelegate<T>(ref T packet, int connectionID);
         public static Action<int> OnClientDisconnected;
 
         public static void Init(int port)
@@ -37,7 +38,7 @@ namespace MonsterWorld.Unity.Network.Server
         }
 
         //Send packet
-        static protected ArraySegment<byte> GetBytesFromPacket(IPacket packet)
+        static protected ArraySegment<byte> GetBytesFromPacket<T>(ref T packet) where T : struct, IPacket
         {
             var writeBuffer = writebuffers[packet.OpCode];
             MemoryStream stream = new MemoryStream(writeBuffer, true);
@@ -57,7 +58,7 @@ namespace MonsterWorld.Unity.Network.Server
         /// <summary>
         /// This function register an handler for a packet
         /// </summary>
-        public static void RegisterHandler<T>(Action<T, int> handler) where T : struct, IPacket
+        public static void RegisterHandler<T>(PacketHandlerDelegate<T> handler) where T : struct, IPacket
         {
             if(handler == null)
             {
@@ -67,7 +68,7 @@ namespace MonsterWorld.Unity.Network.Server
             {
                 T packet = default;
                 packet.Deserialize(new BinaryReader(new MemoryStream(bytes.Array, bytes.Offset + 1, bytes.Count - 1, false)));
-                handler(packet, connectionID);
+                handler(ref packet, connectionID);
             };
             T packet = default;
             handlers.Add(packet.OpCode, del);
@@ -97,18 +98,18 @@ namespace MonsterWorld.Unity.Network.Server
             OnClientDisconnected(connectionId);
         }
 
-        static public void SendPacket(int[] connectionList, IPacket packet)
+        static public void SendPacket<T>(int[] connectionList, ref T packet) where T : struct, IPacket
         {
-            ArraySegment<byte> bytes = GetBytesFromPacket(packet);
+            ArraySegment<byte> bytes = GetBytesFromPacket(ref packet);
             foreach (int connectionId in connectionList)
             {
                 server.Send(connectionId, bytes);
             }
         }
 
-        static public void SendPacket(int connectionId, IPacket packet)
+        static public void SendPacket<T>(int connectionId, ref T packet) where T : struct, IPacket
         {
-            ArraySegment<byte> bytes = GetBytesFromPacket(packet);
+            ArraySegment<byte> bytes = GetBytesFromPacket(ref packet);
             server.Send(connectionId, bytes);
         }
 
