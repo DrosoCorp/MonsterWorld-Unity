@@ -11,7 +11,7 @@ namespace MonsterWorld.Unity.Network
 {
     public struct PlayerDataPacket : IPacket
     {
-        public byte OpCode => 4;
+        public byte OpCode => 5;
 
         public bool isLocalPlayer;
         public string displayName;

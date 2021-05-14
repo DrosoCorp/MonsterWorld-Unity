@@ -14,7 +14,7 @@ namespace MonsterWorld.Unity.Startup
             public static int ConnectionToServerFailedId = Animator.StringToHash("ConnectionToServerFailed");
             public static int RequestPlayerDataId = Animator.StringToHash("RequestPlayerData");
             public static int PlayerConnectedId = Animator.StringToHash("PlayerConnected");
-
+            public static int LoginId = Animator.StringToHash("Login");
         }
 
         public static string connectionToken;

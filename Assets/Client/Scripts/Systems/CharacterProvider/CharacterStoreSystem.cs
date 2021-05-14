@@ -30,9 +30,17 @@ namespace MonsterWorld.Unity.Systems.Characters
             {
                 _characterPool = GameObject.Find("CharacterPool");
 
-                LocalPlayer = StoreCharacter(StartupRoutine.localPlayerName);
-                TerminateInitialization();
+                ClientNetworkManager.OnPlayerDataPacket += OnPlayerData;
+                var requestPlayerDataPacket = new RequestPlayerDataPacket();
+                ClientNetworkManager.SendPacket(ref requestPlayerDataPacket);
             };
+        }
+
+        private void OnPlayerData(ref PlayerDataPacket packet)
+        {
+            ClientNetworkManager.OnPlayerDataPacket -= OnPlayerData;
+            LocalPlayer = StoreCharacter(packet.displayName);
+            TerminateInitialization();
         }
 
         public Character StoreCharacter(string displayName)

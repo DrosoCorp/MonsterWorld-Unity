@@ -24,6 +24,7 @@ namespace MonsterWorld.Unity.Startup
                 {
                     StartupFSMContext.connectionToken = token;
                     animator.SetBool(StartupFSMContext.Parameters.HasConnectionTokenId, true);
+                    animator.SetTrigger(StartupFSMContext.Parameters.LoginId);
                 };
             };
         }

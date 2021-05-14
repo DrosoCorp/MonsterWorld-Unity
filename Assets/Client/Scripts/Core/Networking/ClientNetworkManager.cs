@@ -8,28 +8,30 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 namespace MonsterWorld.Unity.Network.Client
 {
     public class ClientNetworkManager 
     {
         // Handles network messages on client and server
-        public static bool Connected
-        {
-            get
-            {
-                return connected;
-            }
-        }
-        private static bool connected = false;
-        protected delegate void NetworkMessageDelegate(ArraySegment<byte> bytes);
+        public static bool Connected { get; private set; } = false;
+
+        public delegate void PacketHandlerDelegate<T>(ref T packet);
+        private delegate void NetworkMessageDelegate(ArraySegment<byte> bytes);
+
         private static Telepathy.Client client;
-        private static List<Action> loadActions = new List<Action>();
         /// <summary>
         /// The registered network message handlers.
         /// </summary>
         static readonly Dictionary<byte, NetworkMessageDelegate> handlers = new Dictionary<byte, NetworkMessageDelegate>();
         static readonly Dictionary<byte, byte[]> writebuffers = new Dictionary<byte, byte[]>();
+
+        public static Action OnConnected;
+
+        public static PacketHandlerDelegate<ConnectionResponsePacket> OnConnectionResponsePacket;
+        public static PacketHandlerDelegate<PlayerCreationResponsePacket> OnPlayerCreationResponsePacket;
+        public static PacketHandlerDelegate<PlayerDataPacket> OnPlayerDataPacket;
 
         public static void Init()
         {
@@ -37,6 +39,19 @@ namespace MonsterWorld.Unity.Network.Client
             client.OnConnected = () => HandleConnection();
             client.OnData = (message) => HandlePacket(message);
             client.OnDisconnected = () => HandleDisconnection();
+
+            RegisterPackets();
+        }
+
+        private static void RegisterPackets()
+        {
+            RegisterPacket<ConnectionPacket>();
+            RegisterPacket<PlayerCreationPacket>();
+            RegisterPacket<RequestPlayerDataPacket>();
+
+            RegisterHandler((ref ConnectionResponsePacket packet) => OnConnectionResponsePacket(ref packet));
+            RegisterHandler((ref PlayerCreationResponsePacket packet) => OnPlayerCreationResponsePacket(ref packet));
+            RegisterHandler((ref PlayerDataPacket packet) => OnPlayerDataPacket(ref packet));
         }
 
         public static void Stop()
@@ -45,7 +60,7 @@ namespace MonsterWorld.Unity.Network.Client
         }
 
         //Send packet
-        static protected ArraySegment<byte> GetBytesFromPacket(IPacket packet)
+        static protected ArraySegment<byte> GetBytesFromPacket<T>(ref T packet) where T : struct, IPacket
         {
             var writeBuffer = writebuffers[packet.OpCode];
             MemoryStream stream = new MemoryStream(writeBuffer, true);
@@ -65,7 +80,7 @@ namespace MonsterWorld.Unity.Network.Client
         /// <summary>
         /// This function register an handler for a packet
         /// </summary>
-        public static void RegisterHandler<T>(Action<T> handler) where T : struct, IPacket
+        public static void RegisterHandler<T>(PacketHandlerDelegate<T> handler) where T : struct, IPacket
         {
             if (handler == null)
             {
@@ -75,7 +90,7 @@ namespace MonsterWorld.Unity.Network.Client
             {
                 T packet = default;
                 packet.Deserialize(new BinaryReader(new MemoryStream(bytes.Array, bytes.Offset + 1, bytes.Count - 1, false)));
-                handler(packet);
+                handler(ref packet);
             };
             T packet = default;
             handlers.Add(packet.OpCode, del);
@@ -99,25 +114,10 @@ namespace MonsterWorld.Unity.Network.Client
             client.Connect(ip, port);
         }
 
-        // Add function to call when the game finished to load the network
-        public static void ConnectCallBack(Action load)
-        {
-            if(!connected)
-            {
-                loadActions.Add(load);
-            } else
-            {
-                load();
-            }
-        }
-
         private static void HandleConnection()
         {
-            connected = true;
-            foreach(Action load in loadActions)
-            {
-                load();
-            }
+            Connected = true;
+            if (OnConnected != null) OnConnected();
         }
 
         private static void HandleDisconnection()
@@ -125,10 +125,9 @@ namespace MonsterWorld.Unity.Network.Client
 
         }
 
-        //Send packet
-        public static void SendPacket(IPacket packet)
+        public static void SendPacket<T>(ref T packet) where T : struct, IPacket
         {
-            ArraySegment<byte> bytes = GetBytesFromPacket(packet);
+            ArraySegment<byte> bytes = GetBytesFromPacket(ref packet);
             client.Send(bytes);
         }
     }

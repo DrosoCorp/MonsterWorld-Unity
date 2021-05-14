@@ -31,6 +31,13 @@ MonoBehaviour:
     - default
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: c643953c6314b264b860cb85191ca206
+    m_Address: Startup/PlayerCreation
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 804dfac734e4b6f4a9bf4ed852502d14, type: 2}
   m_SchemaSet:

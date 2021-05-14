@@ -32,6 +32,11 @@ namespace MonsterWorld.Unity.Network.Client
         protected override void Initialize()
         {
             ClientNetworkManager.Init();
+            Connect();
+        }
+
+        public void Connect()
+        {
             ClientNetworkManager.Connect(ip, port);
         }
 
@@ -40,8 +45,7 @@ namespace MonsterWorld.Unity.Network.Client
             ClientNetworkManager.Stop();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             ClientNetworkManager.UpdateClient();
         }

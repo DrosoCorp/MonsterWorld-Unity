@@ -163,19 +163,19 @@ namespace MonsterWorld.Unity
                 operationComplete = true;
                 _connectionResponse = packet.responseType;
             };
-            ClientNetworkManager.SendPacket(connectionPacket);
+            ClientNetworkManager.SendPacket(ref connectionPacket);
 
             while (operationComplete == false) yield return null;
         }
         #endregion
 
         #region Handlers
-        private void OnConnectionResponsePacket(ConnectionResponsePacket packet)
+        private void OnConnectionResponsePacket(ref ConnectionResponsePacket packet)
         {
             _onConnectionResponse.Invoke(packet);
         }
 
-        private void OnPlayerCreationResponsePacket(PlayerCreationResponsePacket packet)
+        private void OnPlayerCreationResponsePacket(ref PlayerCreationResponsePacket packet)
         {
             if (packet.responseType == PlayerCreationResponsePacket.ResponseType.Success)
             {
@@ -185,7 +185,7 @@ namespace MonsterWorld.Unity
             }
         }
 
-        private void OnPlayerDataPacket(PlayerDataPacket packet)
+        private void OnPlayerDataPacket(ref PlayerDataPacket packet)
         {
             if (packet.isLocalPlayer)
             {

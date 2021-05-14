@@ -44,6 +44,7 @@ namespace MonsterWorld.Unity.Network.Server
 
             ServerNetworkManager.RegisterHandler<ConnectionPacket>(OnConnectionPacket);
             ServerNetworkManager.RegisterHandler<PlayerCreationPacket>(OnPlayerCreationPacket);
+            ServerNetworkManager.RegisterHandler<RequestPlayerDataPacket>(OnRequestPlayerDataPacket);
         }
 
         // Update is called once per frame
@@ -60,6 +61,11 @@ namespace MonsterWorld.Unity.Network.Server
         public static Guid GetUID(int connectionId)
         {
             return connectionIdToUID[connectionId];
+        }
+
+        public static bool TryGetUID(int connectionId, out Guid guid)
+        {
+            return connectionIdToUID.TryGetValue(connectionId, out guid);
         }
 
         #region Handlers
@@ -80,37 +86,22 @@ namespace MonsterWorld.Unity.Network.Server
             {
                 Guid guid = new Guid(uid);
                 bool playerExists = await PlayerDatabase.PlayerConnection(guid);
+                var response = new ConnectionResponsePacket();
 
                 if (!playerExists)
                 {
                     // Request player creation
                     pendingPlayerCreationRequests.Add(connectionId, guid);
-
-                    var response = new ConnectionResponsePacket()
-                    {
-                        responseType = ConnectionResponsePacket.ResponseType.RequestPlayerCreation
-                    };
-                    ServerNetworkManager.SendPacket(connectionId, response);
+                    response.responseType = ConnectionResponsePacket.ResponseType.RequestPlayerCreation;
                 }
                 else
                 {
                     // Connection success
                     connectionIdToUID.Add(connectionId, guid);
-
-                    var response = new ConnectionResponsePacket()
-                    {
-                        responseType = ConnectionResponsePacket.ResponseType.Success
-                    };
-
-                    var playerDataPacket = new PlayerDataPacket()
-                    {
-                        isLocalPlayer = true,
-                        displayName = PlayerDatabase.GetPlayerData(guid).name
-                    };
-
-                    ServerNetworkManager.SendPacket(connectionId, response);
-                    ServerNetworkManager.SendPacket(connectionId, playerDataPacket);
+                    response.responseType = ConnectionResponsePacket.ResponseType.Success;
                 }
+                Console.WriteLine("Response :" + response.responseType);
+                ServerNetworkManager.SendPacket(connectionId, response);
             });
         }
 
@@ -163,6 +154,20 @@ namespace MonsterWorld.Unity.Network.Server
             else if (pendingPlayerCreationRequests.ContainsKey(connectionId))
             {
                 pendingPlayerCreationRequests.Remove(connectionId);
+            }
+        }
+
+        private void OnRequestPlayerDataPacket(RequestPlayerDataPacket packet, int connectionId)
+        {
+            if (TryGetUID(connectionId, out Guid guid))
+            {
+                var playerDataPacket = new PlayerDataPacket()
+                {
+                    isLocalPlayer = true,
+                    displayName = PlayerDatabase.GetPlayerData(guid).name
+                };
+
+                ServerNetworkManager.SendPacket(connectionId, playerDataPacket);
             }
         }
         #endregion

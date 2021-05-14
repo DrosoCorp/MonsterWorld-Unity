@@ -22,10 +22,10 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ClientContent
-    m_MainAsset: {fileID: 102900000, guid: c1b8aef8a4cdb714eacc31ea2505ea3f, type: 3}
-    m_TargetAsset: {fileID: 102900000, guid: c1b8aef8a4cdb714eacc31ea2505ea3f, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: e7dae5ea29f395345b5c3c9dfec452b0
-    m_Address: GameModes/OverworldGameMode.prefab
+    m_Address: GameModes/Overworld
     m_ReadOnly: 0
     m_SerializedLabels:
     - ClientContent

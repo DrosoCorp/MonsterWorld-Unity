@@ -133,6 +133,22 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-7187788915391610262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c0da0b95de8464c9919f2b271066a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCreationSceneReference:
+    m_AssetGUID: c643953c6314b264b860cb85191ca206
+    m_SubObjectName: 
+    m_SubObjectType: 
 --- !u!1101 &-6761224289760968653
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -158,6 +174,22 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-6533232992174270940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6f16839769343d40862ef66a93df4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _GameMode:
+    m_AssetGUID: e7dae5ea29f395345b5c3c9dfec452b0
+    m_SubObjectName: 
+    m_SubObjectType: 
 --- !u!114 &-4300591846253230079
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +259,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1762840948032877176}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -7187788915391610262}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -253,7 +286,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -6533232992174270940}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -323,12 +357,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: ConnectionToServerFailed
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: RequestPlayerData
     m_Type: 9
     m_DefaultFloat: 0
@@ -337,6 +365,18 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: PlayerConnected
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: ConnectionToServerFailed
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Login
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -513,6 +553,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: HasConnectionToken
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Login
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7847585625219982330}

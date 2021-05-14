@@ -19,14 +19,13 @@ namespace MonsterWorld.Unity
         public UnityEvent GameModeLoadComplete = null;
 
         private SceneLoader _sceneLoader = null;
-        private bool _isLoaded = false;
 
         public string GameModeName => _name;
-        public bool IsLoaded => _isLoaded;
+        public bool IsLoaded { get; private set; } = false;
+        public bool IsLoading { get; private set; } = false;
 
         private void Start()
         {
-            _sceneLoader = new SceneLoader();
             if (_loadOnStart)
             {
                 Load();
@@ -35,8 +34,10 @@ namespace MonsterWorld.Unity
 
         public void Load()
         {
-            if (!_isLoaded)
+            if (!IsLoaded && !IsLoading)
             {
+                IsLoading = true;
+                _sceneLoader = new SceneLoader();
                 StartCoroutine(InitializeSystemsCoroutine());
             }
         }
@@ -54,7 +55,8 @@ namespace MonsterWorld.Unity
                 }
             }
 
-            _isLoaded = true;
+            IsLoaded = true;
+            IsLoading = false;
             if (GameModeLoadComplete != null)
             {
                 GameModeLoadComplete.Invoke();
