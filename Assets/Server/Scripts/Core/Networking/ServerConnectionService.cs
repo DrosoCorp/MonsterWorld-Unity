@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using AWS;
-using UnityEngine;
 
 namespace MonsterWorld.Unity.Network.Server
 {

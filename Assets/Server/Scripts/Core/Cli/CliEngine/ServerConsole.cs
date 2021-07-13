@@ -7,7 +7,6 @@
 //-----------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -74,6 +73,7 @@ namespace MonsterWorld.Unity.Network.Server.Cli
                 end += " ";
             }
             Console.Write(end);
+            Console.SetCursorPosition(2, Console.WindowHeight - 1);
         }
 
         private static void PrintEntry(string value)
