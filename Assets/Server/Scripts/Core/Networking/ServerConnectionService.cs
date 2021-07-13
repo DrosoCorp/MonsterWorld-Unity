@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------
-// File:         ServerAuth.cs
+// File:         ServerConnectionService.cs
 // Description:  Class that initialize the network and offer methods to receive connections
 // Module:       Network.Server
 // Author:       Thomas Hervé
