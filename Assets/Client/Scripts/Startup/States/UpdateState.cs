@@ -20,13 +20,12 @@ namespace MonsterWorld.Unity.Startup
             {
                 var scene = _loadUpdaterSceneHandle.Result.Scene;
                 var updater = scene.GetRootGameObjects()[0].GetComponent<Updater>();
-                updater.UpdateTerminated += () => animator.SetBool(StartupFSMContext.Parameters.UpdateCompleteId, true);
+                updater.UpdateTerminated += () =>
+                {
+                    animator.SetBool(StartupFSMContext.Parameters.UpdateCompleteId, true);
+                    Addressables.UnloadSceneAsync(_loadUpdaterSceneHandle);
+                };
             };
-        }
-
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
-            Addressables.UnloadSceneAsync(_loadUpdaterSceneHandle);
         }
     }
 }

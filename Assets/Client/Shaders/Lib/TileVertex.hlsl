@@ -16,6 +16,7 @@ Varyings TileVertex(Attributes IN)
     OUT.positionHCS = mul(GetWorldToHClipMatrix(), positionWS);
 #endif
 
+    OUT.normalWS = mul(GetObjectToWorldMatrix(), float4(IN.normalOS.xyz, 0.0));
     OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
 
     return OUT;

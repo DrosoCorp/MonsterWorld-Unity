@@ -25,13 +25,9 @@ namespace MonsterWorld.Unity.Startup
                     StartupFSMContext.connectionToken = token;
                     animator.SetBool(StartupFSMContext.Parameters.HasConnectionTokenId, true);
                     animator.SetTrigger(StartupFSMContext.Parameters.LoginId);
+                    Addressables.UnloadSceneAsync(_loadLoginSceneHandle);
                 };
             };
-        }
-
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
-            Addressables.UnloadSceneAsync(_loadLoginSceneHandle);
         }
     }
 }

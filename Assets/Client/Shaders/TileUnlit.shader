@@ -48,7 +48,10 @@
                 half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
                 AlphaDiscard(color.a, _Cutoff);
 
-                color *= _BaseColor;
+                float NdotL = dot(_MainLightPosition.xyz, normalize(IN.normalWS));
+                NdotL = 0.75 + NdotL * 0.25;
+
+                color *= _BaseColor * NdotL * _MainLightColor;
                 return color;
             }
             ENDHLSL

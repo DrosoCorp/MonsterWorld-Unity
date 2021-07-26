@@ -23,13 +23,9 @@ namespace MonsterWorld.Unity.Startup
                 playerCreation.OnCreationSuccess += () =>
                 {
                     animator.SetBool(StartupFSMContext.Parameters.PlayerConnectedId, true);
+                    Addressables.UnloadSceneAsync(_loadPlayerCreationSceneHandle);
                 };
             };
-        }
-
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
-            Addressables.UnloadSceneAsync(_loadPlayerCreationSceneHandle);
         }
     }
 }

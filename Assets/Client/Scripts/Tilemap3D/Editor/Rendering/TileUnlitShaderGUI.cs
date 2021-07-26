@@ -194,6 +194,7 @@ namespace MonsterWorld.Unity.Tilemap
             if (baseMapProp != null && baseColorProp != null) // Draw the baseMap, most shader will have at least a baseMap
             {
                 materialEditor.TexturePropertySingleLine(Styles.baseMap, baseMapProp, baseColorProp);
+                materialEditor.TextureScaleOffsetProperty(baseMapProp);
                 // TODO Temporary fix for lightmapping, to be replaced with attribute tag.
                 if (material.HasProperty("_MainTex"))
                 {
@@ -205,7 +206,7 @@ namespace MonsterWorld.Unity.Tilemap
             }
         }
 
-        protected static void DrawTileOffset(MaterialEditor materialEditor, MaterialProperty textureProp)
+        protected static void DrawMapOffset(MaterialEditor materialEditor, MaterialProperty textureProp)
         {
             materialEditor.TextureScaleOffsetProperty(textureProp);
         }
