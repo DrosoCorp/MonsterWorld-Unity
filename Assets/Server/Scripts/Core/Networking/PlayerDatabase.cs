@@ -101,6 +101,14 @@ namespace MonsterWorld.Unity.Network.Server
         }
 
         /// <summary>
+        /// Utility function to remove a User
+        /// </summary>
+        public async static Task<bool> RemoveUser(string name)
+        {
+            return await ServerDatabase.RemoveUser(name);
+        }
+
+        /// <summary>
         /// /!\ UPDATE THE DATABASE /!\
         /// </summary>
         private static void UpdateOrCreateUser(Guid uid, PlayerData p)

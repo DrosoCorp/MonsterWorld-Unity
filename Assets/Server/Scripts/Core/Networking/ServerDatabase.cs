@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
-using Amazon.DynamoDBv2.Model;
 
 namespace MonsterWorld.Unity.Network.Server
 {
@@ -49,6 +48,14 @@ namespace MonsterWorld.Unity.Network.Server
             {
                 return 3; // invalid
             }
+
+            return await UsernameToDocument(name) != null ? 2 /* Not "", the username is already taken */ : 0; 
+        }
+
+
+        // Return "" if username not in database
+        private async static Task<Document> UsernameToDocument(string name)
+        {
             // Check availability
             Primitive primitiveName = new Primitive(name);
             DynamoDBEntry[] values = new DynamoDBEntry[1] { primitiveName };
@@ -59,17 +66,18 @@ namespace MonsterWorld.Unity.Network.Server
             List<Document> documentSet = new List<Document>();
             documentSet = await response.GetNextSetAsync();
 
-            if (documentSet.Count > 0)
+            if (documentSet.Count == 0)
             {
-                return 2; // Already taken
+                return null;
             }
-            return 0;
+
+            return documentSet[0];
         }
 
         public async static Task<Document> GetUser(string uid)
         {
             Document res = await userTable.GetItemAsync(new Primitive(uid));
-            if (res != null) { 
+            if (res != null) {
                 res.Remove("UID");
             }
             return res;
@@ -90,6 +98,24 @@ namespace MonsterWorld.Unity.Network.Server
             else
             {
                 await userTable.UpdateItemAsync(data);
+            }
+        }
+
+        /// <summary>
+        /// Check if the user with the given name exist then remove it from database 
+        /// </summary>
+        public async static Task<bool> RemoveUser(string name) 
+        {
+            Document user = await UsernameToDocument(name);
+            // Check name exist
+            if (user != null)
+            {
+                await userTable.DeleteItemAsync(user);
+                return true;
+            } else
+            {
+                // username doesn't exist
+                return false;
             }
         }
     }

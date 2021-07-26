@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------
-// File:         ServerAuth.cs
+// File:         ServerConnectionService.cs
 // Description:  Class that initialize the network and offer methods to receive connections
 // Module:       Network.Server
 // Author:       Thomas Hervé
@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using AWS;
-using UnityEngine;
 
 namespace MonsterWorld.Unity.Network.Server
 {
